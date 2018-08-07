@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Scoreboard index{% endblock %}
+
+{% block body %}
+    <h1>Scoreboard index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Points</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for scoreboard in scoreboards %}
+            <tr>
+                <td>{{ scoreboard.id }}</td>
+                <td>{{ scoreboard.points }}</td>
+                <td>
+                    <a href="{{ path('scoreboard_show', {'id': scoreboard.id}) }}">show</a>
+                    <a href="{{ path('scoreboard_edit', {'id': scoreboard.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('scoreboard_new') }}">Create new</a>
+{% endblock %}

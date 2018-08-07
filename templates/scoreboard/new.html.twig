@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Scoreboard{% endblock %}
+
+{% block body %}
+    <h1>Create new Scoreboard</h1>
+
+    {{ include('scoreboard/_form.html.twig') }}
+
+    <a href="{{ path('scoreboard_index') }}">back to list</a>
+{% endblock %}
