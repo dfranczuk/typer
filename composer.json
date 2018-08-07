@@ -35,6 +35,7 @@
         "symfony/css-selector": "^4.1@beta",
         "symfony/debug-bundle": "^4.1@beta",
         "symfony/dotenv": "^4.1@beta",
+        "symfony/maker-bundle": "^1.5",
         "symfony/phpunit-bridge": "^4.1@beta",
         "symfony/stopwatch": "^4.1@beta",
         "symfony/web-profiler-bundle": "^4.1@beta",
