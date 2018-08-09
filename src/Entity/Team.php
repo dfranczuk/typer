@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
  * @ORM\Entity
  * @UniqueEntity(
- *     fields={"id", "name"},
+ *     fields={"name"},
  *     errorPath="name",
  *     message="This team is already existed."
  * )
