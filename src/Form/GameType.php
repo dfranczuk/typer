@@ -14,7 +14,7 @@ class GameType extends AbstractType
         $builder
             /*->add('first_team_score')
             ->add('second_team_score')*/
-            ->add('weight')
+            ->add('TypeofWeight')
             ->add('game_date')
             ->add('tournament')
             ->add('first_team')

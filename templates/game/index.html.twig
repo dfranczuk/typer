@@ -22,7 +22,6 @@
                 <td>{{ game.id }}</td>
                 <td>{{ game.firstTeamScore }}</td>
                 <td>{{ game.secondTeamScore }}</td>
-                <td>{{ game.weight }}</td>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('game_show', {'id': game.id}) }}">show</a>
