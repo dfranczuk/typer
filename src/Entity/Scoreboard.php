@@ -42,12 +42,12 @@ class Scoreboard
         return $this->id;
     }
 
-    public function getUser(): ?int
+    public function getUser(): ?id
     {
         return $this->user;
     }
 
-    public function setUser(int $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 

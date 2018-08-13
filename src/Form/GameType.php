@@ -12,11 +12,11 @@ class GameType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_team_score')
-            ->add('second_team_score')
+            /*->add('first_team_score')
+            ->add('second_team_score')*/
             ->add('weight')
             ->add('game_date')
-            ->add('tournamient')
+            ->add('tournament')
             ->add('first_team')
             ->add('second_team')
         ;
