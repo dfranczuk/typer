@@ -9,8 +9,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>First team score</th>
-                <th>Second team score</th>
+                <th>Confrontation</th>
+                <th>First_team_score</th>
+                <th>Second_team_score</th>
                 <th>Weight</th>
                 <th>Game date</th>
                 <th>Actions</th>
@@ -21,9 +22,9 @@
         {% for game in games %}
             <tr>
                 <td>{{ game.id }}</td>
+                <td>{{ game.firstTeam.name }} - {{ game.secondTeam.name }}</td>
                 <td>{{ game.firstTeamScore }}</td>
                 <td>{{ game.secondTeamScore }}</td>
-                <td>{{ game.weight }}</td>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('game_show', {'id': game.id}) }}">show</a>
