@@ -22,7 +22,7 @@ class Game
      * @ORM\ManyToOne(targetEntity="App\Entity\Tournament")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $tournamient;
+    private $tournament;
 
     /**
      * @var Team
@@ -41,12 +41,12 @@ class Game
     private $second_team;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $first_team_score;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $second_team_score;
 
@@ -67,14 +67,14 @@ class Game
         return $this->id;
     }
 
-    public function getTournamient(): ?int
+    public function getTournament(): ?int
     {
-        return $this->tournamient;
+        return $this->tournament;
     }
 
-    public function setTournamient(Tournament $tournamient): self
+    public function setTournament(Tournament $tournament): self
     {
-        $this->tournamient = $tournamient;
+        $this->tournament = $tournament;
 
         return $this;
     }
