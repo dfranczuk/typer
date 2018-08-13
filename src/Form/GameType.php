@@ -16,7 +16,7 @@ class GameType extends AbstractType
             ->add('second_team_score')
             ->add('weight')
             ->add('game_date')
-            ->add('tournamient')
+            ->add('tournament')
             ->add('first_team')
             ->add('second_team')
         ;

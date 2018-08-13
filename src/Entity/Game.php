@@ -16,13 +16,6 @@ class Game
      */
     private $id;
 
-    /**
-     * @var Tournament
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Tournament")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $tournamient;
 
     /**
      * @var Team
@@ -60,26 +53,40 @@ class Game
      */
     private $game_date;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Tournament", inversedBy="games")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $tournament;
 
+    public $flaga=true;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getTournamient(): ?int
+    /**
+     * @return bool
+     */
+    public function isFlaga(): bool
     {
-        return $this->tournamient;
+        return $this->flaga;
     }
 
-    public function setTournamient(Tournament $tournamient): self
+    /**
+     * @param bool $flaga
+     */
+    public function setFlaga(bool $flaga): void
     {
-        $this->tournamient = $tournamient;
-
-        return $this;
+        $this->flaga = $flaga;
     }
 
-    public function getFirstTeam(): ?int
+    /**
+     * @return mixed
+     */
+
+    public function getFirstTeam()
     {
         return $this->first_team;
     }
@@ -91,16 +98,33 @@ class Game
         return $this;
     }
 
-    public function getSecondTeam(): ?int
+
+
+
+
+    public function getSecondTeam()
     {
         return $this->second_team;
     }
 
     public function setSecondTeam(Team $second_team): self
     {
-        $this->second_team = $second_team;
 
+
+        if($this->getFirstTeam()!=$second_team){
+
+
+        $flaga=true;
+
+
+        }else{
+
+            $flaga=false;
+        }
+
+        $this->second_team = $second_team;
         return $this;
+
     }
 
     public function getFirstTeamScore(): ?int
@@ -147,6 +171,18 @@ class Game
     public function setGameDate(\DateTimeInterface $game_date): self
     {
         $this->game_date = $game_date;
+
+        return $this;
+    }
+
+    public function getTournament(): ?Tournament
+    {
+        return $this->tournament;
+    }
+
+    public function setTournament(?Tournament $tournament): self
+    {
+        $this->tournament = $tournament;
 
         return $this;
     }
