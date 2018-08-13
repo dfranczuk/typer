@@ -17,40 +17,57 @@ class ExpectedResults
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=false)
      */
-    private $FirstTeamScore;
+    private $FirstTeamScoreExpected;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=false)
      */
-    private $SecondTeamScore;
+    private $SecondTeamScoreExpected;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game")
+     */
+    private $NameOfMeeting;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getFirstTeamScore(): ?int
+    public function getFirstTeamScoreExpected(): ?int
     {
-        return $this->FirstTeamScore;
+        return $this->FirstTeamScoreExpected;
     }
 
-    public function setFirstTeamScore(int $FirstTeamScore): self
+    public function setFirstTeamScoreExpected(?int $FirstTeamScoreExpected): self
     {
-        $this->FirstTeamScore = $FirstTeamScore;
+        $this->FirstTeamScoreExpected = $FirstTeamScoreExpected;
 
         return $this;
     }
 
-    public function getSecondTeamScore(): ?int
+    public function getSecondTeamScoreExpected(): ?int
     {
-        return $this->SecondTeamScore;
+        return $this->SecondTeamScoreExpected;
     }
 
-    public function setSecondTeamScore(int $SecondTeamScore): self
+    public function setSecondTeamScoreExpected(?int $SecondTeamScoreExpected): self
     {
-        $this->SecondTeamScore = $SecondTeamScore;
+        $this->SecondTeamScoreExpected = $SecondTeamScoreExpected;
+
+        return $this;
+    }
+
+    public function getNameOfMeeting(): ?Game
+    {
+        return $this->NameOfMeeting;
+    }
+
+    public function setNameOfMeeting(?Game $NameOfMeeting): self
+    {
+        $this->NameOfMeeting = $NameOfMeeting;
 
         return $this;
     }

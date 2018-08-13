@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,12 +36,12 @@ class Game
     private $second_team;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $first_team_score;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $second_team_score;
 
@@ -60,6 +62,15 @@ class Game
     private $tournament;
 
     public $flaga=true;
+
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private $meeting;
+
+
+
+
 
     public function getId()
     {
@@ -186,4 +197,32 @@ class Game
 
         return $this;
     }
+
+
+
+    public function getMeeting(): ?string
+    {
+        return $this->meeting;
+    }
+
+    public function setMeeting(string $meeting): self
+    {
+        $this->meeting = $meeting;
+
+        return $this;
+    }
+
+
+    public function __toString()
+    {
+        return $this->meeting;
+    }
+
+
+    public function __toString1()
+    {
+        return $this->first_team;
+    }
+
+
 }
