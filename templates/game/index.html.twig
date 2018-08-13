@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Confrontation</th>
                 <th>First_team_score</th>
                 <th>Second_team_score</th>
                 <th>Weight</th>
@@ -20,6 +21,7 @@
         {% for game in games %}
             <tr>
                 <td>{{ game.id }}</td>
+                <td>{{ game.firstTeam.name }} - {{ game.secondTeam.name }}</td>
                 <td>{{ game.firstTeamScore }}</td>
                 <td>{{ game.secondTeamScore }}</td>
                 <td>{{ game.weight }}</td>
