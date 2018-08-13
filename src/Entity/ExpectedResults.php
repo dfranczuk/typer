@@ -31,6 +31,8 @@ class ExpectedResults
      */
     private $NameOfMeeting;
 
+
+
     public function getId()
     {
         return $this->id;
@@ -71,4 +73,6 @@ class ExpectedResults
 
         return $this;
     }
+
+
 }
