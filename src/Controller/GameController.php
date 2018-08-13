@@ -40,6 +40,13 @@ class GameController extends Controller
                 //$this->redirectToRoute('game_new');
             }else{
                 $em = $this->getDoctrine()->getManager();
+
+
+                $spotkanie1=$game->getFirstTeam();
+                $spotkanie2=$game->getSecondTeam();
+                $spotkanie3=$spotkanie1."-".$spotkanie2;
+                $game->setMeeting($spotkanie3);
+
                 $em->persist($game);
                 $em->flush();
                 return $this->redirectToRoute('game_index');
@@ -65,6 +72,16 @@ class GameController extends Controller
         $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $EntityManager=$this->getDoctrine()->getManager();
+
+
+            $spotkanie1=$game->getFirstTeam();
+            $spotkanie2=$game->getSecondTeam();
+            $spotkanie3=$spotkanie1."-".$spotkanie2;
+            $game->setMeeting($spotkanie3);
+            $EntityManager->persist($game);
+            $EntityManager->flush();
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('game_edit', ['id' => $game->getId()]);
         }
