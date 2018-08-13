@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="pl" datatype="plaintext" original="file.ext">
+        <body>
+<trans-unit id="scoreboard_table.index">
+           <source>scoreboard_table.index</source>
+           <target>Tabela Wyników</target>
+</trans-unit>
+
+<trans-unit id="scoreboard_table.id">
+           <source>scoreboard_table.id</source>
+           <target>Id</target>
+</trans-unit>
+
+<trans-unit id="scoreboard_table.user_id">
+           <source>scoreboard_table.user_id</source>
+           <target>Użytkownik</target>
+</trans-unit>
+
+<trans-unit id="scoreboard_table.actions">
+           <source>scoreboard_table.actions</source>
+           <target>Akcje</target>
+</trans-unit>
+        </body>
+    </file>
+</xliff>

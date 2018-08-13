@@ -19,8 +19,12 @@
                 <td>{{ scoreboard.id }}</td>
                 <td>{{ scoreboard.points }}</td>
                 <td>
-                    <a href="{{ path('scoreboard_show', {'id': scoreboard.id}) }}">show</a>
-                    <a href="{{ path('scoreboard_edit', {'id': scoreboard.id}) }}">edit</a>
+                    <a href="{{ path('scoreboard_show', {'id': scoreboard.id}) }}">
+                        {{ 'action.show' | trans }}
+                    </a>
+                    <a href="{{ path('scoreboard_edit', {'id': scoreboard.id}) }}">
+                        {{ 'action.edit' | trans }}
+                    </a>
                 </td>
             </tr>
         {% else %}
