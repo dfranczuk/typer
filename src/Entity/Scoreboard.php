@@ -76,5 +76,12 @@ class Scoreboard
         $this->points = $points;
 
         return $this;
+
+    }
+
+    public function __toString(): string
+
+    {
+        return $this->user;
     }
 }
