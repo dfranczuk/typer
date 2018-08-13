@@ -198,6 +198,10 @@
                 <source>menu.admin</source>
                 <target>Panel administracyjny</target>
             </trans-unit>
+            <trans-unit id="menu.team">
+                     <source>menu.team</source>
+                     <target>Drużyna</target>
+            </trans-unit>
             <trans-unit id="menu.logout">
                 <source>menu.logout</source>
                 <target>Wyloguj się</target>

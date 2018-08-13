@@ -3,9 +3,14 @@
 {% block title %}New Team{% endblock %}
 
 {% block body %}
+    {% if is_granted ('ROLE_ADMIN') %}
     <h1>Create new Team</h1>
 
     {{ include('team/_form.html.twig') }}
 
     <a href="{{ path('team_index') }}">back to list</a>
+    {% else %}
+        <p>You dont have permission</p>
+        <a href="{{ path('team_index') }}">back to list</a>
+    {% endif %}
 {% endblock %}
