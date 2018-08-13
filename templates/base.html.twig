@@ -50,7 +50,7 @@
                                     {% if is_granted('ROLE_ADMIN') %}
                                         <li>
                                             <a href="{{ path('admin_post_index') }}">
-                                                <i class="" aria-hidden="true"></i> {{ 'Menu Admin' }}
+                                                <i class="" aria-hidden="true"></i> {{ 'menu.admin' | trans }}
                                             </a>
                                         </li>
                                     {% endif %}
@@ -62,7 +62,7 @@
                                 {% if app.user %}
                                     <li>
                                         <a href="{{ path('game_index') }}">
-                                            <i class="" aria-hidden="true"></i> {{ 'Game' }}
+                                            <i class="" aria-hidden="true"></i> {{ 'menu.game' | trans }}
                                         </a>
                                     </li>
                                     <li>
@@ -72,12 +72,12 @@
                                     </li>
                                     <li>
                                         <a href="{{ path('tournament_index') }}">
-                                            <i class="" aria-hidden="true"></i> {{ 'Tournament' }}
+                                            <i class="" aria-hidden="true"></i> {{ 'menu.tournament' | trans }}
                                         </a>
                                     </li>
                                     <li>
                                         <a href="{{ path('scoreboard_index') }}">
-                                            <i class="" aria-hidden="true"></i> {{ 'Tournament' }}
+                                            <i class="" aria-hidden="true"></i> {{ 'menu.scoreboard' | trans }}
                                         </a>
                                     </li>
                                     <li>
