@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Tournament;
-use App\Form\TournamentType;
+use App\Form\Tournament1Type;
 use App\Repository\TournamentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +29,7 @@ class TournamentController extends Controller
     public function new(Request $request): Response
     {
         $tournament = new Tournament();
-        $form = $this->createForm(TournamentType::class, $tournament);
+        $form = $this->createForm(Tournament1Type::class, $tournament);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class TournamentController extends Controller
      */
     public function edit(Request $request, Tournament $tournament): Response
     {
-        $form = $this->createForm(TournamentType::class, $tournament);
+        $form = $this->createForm(Tournament1Type::class, $tournament);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

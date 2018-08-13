@@ -16,7 +16,7 @@ yarn-error.log
 !var/SymfonyRequirements.php
 /public/build/fonts/glyphicons-*
 /public/build/images/glyphicons-*
-
+/.idea/*
 ###> symfony/framework-bundle ###
 /.env
 /public/bundles/

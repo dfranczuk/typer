@@ -32,13 +32,47 @@ class GameController extends Controller
         $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($game);
-            $em->flush();
 
-            return $this->redirectToRoute('game_index');
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+
+            if($game->getFirstTeam()!=$game->getSecondTeam()){
+
+
+                $game->setFlaga(1);
+
+
+            }else{
+
+                $game->setFlaga(0);
+            }
+
+
+            if($game->isFlaga()==false){
+
+
+                echo '<script language="javascript">';
+                echo 'alert("message successfully sent")';
+                echo '</script>';
+                //$this->redirectToRoute('game_new');
+
+
+            }else{
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($game);
+                $em->flush();
+                return $this->redirectToRoute('game_index');
+
+            }
+
+
+
+
+
         }
+
+
 
         return $this->render('game/new.html.twig', [
             'game' => $game,
