@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
 /**
  * @Route("/game")
  */
@@ -25,27 +25,60 @@ class GameController extends Controller
 
     /**
      * @Route("/new", name="game_new", methods="GET|POST")
-     * @Security("has_role('ROLE_ADMIN')")
      */
     public function new(Request $request): Response
     {
-            $game = new Game();
-            $form = $this->createForm(GameType::class, $game);
-            $form->handleRequest($request);
+        $game = new Game();
+        $form = $this->createForm(GameType::class, $game);
+        $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+
+            if($game->getFirstTeam()!=$game->getSecondTeam()){
+
+
+                $game->setFlaga(1);
+
+
+            }else{
+
+                $game->setFlaga(0);
+            }
+
+
+            if($game->isFlaga()==false){
+
+
+                echo '<script language="javascript">';
+                echo 'alert("message successfully sent")';
+                echo '</script>';
+                //$this->redirectToRoute('game_new');
+
+
+            }else{
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($game);
                 $em->flush();
-
                 return $this->redirectToRoute('game_index');
+
             }
 
-            return $this->render('game/new.html.twig', [
-                'game' => $game,
-                'form' => $form->createView(),
-            ]);
+
+
+
+
         }
+
+
+
+        return $this->render('game/new.html.twig', [
+            'game' => $game,
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @Route("/{id}", name="game_show", methods="GET")
