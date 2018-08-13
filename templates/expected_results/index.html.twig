@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ExpectedResults index{% endblock %}
+
+{% block body %}
+    <h1>ExpectedResults index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstTeamScoreExpected</th>
+                <th>SecondTeamScoreExpected</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for expected_result in expected_results %}
+            <tr>
+                <td>{{ expected_result.id }}</td>
+                <td>{{ expected_result.FirstTeamScoreExpected }}</td>
+                <td>{{ expected_result.SecondTeamScoreExpected }}</td>
+                <td>
+                    <a href="{{ path('expected_results_show', {'id': expected_result.id}) }}">show</a>
+                    <a href="{{ path('expected_results_edit', {'id': expected_result.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('expected_results_new') }}">Create new</a>
+{% endblock %}

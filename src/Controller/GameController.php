@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controller;
-
 use App\Entity\Game;
 use App\Form\GameType;
 use App\Repository\GameRepository;
@@ -9,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 /**
  * @Route("/game")
  */
@@ -22,7 +19,6 @@ class GameController extends Controller
     {
         return $this->render('game/index.html.twig', ['games' => $gameRepository->findAll()]);
     }
-
     /**
      * @Route("/new", name="game_new", methods="GET|POST")
      */
@@ -31,33 +27,17 @@ class GameController extends Controller
         $game = new Game();
         $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
-
-
         if ($form->isSubmitted() && $form->isValid()) {
-
-
-
             if($game->getFirstTeam()!=$game->getSecondTeam()){
-
-
                 $game->setFlaga(1);
-
-
             }else{
-
                 $game->setFlaga(0);
             }
-
-
             if($game->isFlaga()==false){
-
-
                 echo '<script language="javascript">';
                 echo 'alert("message successfully sent")';
                 echo '</script>';
                 //$this->redirectToRoute('game_new');
-
-
             }else{
                 $em = $this->getDoctrine()->getManager();
 
@@ -70,23 +50,13 @@ class GameController extends Controller
                 $em->persist($game);
                 $em->flush();
                 return $this->redirectToRoute('game_index');
-
             }
-
-
-
-
-
         }
-
-
-
         return $this->render('game/new.html.twig', [
             'game' => $game,
             'form' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/{id}", name="game_show", methods="GET")
      */
@@ -94,7 +64,6 @@ class GameController extends Controller
     {
         return $this->render('game/show.html.twig', ['game' => $game]);
     }
-
     /**
      * @Route("/{id}/edit", name="game_edit", methods="GET|POST")
      */
@@ -102,7 +71,6 @@ class GameController extends Controller
     {
         $form = $this->createForm(GameType::class, $game);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $EntityManager=$this->getDoctrine()->getManager();
@@ -115,16 +83,13 @@ class GameController extends Controller
             $EntityManager->persist($game);
             $EntityManager->flush();
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('game_edit', ['id' => $game->getId()]);
         }
-
         return $this->render('game/edit.html.twig', [
             'game' => $game,
             'form' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/{id}", name="game_delete", methods="DELETE")
      */
@@ -135,7 +100,6 @@ class GameController extends Controller
             $em->remove($game);
             $em->flush();
         }
-
         return $this->redirectToRoute('game_index');
     }
 }

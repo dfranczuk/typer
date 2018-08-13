@@ -196,7 +196,23 @@
             </trans-unit>
             <trans-unit id="menu.admin">
                 <source>menu.admin</source>
-                <target>Panel administracyjny</target>
+                <target>Panel </target>
+            </trans-unit>
+            <trans-unit id="menu.team">
+                     <source>menu.team</source>
+                     <target>Drużyna</target>
+            </trans-unit>
+            <trans-unit id="menu.game">
+                    <source>menu.game</source>
+                     <target>Spotkanie</target>
+            </trans-unit>
+            <trans-unit id="menu.tournament">
+                  <source>menu.tournament</source>
+                  <target>Turniej</target>
+            </trans-unit>
+            <trans-unit id="menu.scoreboard">
+                    <source>menu.scoreboard</source>
+                    <target>Tablica wyników</target>
             </trans-unit>
             <trans-unit id="menu.logout">
                 <source>menu.logout</source>

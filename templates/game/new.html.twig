@@ -2,10 +2,31 @@
 
 {% block title %}New Game{% endblock %}
 
+{% block javascripts %}
+    <script>
+        {{ parent() }}
+        $('#game_first_team').clik(function(){
+            var d1= document.getElementById('#game_first_team');
+            var d2= document.getElementById('#game_second_team')
+            if(d2 == d1)
+            {
+                console.log("Bład");
+            }
+        });
+    </script>
+{% endblock %}
+
 {% block body %}
+    {% if is_granted ('ROLE_ADMIN') %}
     <h1>Create new Game</h1>
 
     {{ include('game/_form.html.twig') }}
 
     <a href="{{ path('game_index') }}">back to list</a>
+    {% else %}
+        <p>You dont have permission</p>
+        <a href="{{ path('game_index') }}">back to list</a>
+    {% endif %}
 {% endblock %}
+
+

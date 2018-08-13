@@ -9,24 +9,28 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Confrontation</th>
                 <th>First_team_score</th>
                 <th>Second_team_score</th>
                 <th>Weight</th>
-                <th>Game_date</th>
-                <th>actions</th>
+                <th>Game date</th>
+                <th>Actions</th>
+
             </tr>
         </thead>
         <tbody>
         {% for game in games %}
             <tr>
                 <td>{{ game.id }}</td>
+                <td>{{ game.firstTeam.name }} - {{ game.secondTeam.name }}</td>
                 <td>{{ game.firstTeamScore }}</td>
                 <td>{{ game.secondTeamScore }}</td>
-                <td>{{ game.weight }}</td>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('game_show', {'id': game.id}) }}">show</a>
+                    {% if is_granted ('ROLE_ADMIN') %}
                     <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -36,6 +40,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+{% if is_granted ('ROLE_ADMIN') %}
     <a href="{{ path('game_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

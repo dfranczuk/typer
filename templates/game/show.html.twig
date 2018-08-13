@@ -12,6 +12,10 @@
                 <td>{{ game.id }}</td>
             </tr>
             <tr>
+                <th>Confrontation</th>
+                <td>{{ game.firstTeam }} - {{ game.secondTeam }}</td>
+            </tr>
+            <tr>
                 <th>First_team_score</th>
                 <td>{{ game.firstTeamScore }}</td>
             </tr>
@@ -20,19 +24,25 @@
                 <td>{{ game.secondTeamScore }}</td>
             </tr>
             <tr>
-                <th>Weight</th>
-                <td>{{ game.weight }}</td>
-            </tr>
-            <tr>
                 <th>Game_date</th>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>Second_team_score</th>
+                <td>{{ game.firstTeam }}</td>
+            </tr>
+            <tr>
+                <th>Second_team_score</th>
+                <td>{{ game.secondTeam }}</td>
+            </tr>
+
         </tbody>
     </table>
 
     <a href="{{ path('game_index') }}">back to list</a>
-
+    {% if is_granted ('ROLE_ADMIN') %}
     <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
 
     {{ include('game/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

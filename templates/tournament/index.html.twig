@@ -18,9 +18,12 @@
             <tr>
                 <td>{{ tournament.id }}</td>
                 <td>{{ tournament.name }}</td>
+
                 <td>
                     <a href="{{ path('tournament_show', {'id': tournament.id}) }}">show</a>
+                    {% if is_granted ('ROLE_ADMIN') %}
                     <a href="{{ path('tournament_edit', {'id': tournament.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -30,6 +33,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% if is_granted ('ROLE_ADMIN') %}
     <a href="{{ path('tournament_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

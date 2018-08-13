@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeofWeight index{% endblock %}
+
+{% block body %}
+    <h1>TypeofWeight index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Weight</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for typeof_weight in typeof_weights %}
+            <tr>
+                <td>{{ typeof_weight.id }}</td>
+                <td>{{ typeof_weight.Weight }}</td>
+                <td>
+                    <a href="{{ path('typeof_weight_show', {'id': typeof_weight.id}) }}">show</a>
+                    <a href="{{ path('typeof_weight_edit', {'id': typeof_weight.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('typeof_weight_new') }}">Create new</a>
+{% endblock %}
