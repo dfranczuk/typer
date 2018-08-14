@@ -16,6 +16,8 @@ class ExpectedResults
      */
     private $id;
 
+
+
     /**
      * @ORM\Column(type="integer", nullable=false)
      */
@@ -26,10 +28,17 @@ class ExpectedResults
      */
     private $SecondTeamScoreExpected;
 
+
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Game")
      */
     private $NameOfMeeting;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Game")
+     */
+    private $game_date;
 
     public function getId()
     {
@@ -71,4 +80,16 @@ class ExpectedResults
 
         return $this;
     }
+
+    public function getgame_date(): ?Game
+    {
+        return $this->game_date;
+    }
+
+    public function setgame_date(?Game $game_date): self
+    {
+        $this->game_date = $game_date;
+        return $this;
+    }
+
 }
