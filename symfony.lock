@@ -5,6 +5,9 @@
     "composer/semver": {
         "version": "1.4.2"
     },
+    "composer/xdebug-handler": {
+        "version": "1.1.0"
+    },
     "dama/doctrine-test-bundle": {
         "version": "v4.0.1"
     },
@@ -56,6 +59,9 @@
             "ref": "c1431086fec31f17fbcfe6d6d7e92059458facc1"
         }
     },
+    "doctrine/event-manager": {
+        "version": "v1.0.0"
+    },
     "doctrine/inflector": {
         "version": "v1.2.0"
     },
@@ -70,6 +76,12 @@
     },
     "doctrine/orm": {
         "version": "v2.5.12"
+    },
+    "doctrine/persistence": {
+        "version": "v1.0.0"
+    },
+    "doctrine/reflection": {
+        "version": "v1.0.0"
     },
     "egulias/email-validator": {
         "version": "2.1.2"
@@ -265,6 +277,9 @@
     },
     "symfony/options-resolver": {
         "version": "v3.4.0-beta2"
+    },
+    "symfony/orm-pack": {
+        "version": "v1.0.5"
     },
     "symfony/phpunit-bridge": {
         "version": "3.3",

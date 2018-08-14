@@ -12,178 +12,116 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\Table(name="symfony_demo_user")
- *
- * Defines the properties of the User entity to represent the application users.
- * See https://symfony.com/doc/current/book/doctrine.html#creating-an-entity-class
- *
- * Tip: if you have an existing database, you can generate these entity class automatically.
- * See https://symfony.com/doc/current/cookbook/doctrine/reverse_engineering.html
- *
- * @author Ryan Weaver <weaverryan@gmail.com>
- * @author Javier Eguiluz <javier.eguiluz@gmail.com>
+ * @ORM\Entity
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User implements UserInterface, \Serializable
+class User implements UserInterface
 {
     /**
-     * @var int
-     *
      * @ORM\Id
-     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     */
-    private $fullName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @var string
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     */
+    private $username;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
+
+    /**
+     * The below length depends on the "algorithm" you use for encoding
+     * the password, but this works well with bcrypt.
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=64)
      */
     private $password;
 
     /**
-     * @var array
-     *
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="array")
      */
-    private $roles = [];
+    private $roles;
 
-    public function getId(): int
+    public function __construct()
     {
-        return $this->id;
+        $this->roles = array('["ROLE_USER"]');
     }
 
-    public function setFullName(string $fullName): void
-    {
-        $this->fullName = $fullName;
-    }
+    // other properties and methods
 
-    public function getFullName(): string
-    {
-        return $this->fullName;
-    }
-
-    public function getUsername(): string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
-    }
-
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): void
+    public function setEmail($email)
     {
         $this->email = $email;
     }
 
-    public function getPassword(): string
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
+    public function getPassword()
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): void
+    public function setPassword($password)
     {
         $this->password = $password;
     }
 
-    /**
-     * Returns the roles or permissions granted to the user for security.
-     */
-    public function getRoles(): array
+    public function getSalt()
     {
-        $roles = $this->roles;
-
-        // guarantees that a user always has at least one role for security
-        if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
-        }
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): void
-    {
-        $this->roles = $roles;
-    }
-
-    /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * {@inheritdoc}
-     */
-    public function getSalt(): ?string
-    {
-        // See "Do you need to use a Salt?" at https://symfony.com/doc/current/cookbook/security/entity_provider.html
-        // we're using bcrypt in security.yml to encode the password, so
-        // the salt value is built-in and you don't have to generate one
-
+        // The bcrypt and argon2i algorithms don't require a separate salt.
+        // You *may* need a real salt if you choose a different encoder.
         return null;
     }
 
-    /**
-     * Removes sensitive data from the user.
-     *
-     * {@inheritdoc}
-     */
-    public function eraseCredentials(): void
+    public function getRoles()
     {
-        // if you had a plainPassword property, you'd nullify it here
-        // $this->plainPassword = null;
+        return $this->roles;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function serialize(): string
+    public function eraseCredentials()
     {
-        // add $this->salt too if you don't use Bcrypt or Argon2i
-        return serialize([$this->id, $this->username, $this->password]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized): void
-    {
-        // add $this->salt too if you don't use Bcrypt or Argon2i
-        [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
-    }
-
-    public function __toString(): string
-
-    {
-        return $this->username;
     }
 }
