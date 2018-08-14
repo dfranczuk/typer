@@ -53,9 +53,10 @@ class ExpectedResults
     private $game_date;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="expectedResultsID")
      */
     private $user_id;
+
 
     public function getId()
     {
@@ -109,16 +110,17 @@ class ExpectedResults
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function getUserId(): User
     {
         return $this->user_id;
     }
 
-    public function setUserId(int $user_id): self
+    public function setUserId(?User $user_id): void
     {
         $this->user_id = $user_id;
 
-        return $this;
     }
+
+
 
 }

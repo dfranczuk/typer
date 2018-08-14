@@ -21,6 +21,9 @@ class ExpectedResultsController extends Controller
      */
     public function index(ExpectedResultsRepository $expectedResultsRepository): Response
     {
+
+
+
         return $this->render('expected_results/index.html.twig', ['expected_results' => $expectedResultsRepository->findAll()]);
     }
 
@@ -37,7 +40,11 @@ class ExpectedResultsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($expectedResult);
             $em->flush();
+            $EntityManager=$this->getDoctrine()->getManager();
+            $expectedResult->setUserId($this->getUser());
 
+            $EntityManager->persist($expectedResult);
+            $EntityManager->flush();
             return $this->redirectToRoute('expected_results_index');
         }
 
@@ -89,8 +96,4 @@ class ExpectedResultsController extends Controller
         return $this->redirectToRoute('expected_results_index');
     }
 
-    public function fooAction(UserInterface $user_id)
-    {
-        $userId = $user_id->getId();
-    }
 }
