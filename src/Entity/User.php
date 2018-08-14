@@ -64,10 +64,20 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->roles = array('["ROLE_USER"]');
+        $this->roles = array('["ROLE_ADMIN"]');
+        $this->role = '["ROLE_ADMIN"]';
     }
 
     // other properties and methods
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $role;
+
+    public function getRole()
+    {
+        return $this->role;
+    }
 
     public function getEmail()
     {

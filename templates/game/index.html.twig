@@ -28,9 +28,11 @@
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('game_show', {'id': game.id}) }}">show</a>
-
+                    {% if app.user %}
+                    {% if app.user.role == '"ROLE_ADMIN"' %}
                     <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
-
+                    {% endif %}
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -40,5 +42,9 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if app.user %}
+    {% if app.user.role == '"ROLE_ADMIN"' %}
     <a href="{{ path('game_new') }}">Create new</a>
+        {% endif %}
+    {% endif %}
 {% endblock %}

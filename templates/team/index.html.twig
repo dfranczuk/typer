@@ -22,7 +22,11 @@
                 <td>{{ team.type }}</td>
                 <td>
                     <a href="{{ path('team_show', {'id': team.id}) }}">show</a>
+                    {% if app.user %}
+                    {% if app.user.role == '"ROLE_ADMIN"' %}
                     <a href="{{ path('team_edit', {'id': team.id}) }}">edit</a>
+                    {% endif %}
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -32,6 +36,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% if app.user %}
+    {% if app.user.role == '"ROLE_ADMIN"' %}
     <a href="{{ path('team_new') }}">Create new</a>
+    {% endif %}
+    {% endif %}
 {% endblock %}
