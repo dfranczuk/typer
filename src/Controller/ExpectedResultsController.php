@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @Route("/expected/results")
@@ -86,5 +87,10 @@ class ExpectedResultsController extends Controller
         }
 
         return $this->redirectToRoute('expected_results_index');
+    }
+
+    public function fooAction(UserInterface $user_id)
+    {
+        $userId = $user_id->getId();
     }
 }

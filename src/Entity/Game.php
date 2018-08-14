@@ -75,7 +75,7 @@ class Game
 
 
     /**
-     * @ORM\Column(type="string", length=255,nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $meeting;
 
@@ -170,12 +170,12 @@ class Game
 
 
 
-    public function getMeeting(): ?string
+    public function getMeeting()
     {
         return $this->meeting;
     }
 
-    public function setMeeting(string $meeting): self
+    public function setMeeting(string $meeting)
     {
         $this->meeting = $meeting;
 
@@ -184,7 +184,13 @@ class Game
 
     public function __toString()
     {
+        if(is_null($this->meeting)) {
+            return 'NULL';
+        }
         return $this->meeting;
+
+
+
     }
 
 

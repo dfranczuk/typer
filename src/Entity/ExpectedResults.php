@@ -40,6 +40,11 @@ class ExpectedResults
      */
     private $game_date;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $user_id;
+
     public function getId()
     {
         return $this->id;
@@ -89,6 +94,18 @@ class ExpectedResults
     public function setgame_date(?Game $game_date): self
     {
         $this->game_date = $game_date;
+        return $this;
+    }
+
+    public function getUserId(): ?int
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(int $user_id): self
+    {
+        $this->user_id = $user_id;
+
         return $this;
     }
 
