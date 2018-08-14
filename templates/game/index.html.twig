@@ -29,9 +29,9 @@
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('game_show', {'id': game.id}) }}">show</a>
-                    {% if is_granted ('ROLE_ADMIN') %}
+
                     <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
-                    {% endif %}
+
                 </td>
             </tr>
         {% else %}
@@ -41,7 +41,5 @@
         {% endfor %}
         </tbody>
     </table>
-{% if is_granted ('ROLE_ADMIN') %}
     <a href="{{ path('game_new') }}">Create new</a>
-    {% endif %}
 {% endblock %}
