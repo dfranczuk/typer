@@ -15,8 +15,7 @@ class ExpectedResults
      * @ORM\Column(type="integer")
      */
     private $id;
-
-
+    
 
     /**
      * @ORM\Column(type="integer", nullable=false)
@@ -120,7 +119,6 @@ class ExpectedResults
         $this->user_id = $user_id;
 
     }
-
 
 
 }
