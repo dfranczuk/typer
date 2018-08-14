@@ -12,12 +12,20 @@
                 <td>{{ expected_result.id }}</td>
             </tr>
             <tr>
+                <th>Confrontation</th>
+                <td>{{ expected_result.NameOfMeeting }}</td>
+            </tr>
+            <tr>
                 <th>FirstTeamScoreExpected</th>
                 <td>{{ expected_result.FirstTeamScoreExpected }}</td>
             </tr>
             <tr>
                 <th>SecondTeamScoreExpected</th>
                 <td>{{ expected_result.SecondTeamScoreExpected }}</td>
+            </tr>
+            <tr>
+                <th>Game_date</th>
+                <td>{{ expected_result.game_date ? expected_result.game_date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>

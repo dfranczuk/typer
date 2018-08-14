@@ -11,6 +11,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -29,6 +31,22 @@ class User implements UserInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
@@ -62,10 +80,17 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ExpectedResults", mappedBy="user_id")
+     */
+    private $expectedResultsID;
+
     public function __construct()
     {
-        $this->roles = array('["ROLE_ADMIN"]');
+
         $this->role = '["ROLE_ADMIN"]';
+        $this->roles = array('["ROLE_USER"]');
+        $this->expectedResultsID = new ArrayCollection();
     }
 
     // other properties and methods
@@ -133,5 +158,42 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
+    }
+
+    public function fooAction(UserInterface $user)
+    {
+        $user_id = $user->getId();
+    }
+
+
+    /**
+     * @return Collection|ExpectedResults[]
+     */
+    public function getExpectedResultsID(): Collection
+    {
+        return $this->expectedResultsID;
+    }
+
+    public function addExpectedResultsID(ExpectedResults $expectedResultsID): self
+    {
+        if (!$this->expectedResultsID->contains($expectedResultsID)) {
+            $this->expectedResultsID[] = $expectedResultsID;
+            $expectedResultsID->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExpectedResultsID(ExpectedResults $expectedResultsID): self
+    {
+        if ($this->expectedResultsID->contains($expectedResultsID)) {
+            $this->expectedResultsID->removeElement($expectedResultsID);
+            // set the owning side to null (unless already changed)
+            if ($expectedResultsID->getUserId() === $this) {
+                $expectedResultsID->setUserId(null);
+            }
+        }
+
+        return $this;
     }
 }

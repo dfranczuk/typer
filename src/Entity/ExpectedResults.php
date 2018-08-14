@@ -16,6 +16,8 @@ class ExpectedResults
      */
     private $id;
 
+
+
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\Range(
@@ -38,11 +40,22 @@ class ExpectedResults
      */
     private $SecondTeamScoreExpected;
 
+
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Game")
      */
     private $NameOfMeeting;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Game")
+     */
+    private $game_date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="expectedResultsID")
+     */
+    private $user_id;
 
 
     public function getId()
@@ -85,6 +98,29 @@ class ExpectedResults
 
         return $this;
     }
+
+    public function getgame_date(): ?Game
+    {
+        return $this->game_date;
+    }
+
+    public function setgame_date(?Game $game_date): self
+    {
+        $this->game_date = $game_date;
+        return $this;
+    }
+
+    public function getUserId(): User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?User $user_id): void
+    {
+        $this->user_id = $user_id;
+
+    }
+
 
 
 }
