@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}ExpectedResults index{% endblock %}
-
 {% block body %}
     <h1>ExpectedResults index</h1>
 
@@ -12,7 +11,7 @@
                 <th>Confrontation</th>
                 <th>FirstTeamScoreExpected</th>
                 <th>SecondTeamScoreExpected</th>
-                <th>Game date</th>
+
                 <th>actions</th>
             </tr>
         </thead>
@@ -23,7 +22,7 @@
                 <td>{{ expected_result.NameOfMeeting }}</td>
                 <td>{{ expected_result.FirstTeamScoreExpected }}</td>
                 <td>{{ expected_result.SecondTeamScoreExpected }}</td>
-                <td>{{ expected_result.game_date ? expected_result.game_date|date('Y-m-d H:i:s') : '' }}</td>
+
                 <td>
                     <a href="{{ path('expected_results_show', {'id': expected_result.id}) }}">show</a>
                     <a href="{{ path('expected_results_edit', {'id': expected_result.id}) }}">edit</a>

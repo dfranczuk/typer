@@ -57,6 +57,16 @@ class ExpectedResults
      */
     private $user_id;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $DateOfType;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Flaga=false;
+
 
     public function getId()
     {
@@ -119,6 +129,30 @@ class ExpectedResults
     {
         $this->user_id = $user_id;
 
+    }
+
+    public function getDateOfType(): ?\DateTimeInterface
+    {
+        return $this->DateOfType;
+    }
+
+    public function setDateOfType(\DateTimeInterface $DateOfType): self
+    {
+        $this->DateOfType = $DateOfType;
+
+        return $this;
+    }
+
+    public function getFlaga(): ?bool
+    {
+        return $this->Flaga;
+    }
+
+    public function setFlaga(bool $Flaga): self
+    {
+        $this->Flaga = $Flaga;
+
+        return $this;
     }
 
 

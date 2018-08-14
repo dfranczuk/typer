@@ -37,7 +37,12 @@ class ExpectedResultsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+
+
+            $expectedResult->setDateOfType(\DateTime::createFromFormat( 'Y-m-d H-i-s' ,date('Y-m-d H-i-s')));
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($expectedResult);
             $em->flush();
             $EntityManager=$this->getDoctrine()->getManager();
@@ -71,6 +76,11 @@ class ExpectedResultsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $expectedResult->setDateOfType(\DateTime::createFromFormat( 'Y-m-d H-i-s' ,date('Y-m-d H-i-s')));
+            $this->getDoctrine()->getManager();
+
+            $this->persist($expectedResult);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('expected_results_edit', ['id' => $expectedResult->getId()]);
