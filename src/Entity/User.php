@@ -62,9 +62,15 @@ class User implements UserInterface
      */
     private $roles;
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
     public function __construct()
     {
-        $this->roles = array('["ROLE_USER"]');
+        $this->roles = array('ROLE_USER');
     }
 
     // other properties and methods
