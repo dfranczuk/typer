@@ -21,8 +21,12 @@
 
             <trans-unit id="title.homepage">
                 <source>title.homepage</source>
-                <target><![CDATA[Witamy w aplikacji <strong>Symfony Demo</strong>]]></target>
+                <target><![CDATA[Witamy w aplikacji <strong></strong>]]></target>
             </trans-unit>
+            <trans-unit id="title.homepage_text">
+                            <source>title.homepage_text</source>
+                            <target>Możesz udać się do...</target>
+                        </trans-unit>
             <trans-unit id="title.source_code">
                 <source>title.source_code</source>
                 <target>Kod źródłowy użyty do wygenerowania tej podstrony</target>
@@ -120,6 +124,10 @@
                 <source>action.sign_in</source>
                 <target>Zaloguj się</target>
             </trans-unit>
+            <trans-unit id="action.create_an_account">
+                     <source>action.create_an_account</source>
+                     <target>Utwórz konto</target>
+            </trans-unit>
             <trans-unit id="action.browse_app">
                 <source>action.browse_app</source>
                 <target>Przeglądaj aplikację</target>
@@ -214,6 +222,22 @@
                     <source>menu.scoreboard</source>
                     <target>Tablica wyników</target>
             </trans-unit>
+
+            <trans-unit id="menu.expected_results">
+                <source>menu.expected_results</source>
+                <target>Moje typy</target>
+            </trans-unit>
+
+            <trans-unit id="menu.type_of_event">
+                <source>menu.type_of_event</source>
+                <target>Typ wydarzenia</target>
+            </trans-unit>
+
+            <trans-unit id="menu.typeof_weight">
+                <source>menu.typeof_weight</source>
+                <target>Typ wagi wydarzenia</target>
+            </trans-unit>
+
             <trans-unit id="menu.logout">
                 <source>menu.logout</source>
                 <target>Wyloguj się</target>

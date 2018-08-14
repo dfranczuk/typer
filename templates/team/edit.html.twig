@@ -3,7 +3,7 @@
 {% block title %}Edit Team{% endblock %}
 
 {% block body %}
-    {% if is_granted ('ROLE_ADMIN') %}
+
     <h1>Edit Team</h1>
 
     {{ include('team/_form.html.twig', {'button_label': 'Update'}) }}
@@ -11,8 +11,4 @@
     <a href="{{ path('team_index') }}">back to list</a>
 
     {{ include('team/_delete_form.html.twig') }}
-    {% else %}
-        <p>You dont have permission</p>
-        <a href="{{ path('team_index') }}">back to list</a>
-    {% endif %}
 {% endblock %}

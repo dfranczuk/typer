@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ExpectedResultsRepository")
  */
@@ -18,11 +18,23 @@ class ExpectedResults
 
     /**
      * @ORM\Column(type="integer", nullable=false)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 50,
+     *      minMessage = "The number must be greater than or equal to {{ limit }}",
+     *      maxMessage = "The number must be less than  {{ limit }}"
+     * )
      */
     private $FirstTeamScoreExpected;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
+     *  @Assert\Range(
+     *      min = 0,
+     *      max = 50,
+     *      minMessage = "The number must be greater than or equal to {{ limit }}",
+     *      maxMessage = "The number must be less than  {{ limit }}"
+     * )
      */
     private $SecondTeamScoreExpected;
 
