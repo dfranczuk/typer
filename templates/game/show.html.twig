@@ -27,15 +27,17 @@
                 <th>Game_date</th>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
-
+          
 
         </tbody>
     </table>
 
     <a href="{{ path('game_index') }}">back to list</a>
 
+    {% if app.user %}
+    {% if app.user.role == '"ROLE_ADMIN"' %}
     <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
-
     {{ include('game/_delete_form.html.twig') }}
-
+    {% endif %}
+    {% endif %}
 {% endblock %}

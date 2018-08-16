@@ -42,11 +42,13 @@ class Game
      * @ORM\Column(type="datetime")
      */
     private $game_date;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Tournament", inversedBy="games")
      * @ORM\JoinColumn(nullable=false)
      */
     private $tournament;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\TypeofWeight", inversedBy="Game")
      */
@@ -180,7 +182,6 @@ class Game
         return $this;
     }
 
-
     public function __toString()
     {
         if(is_null($this->meeting)) {
@@ -198,6 +199,11 @@ class Game
         return $this->first_team;
     }
 
+
+    public function __toString2()
+    {
+        return $this->game_date;
+    }
 
 }
 

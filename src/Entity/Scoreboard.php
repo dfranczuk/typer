@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,18 @@ class Scoreboard
      * @ORM\Column(type="integer")
      */
     private $points;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ExpectedResults", mappedBy="ScoreboardID")
+     */
+    private $ExpectedResultsID;
+
+
+
+    public function __construct()
+    {
+        $this->ExpectedResultsID = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -84,4 +98,38 @@ class Scoreboard
     {
         return $this->user;
     }
+
+    /**
+     * @return Collection|ExpectedResults[]
+     */
+    public function getExpectedResultsID(): Collection
+    {
+        return $this->ExpectedResultsID;
+    }
+
+    public function addExpectedResultsID(ExpectedResults $expectedResultsID): self
+    {
+        if (!$this->ExpectedResultsID->contains($expectedResultsID)) {
+            $this->ExpectedResultsID[] = $expectedResultsID;
+            $expectedResultsID->setScoreboardID($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExpectedResultsID(ExpectedResults $expectedResultsID): self
+    {
+        if ($this->ExpectedResultsID->contains($expectedResultsID)) {
+            $this->ExpectedResultsID->removeElement($expectedResultsID);
+            // set the owning side to null (unless already changed)
+            if ($expectedResultsID->getScoreboardID() === $this) {
+                $expectedResultsID->setScoreboardID(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 }

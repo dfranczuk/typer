@@ -16,6 +16,8 @@ class ExpectedResults
      */
     private $id;
 
+
+
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\Range(
@@ -38,10 +40,43 @@ class ExpectedResults
      */
     private $SecondTeamScoreExpected;
 
+
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Game")
      */
     private $NameOfMeeting;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="expectedResultsID")
+     */
+    private $user_id;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $DateOfType;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $Flaga=false;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $points;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Scoreboard", inversedBy="ExpectedResultsID")
+     */
+    private $ScoreboardID;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Game")
+     */
+    private $Game_date_id;
 
 
 
@@ -85,6 +120,80 @@ class ExpectedResults
 
         return $this;
     }
+
+
+
+    public function getUserId(): User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?User $user_id): void
+    {
+        $this->user_id = $user_id;
+
+    }
+
+    public function getDateOfType(): ?\DateTimeInterface
+    {
+        return $this->DateOfType;
+    }
+
+    public function setDateOfType(\DateTimeInterface $DateOfType): self
+    {
+        $this->DateOfType = $DateOfType;
+
+        return $this;
+    }
+
+    public function getFlaga(): ?bool
+    {
+        return $this->Flaga;
+    }
+
+    public function setFlaga(bool $Flaga): self
+    {
+        $this->Flaga = $Flaga;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(?int $points): self
+    {
+        $this->points = $points;
+
+        return $this;
+    }
+
+    public function getScoreboardID(): ?Scoreboard
+    {
+        return $this->ScoreboardID;
+    }
+
+    public function setScoreboardID(?Scoreboard $ScoreboardID): self
+    {
+        $this->ScoreboardID = $ScoreboardID;
+
+        return $this;
+    }
+
+    public function getGameDateId(): ?Game
+    {
+        return $this->Game_date_id;
+    }
+
+    public function setGameDateId(?Game $Game_date_id): self
+    {
+        $this->Game_date_id = $Game_date_id;
+
+        return $this;
+    }
+    
 
 
 }
