@@ -43,9 +43,7 @@
         {% endfor %}
         </tbody>
     </table>
-    {% if app.user %}
-    {% if app.user.role == '"ROLE_ADMIN"' %}
+
     <a href="{{ path('game_new') }}">Create new</a>
-        {% endif %}
-    {% endif %}
+
 {% endblock %}
