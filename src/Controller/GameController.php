@@ -42,7 +42,6 @@ class GameController extends Controller
             }else{
                 $em = $this->getDoctrine()->getManager();
 
-
                 $spotkanie1=$game->getFirstTeam();
                 $spotkanie2=$game->getSecondTeam();
                 $spotkanie3=$spotkanie1."-".$spotkanie2;
