@@ -115,14 +115,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('expected_results_index') }}">{{ 'menu.expected_results' | trans }}</a>
                         </li>
-                        {% if app.user.role is same as('["ROLE_ADMIN"]') %}
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('type_of_event_index') }}">{{ 'menu.type_of_event' | trans }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('typeof_weight_index') }}">{{ 'menu.typeof_weight' | trans }}</a>
                         </li>
-                        {% endif %}
+
                     </ul>
 
                 </nav>

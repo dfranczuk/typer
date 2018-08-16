@@ -47,7 +47,7 @@
             </p>
             {% endif %}
 
-            {% if app.user.role is same as('["ROLE_ADMIN"]') %}
+
                 <p>
                     <a href="{{ path('type_of_event_index') }}">
                         <i class="" aria-hidden="true"></i> {{ 'menu.type_of_event' | trans }}
@@ -58,22 +58,19 @@
                         <i class="" aria-hidden="true"></i> {{ 'menu.typeof_weight' | trans }}
                     </a>
                 </p>
-            {% endif %}
         </div>
     </div>
 
     <div class="row" >
         <div class="col-sm-6">
             <div class="jumbotron">
-                {% if app.user.role is same as('["ROLE_ADMIN"]') %}
+
                 <p>
                     <a class="btn btn-primary btn-lg" href="{{ path('admin_index') }}">
                         <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.browse_admin'|trans }}
                     </a>
                 </p>
-                {% else %}
-                    <p>nie jest admin</p>
-                {% endif %}
+
                 {% if app.user %}
                     <p >Jesteś zalogowany jako: {{ app.user.username }} </p>
                     <p >Jesteś zalogowany jako: {{ app.user.role }} </p>

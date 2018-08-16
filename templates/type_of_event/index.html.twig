@@ -23,11 +23,11 @@
                         <a href="{{ path('type_of_event_show', {'id': type_of_event.id}) }}" class="btn btn-sm btn-default">
                             <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
                         </a>
-                        {% if app.user.role is same as('["ROLE_ADMIN"]') %}
+
                             <a href="{{ path('type_of_event_edit', {'id': type_of_event.id}) }}" class="btn btn-sm btn-primary">
                                 <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
                             </a>
-                        {% endif %}
+
                     </div>
                 </td>
             </tr>

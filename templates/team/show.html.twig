@@ -23,8 +23,8 @@
     </table>
 
     <a href="{{ path('team_index') }}">back to list</a>
-{% if app.user.role is same as('["ROLE_ADMIN"]') %}
+
     <a href="{{ path('team_edit', {'id': team.id}) }}">edit</a>
     {{ include('team/_delete_form.html.twig') }}
-    {% endif %}
+
 {% endblock %}
