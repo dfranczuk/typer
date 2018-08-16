@@ -113,17 +113,19 @@
                     </ul>
 
                     <ul class="nav nav-pills flex-column">
+                        {% if app.user %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('expected_results_index') }}">{{ 'menu.expected_results' | trans }}</a>
                         </li>
-
+                        {% endif %}
+                        {% if app.user and app.user.role == '["ROLE_ADMIN"]' %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('type_of_event_index') }}">{{ 'menu.type_of_event' | trans }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('typeof_weight_index') }}">{{ 'menu.typeof_weight' | trans }}</a>
                         </li>
-
+                        {% endif %}
                     </ul>
 
                 </nav>
