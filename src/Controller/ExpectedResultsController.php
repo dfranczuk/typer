@@ -85,7 +85,7 @@ class ExpectedResultsController extends Controller
             $EntityManager=$this->getDoctrine()->getManager();
 
             $expectedResult->setUserId($this->getUser());
-            $expectedResult->setGameDateId(1);
+        //    $expectedResult->setGameDateId(1);
 
 
             $EntityManager->persist($expectedResult);
