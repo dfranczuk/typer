@@ -18,7 +18,7 @@ class GameType extends AbstractType
 
             ->add('TypeofWeight')
             ->add('game_date', DateTimeType::class, [
-                'widget' => 'single_text'
+                'date_widget' => 'single_text'
             ])
             ->add('tournament')
             ->add('first_team')

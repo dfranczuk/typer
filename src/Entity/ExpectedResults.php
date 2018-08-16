@@ -120,7 +120,4 @@ class ExpectedResults
         $this->user_id = $user_id;
 
     }
-
-
-
 }

@@ -25,8 +25,14 @@
                 <td>{{ expected_result.SecondTeamScoreExpected }}</td>
                 <td>{{ expected_result.game_date ? expected_result.game_date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('expected_results_show', {'id': expected_result.id}) }}">show</a>
-                    <a href="{{ path('expected_results_edit', {'id': expected_result.id}) }}">edit</a>
+                    <div class="item-actions">
+                        <a href="{{ path('expected_results_show', {'id': expected_result.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                        </a>
+                            <a href="{{ path('expected_results_edit', {'id': expected_result.id}) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                            </a>
+                    </div>
                 </td>
             </tr>
         {% else %}

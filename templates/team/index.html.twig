@@ -21,12 +21,16 @@
                 <td>{{ team.name }}</td>
                 <td>{{ team.type }}</td>
                 <td>
-                    <a href="{{ path('team_show', {'id': team.id}) }}">show</a>
-                    {% if app.user %}
-                    {% if app.user.role == '"ROLE_ADMIN"' %}
-                    <a href="{{ path('team_edit', {'id': team.id}) }}">edit</a>
-                    {% endif %}
-                    {% endif %}
+                    <div class="item-actions">
+                        <a href="{{ path('team_show', {id: team.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                        </a>
+                        {% if app.user.role is same as('["ROLE_ADMIN"]') %}
+                            <a href="{{ path('team_edit', {id: team.id}) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -36,9 +40,7 @@
         {% endfor %}
         </tbody>
     </table>
-    {% if app.user %}
-    {% if app.user.role == '"ROLE_ADMIN"' %}
+    {% if app.user.role is same as('["ROLE_ADMIN"]') %}
     <a href="{{ path('team_new') }}">Create new</a>
-    {% endif %}
     {% endif %}
 {% endblock %}
