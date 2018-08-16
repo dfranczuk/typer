@@ -18,14 +18,17 @@
             <tr>
                 <td>{{ tournament.id }}</td>
                 <td>{{ tournament.name }}</td>
-
                 <td>
-                    <a href="{{ path('tournament_show', {'id': tournament.id}) }}">show</a>
-                    {% if app.user %}
-                    {% if app.user.role == '"ROLE_ADMIN"' %}
-                    <a href="{{ path('tournament_edit', {'id': tournament.id}) }}">edit</a>
-                    {% endif %}
-                    {% endif %}
+                    <div class="item-actions">
+                        <a href="{{ path('tournament_show', {'id': tournament.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                        </a>
+
+                            <a href="{{ path('tournament_edit', {'id': tournament.id}) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                            </a>
+
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -35,9 +38,7 @@
         {% endfor %}
         </tbody>
     </table>
-    {% if app.user %}
-    {% if app.user.role == '"ROLE_ADMIN"' %}
+
     <a href="{{ path('tournament_new') }}">Create new</a>
-    {% endif %}
-    {% endif %}
+
 {% endblock %}

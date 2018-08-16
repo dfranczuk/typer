@@ -14,6 +14,7 @@ class GameController extends Controller
 {
     /**
      * @Route("/", name="game_index", methods="GET")
+     *
      */
     public function index(GameRepository $gameRepository): Response
     {
