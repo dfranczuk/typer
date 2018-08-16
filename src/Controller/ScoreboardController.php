@@ -21,7 +21,7 @@ class ScoreboardController extends Controller
     public function index(ScoreboardRepository $scoreboardRepository): Response
 
     {
-        
+
 
             return $this->render('scoreboard/index.html.twig', ['scoreboards' => $scoreboardRepository->findAll()]);
     }

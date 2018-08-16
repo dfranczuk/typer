@@ -1,7 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}New Team{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    <script >
+        $( document ).ready(function() {
+
+
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
 

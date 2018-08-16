@@ -70,11 +70,15 @@ class ExpectedResultsController extends Controller
     public function new(Request $request): Response
     {
         $expectedResult = new ExpectedResults();
+        $expectedResult1=new Game();
         $form = $this->createForm(ExpectedResults10Type::class, $expectedResult);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $repository1=$this->getDoctrine()->getRepository(Game::class);
+
+            $meeting=$expectedResult->getNameOfMeeting();
 
 
             $expectedResult->setDateOfType(\DateTime::createFromFormat( 'Y-m-d H-i-s' ,date('Y-m-d H-i-s')));
@@ -84,9 +88,23 @@ class ExpectedResultsController extends Controller
             $em->flush();
             $EntityManager=$this->getDoctrine()->getManager();
 
-            $expectedResult->setUserId($this->getUser());
-        //    $expectedResult->setGameDateId(1);
+            /*
+            $expectedResult->getNameOfMeeting()->getTournament();//id turnieju
+            $expectedResult->getDateOfType(); //data typowania
+            $expectedResult->getNameOfMeeting()->getTypeofWeight();//waga meczu
+            $expectedResult->getFlaga();//stan flagi
+            $expectedResult->getNameOfMeeting()->getFirstTeamScore();//gole 1 zespolu
+            $expectedResult->getNameOfMeeting()->getSecondTeamScore();// gole 2 zespolu
+            $expectedResult->getFirstTeamScoreExpected();//przewidywane gole 1 zespolu
+            $expectedResult->getSecondTeamScoreExpected();///przewidywane gole 2 zespolu
+*/
 
+
+            $expectedResult->setUserId($this->getUser());
+         //   dump($expectedResult->getNameOfMeeting()->getGameDate());die;
+    $expectedResult1->setGameDate($expectedResult->getNameOfMeeting()->getGameDate());
+   // dump($expectedResult1->getGameDate());die;
+            $expectedResult->setGameDateId($expectedResult1->getGameDate());
 
             $EntityManager->persist($expectedResult);
             $EntityManager->flush();
