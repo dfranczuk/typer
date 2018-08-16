@@ -88,6 +88,16 @@ class ExpectedResultsController extends Controller
             $em->flush();
             $EntityManager=$this->getDoctrine()->getManager();
 
+            /*
+            $expectedResult->getNameOfMeeting()->getTournament();//id turnieju
+            $expectedResult->getDateOfType(); //data typowania
+            $expectedResult->getNameOfMeeting()->getTypeofWeight();//waga meczu
+            $expectedResult->getFlaga();//stan flagi
+            $expectedResult->getNameOfMeeting()->getFirstTeamScore();//gole 1 zespolu
+            $expectedResult->getNameOfMeeting()->getSecondTeamScore();// gole 2 zespolu
+            $expectedResult->getFirstTeamScoreExpected();//przewidywane gole 1 zespolu
+            $expectedResult->getSecondTeamScoreExpected();///przewidywane gole 2 zespolu
+*/
 
 
             $expectedResult->setUserId($this->getUser());
