@@ -74,9 +74,10 @@ class ExpectedResults
     private $ScoreboardID;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Game")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $Game_date_id;
+
 
 
 
@@ -182,18 +183,20 @@ class ExpectedResults
         return $this;
     }
 
-    public function getGameDateId(): ?Game
+    public function getGameDateId(): ?\DateTimeInterface
     {
         return $this->Game_date_id;
     }
 
-    public function setGameDateId(?Game $Game_date_id): self
+    public function setGameDateId(?\DateTimeInterface $Game_date_id): self
     {
         $this->Game_date_id = $Game_date_id;
 
         return $this;
     }
-    
+
+
+
 
 
 }
