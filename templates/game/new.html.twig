@@ -10,7 +10,26 @@
 
         $( document ).ready(function() {
 
-            $('#game_second_team').prop('selectedIndex', 1);
+            $('#game_second_team').prop('selectedIndex', -1);
+            $('#game_first_team').prop('selectedIndex', -1);
+
+
+            var sel = $('#game_first_team');
+            var selected = sel.val();
+            var opts_list = sel.find('option');
+            opts_list.sort(function(a, b) { return $(a).text().toLowerCase() > $(b).text().toLowerCase() ? 1 : -1; });
+            sel.html('').append(opts_list);
+            sel.val(selected);
+
+
+            var sel2 = $('#game_second_team');
+            var selected2 = sel2.val();
+            var opts_list2 = sel2.find('option');
+            opts_list2.sort(function(a, b) { return $(a).text().toLowerCase() > $(b).text().toLowerCase() ? 1 : -1; });
+            sel2.html('').append(opts_list2);
+            sel2.val(selected2);
+
+
 
         });
     </script>
@@ -23,6 +42,8 @@
     {{ include('game/_form.html.twig') }}
 
     <a href="{{ path('game_index') }}">back to list</a>
+
+
 
 {% endblock %}
 

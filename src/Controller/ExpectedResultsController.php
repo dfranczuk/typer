@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ExpectedResults;
+use App\Entity\Game;
 use App\Form\ExpectedResults10Type;
 use App\Repository\ExpectedResultsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,6 +23,42 @@ class ExpectedResultsController extends Controller
     public function index(ExpectedResultsRepository $expectedResultsRepository): Response
     {
 
+        $repository1=$this->getDoctrine()->getRepository(ExpectedResults::class);
+        $repository2=$this->getDoctrine()->getRepository(Game::class);
+        $numberofmatch = $repository1->createQueryBuilder('u') // aktualnie to ilosc obstawionych meczy,
+        ->select('u.id')
+            ->getQuery();
+
+       foreach($numberofmatch as $x){
+
+             $query = $repository1->createQueryBuilder('p') //userID
+ ->select("p.user_id_id")
+ ->andWhere('p.id =: id')//gdzie idtypu=id przegladanego w petli
+ ->setParameter('id',$x)
+ ->getQuery();
+
+
+
+             /*$query2 = $repository1->createQueryBuilder('a') //game_date_id
+                ->select("a.game_date_id")
+                ->andWhere('a.id =: id')//gdzie idtypu=id przegladanego w petli
+                ->setParameter('id',$x)
+                ->getQuery();
+
+            $query3 = $repository2->createQueryBuilder('a')
+                ->select("a.tournament_id")
+                ->andWhere('a.id =: id')//gdzie idtypu=id przegladanego w petli
+                ->setParameter('id',$query2)
+                ->getQuery();
+
+*/
+
+
+        }
+
+
+
+
 
 
         return $this->render('expected_results/index.html.twig', ['expected_results' => $expectedResultsRepository->findAll()]);
@@ -33,15 +70,31 @@ class ExpectedResultsController extends Controller
     public function new(Request $request): Response
     {
         $expectedResult = new ExpectedResults();
+        $expectedResult1=new Game();
         $form = $this->createForm(ExpectedResults10Type::class, $expectedResult);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $repository1=$this->getDoctrine()->getRepository(Game::class);
+
+            $meeting=$expectedResult->getNameOfMeeting();
+
+
+            $expectedResult->setDateOfType(\DateTime::createFromFormat( 'Y-m-d H-i-s' ,date('Y-m-d H-i-s')));
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($expectedResult);
             $em->flush();
             $EntityManager=$this->getDoctrine()->getManager();
+
+
+
             $expectedResult->setUserId($this->getUser());
+         //   dump($expectedResult->getNameOfMeeting()->getGameDate());die;
+    $expectedResult1->setGameDate($expectedResult->getNameOfMeeting()->getGameDate());
+   // dump($expectedResult1->getGameDate());die;
+            $expectedResult->setGameDateId($expectedResult1->getGameDate());
 
             $EntityManager->persist($expectedResult);
             $EntityManager->flush();
@@ -59,6 +112,10 @@ class ExpectedResultsController extends Controller
      */
     public function show(ExpectedResults $expectedResult): Response
     {
+
+
+
+
         return $this->render('expected_results/show.html.twig', ['expected_result' => $expectedResult]);
     }
 
@@ -71,6 +128,11 @@ class ExpectedResultsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $expectedResult->setDateOfType(\DateTime::createFromFormat( 'Y-m-d H-i-s' ,date('Y-m-d H-i-s')));
+            $this->getDoctrine()->getManager();
+
+            $this->persist($expectedResult);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('expected_results_edit', ['id' => $expectedResult->getId()]);

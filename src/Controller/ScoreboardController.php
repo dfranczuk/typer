@@ -19,9 +19,13 @@ class ScoreboardController extends Controller
      * @Route("/", name="scoreboard_index", methods="GET")
      */
     public function index(ScoreboardRepository $scoreboardRepository): Response
+
     {
-        return $this->render('scoreboard/index.html.twig', ['scoreboards' => $scoreboardRepository->findAll()]);
+
+
+            return $this->render('scoreboard/index.html.twig', ['scoreboards' => $scoreboardRepository->findAll()]);
     }
+
 
     /**
      * @Route("/new", name="scoreboard_new", methods="GET|POST")
