@@ -7,21 +7,34 @@
     <script>
 
 
-      /*  $("#btn_check").click(function(){
-            if($('#rep_check').prop('checked', true))
-                $('#type')
-            else if($('#cl_check').prop('checked', true))
-            }
+        $("#rep_check").on("change",
+            function(){
 
+                var a = $(this).find("option:selected").html();
 
-        )*/
+                $("table tr td:nth-last-child(2)").each(
+
+                    function(){
+                        if($(this).html() != a){
+                            $(this).parent().hide();
+                        }
+                        else{
+                            $(this).parent().show();
+                        }
+                    });
+            });
+
     </script>
 {% endblock %}
 {% block body %}
     <h1>Team index</h1>
-    <label id="rep_check"><input type="checkbox" checked>Representation</label>
-    <label id="cl_check"><input type="checkbox" checked>Club</label>
-    <button class="btn" id="btn_check">{{ button_label|default('Search') }}</button>
+<p>
+    <select id="rep_check" title="fji">
+        <option disabled selected value> -- select a category -- </option>
+        <option>representation</option>
+        <option>club</option>
+    </select>
+</p>
     <table class="table">
         <thead>
             <tr>
@@ -33,11 +46,14 @@
             </tr>
         </thead>
         <tbody>
+
         {% for team in teams %}
+
+
             <tr>
                 <td>{{ team.id }}</td>
                 <td>{{ team.name }}</td>
-                <td id="type">{{ team.type }}</td>
+                <td>{{ team.type }}</td>
                 <td>
                     <a href="{{ path('team_show', {'id': team.id}) }}">show</a>
                     {% if app.user %}
@@ -47,6 +63,7 @@
                     {% endif %}
                 </td>
             </tr>
+
         {% else %}
             <tr>
                 <td colspan="3">no records found</td>
