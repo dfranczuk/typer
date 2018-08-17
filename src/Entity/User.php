@@ -76,20 +76,40 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="json_array")
      */
-    private $roles;
+    private $roles = [];
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ExpectedResults", mappedBy="user_id")
      */
     private $expectedResultsID;
 
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     *
+     * @Assert\File(mimeTypes={"image/jpeg","image/gif","image/png"})
+     */
+    private $brochure;
+
+    public function getBrochure()
+    {
+        return $this->brochure;
+    }
+
+    public function setBrochure($brochure)
+    {
+        $this->brochure = $brochure;
+
+        return $this;
+    }
+
+
     public function __construct()
     {
-
         $this->role = '["ROLE_ADMIN"]';
-        $this->roles = array('["ROLE_USER"]');
         $this->expectedResultsID = new ArrayCollection();
     }
 
@@ -153,7 +173,18 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return $this->roles;
+
+        $roles = $this->roles;
+        $role = $this->role;
+        if ( $role =='["ROLE_ADMIN"]'){
+            $roles[] ='ROLE_ADMIN';
+        }
+        if ( $role =='["ROLE_USER"]'){
+            $roles[] ='ROLE_USER';
+        }
+
+        return $roles;
+
     }
 
     public function eraseCredentials()
@@ -196,4 +227,5 @@ class User implements UserInterface
 
         return $this;
     }
+
 }

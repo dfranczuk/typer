@@ -86,6 +86,10 @@ class Game
 
     public $flaga=true;
 
+
+
+
+
     public function getId()
     {
         return $this->id;
@@ -203,6 +207,11 @@ class Game
     public function __toString2()
     {
         return $this->game_date;
+    }
+
+    public function getExpectedResults(): ?ExpectedResults
+    {
+        return $this->expectedResults;
     }
 
 }

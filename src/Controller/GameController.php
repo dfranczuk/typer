@@ -3,6 +3,7 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Form\GameType;
 use App\Repository\GameRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,8 @@ class GameController extends Controller
 {
     /**
      * @Route("/", name="game_index", methods="GET")
+     *
+     *
      */
     public function index(GameRepository $gameRepository): Response
     {
@@ -21,6 +24,7 @@ class GameController extends Controller
     }
     /**
      * @Route("/new", name="game_new", methods="GET|POST")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request): Response
     {
@@ -40,7 +44,6 @@ class GameController extends Controller
                 //$this->redirectToRoute('game_new');
             }else{
                 $em = $this->getDoctrine()->getManager();
-
 
                 $spotkanie1=$game->getFirstTeam();
                 $spotkanie2=$game->getSecondTeam();
@@ -66,6 +69,7 @@ class GameController extends Controller
     }
     /**
      * @Route("/{id}/edit", name="game_edit", methods="GET|POST")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Game $game): Response
     {
@@ -92,6 +96,7 @@ class GameController extends Controller
     }
     /**
      * @Route("/{id}", name="game_delete", methods="DELETE")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, Game $game): Response
     {

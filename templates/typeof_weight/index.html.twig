@@ -19,8 +19,16 @@
                 <td>{{ typeof_weight.id }}</td>
                 <td>{{ typeof_weight.Weight }}</td>
                 <td>
-                    <a href="{{ path('typeof_weight_show', {'id': typeof_weight.id}) }}">show</a>
-                    <a href="{{ path('typeof_weight_edit', {'id': typeof_weight.id}) }}">edit</a>
+                    <div class="item-actions">
+                        <a href="{{ path('typeof_weight_show', {'id': typeof_weight.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                        </a>
+
+                            <a href="{{ path('typeof_weight_edit', {'id': typeof_weight.id}) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                            </a>
+
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -32,4 +40,5 @@
     </table>
 
     <a href="{{ path('typeof_weight_new') }}">Create new</a>
+
 {% endblock %}

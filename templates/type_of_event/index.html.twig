@@ -19,8 +19,16 @@
                 <td>{{ type_of_event.id }}</td>
                 <td>{{ type_of_event.name }}</td>
                 <td>
-                    <a href="{{ path('type_of_event_show', {'id': type_of_event.id}) }}">show</a>
-                    <a href="{{ path('type_of_event_edit', {'id': type_of_event.id}) }}">edit</a>
+                    <div class="item-actions">
+                        <a href="{{ path('type_of_event_show', {'id': type_of_event.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                        </a>
+
+                            <a href="{{ path('type_of_event_edit', {'id': type_of_event.id}) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                            </a>
+
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -32,4 +40,5 @@
     </table>
 
     <a href="{{ path('type_of_event_new') }}">Create new</a>
+
 {% endblock %}
