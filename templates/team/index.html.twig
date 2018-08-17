@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Team index{% endblock %}
+{% block title %}{{  'team_table.title' | trans}}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
 
@@ -72,7 +72,7 @@
     </script>
 {% endblock %}
 {% block body %}
-    <h1>Team index</h1>
+    <h1>{{ 'team_table.title' | trans }}</h1>
 <p>
     <select id="rep_check" title="fji">
         <option disabled selected value> -- select a category -- </option>
@@ -84,10 +84,16 @@
         <thead>
             <tr>
 
-                <th onclick="sortTable(0)" style="cursor:pointer">Id</th>
-                <th onclick="sortTable(1)"style="cursor:pointer">Name</th>
-                <th onclick="sortTable(2)" style="cursor:pointer">Type</th>
-                <th>actions</th>
+                <th onclick="sortTable(0)" style="cursor:pointer">Id
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
+                </th>
+                <th onclick="sortTable(1)"style="cursor:pointer">{{ 'team_table.name' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
+                </th>
+                <th onclick="sortTable(2)" style="cursor:pointer">{{ 'team_table.type' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
+                </th>
+                <th>{{ 'table.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -100,23 +106,27 @@
                 <td>{{ team.name }}</td>
                 <td>{{ team.type }}</td>
                 <td>
-                    <a href="{{ path('team_show', {'id': team.id}) }}">show</a>
-                    {% if app.user %}
-                    {% if app.user.role == '"ROLE_ADMIN"' %}
-                    <a href="{{ path('team_edit', {'id': team.id}) }}">edit</a>
+                <div class="item-actions">
+                    <a href="{{ path('team_show', {'id': team.id}) }}" class="btn btn-sm btn-default">
+                        <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                    </a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('team_edit', {'id': team.id}) }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                        </a>
                     {% endif %}
-                    {% endif %}
+                </div>
                 </td>
             </tr>
 
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">{{ 'team_table.no_team_found' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('team_new') }}">Create new</a>
-
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('team_new') }}">{{ 'team_table.new' | trans }}</a>
+    {% endif %}
 {% endblock %}

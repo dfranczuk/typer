@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Game index{% endblock %}
+{% block title %}{{ 'game_table.title' | trans }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
 
@@ -51,18 +51,26 @@
     </script>
 {% endblock %}
 {% block body %}
-    <h1>Game index</h1>
+    <h1>{{ 'game_table.title' | trans }}</h1>
 
     <table class="table" id="myTable4">
         <thead>
             <tr>
-                <th onclick="sortTable(0)" style="cursor:pointer">Id</th>
-                <th onclick="sortTable(1)" style="cursor:pointer">Confrontation</th>
-                <th onclick="sortTable(2)" style="cursor:pointer">First_team_score</th>
-                <th onclick="sortTable(3)" style="cursor:pointer">Second_team_score</th>
-                <th onclick="sortTable(4)" style="cursor:pointer">Weight</th>
-                <th onclick="sortTable(5)" style="cursor:pointer">Game date</th>
-                <th>Actions</th>
+                <th onclick="sortTable(0)" style="cursor:pointer">Id
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
+                </th>
+                <th onclick="sortTable(1)" style="cursor:pointer">{{ 'game_table.confrontation' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
+                </th>
+                <th onclick="sortTable(2)" style="cursor:pointer">{{ 'game_table.first_team_score' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(3)" style="cursor:pointer">{{ 'game_table.second_team_score' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(4)" style="cursor:pointer">{{ 'game_table.weigh' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(5)" style="cursor:pointer">{{ 'game_table.game_date' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th>{{ 'table.actions' | trans }}</th>
 
             </tr>
         </thead>
@@ -71,13 +79,15 @@
             <tr>
                 <td>{{ game.id }}</td>
                 <td>{{ game.firstTeam.name }} - {{ game.secondTeam.name }}</td>
+
                 <td>{{ game.firstTeamScore }}</td>
                 <td>{{ game.secondTeamScore }}</td>
+
                 <td>{{ game.typeofweight }}</td>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
 
                 <td>
-                   <--? <div class="item-actions">
+                    <div class="item-actions">
                         <a href="{{ path('game_show', {id: game.id}) }}" class="btn btn-sm btn-default">
                             <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
                         </a>
@@ -86,18 +96,18 @@
                             <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
                         </a>
                         {% endif %}
-                    </div> -->
+                    </div>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">{{ 'game_table.no_game_found' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('game_new') }}">Create new</a>
+    <a href="{{ path('game_new') }}">{{ 'game_table.new' | trans }}</a>
     {% endif %}
 {% endblock %}

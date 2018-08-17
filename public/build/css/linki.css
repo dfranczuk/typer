@@ -1,0 +1,8 @@
+a.ex1 {
+    color: white;
+    background: none;
+}
+a.ex1:hover,  a.ex1:active a.ex1:visited {
+    color: #000033;
+    background: none;
+}
