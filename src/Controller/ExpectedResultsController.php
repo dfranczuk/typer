@@ -23,35 +23,292 @@ class ExpectedResultsController extends Controller
     public function index(ExpectedResultsRepository $expectedResultsRepository): Response
     {
 
+
+
         $repository1=$this->getDoctrine()->getRepository(ExpectedResults::class);
         $repository2=$this->getDoctrine()->getRepository(Game::class);
         $numberofmatch = $repository1->createQueryBuilder('u') // aktualnie to ilosc obstawionych meczy,
         ->select('u.id')
             ->getQuery();
+        $numberofmatch=$numberofmatch->execute(); //id wszystkich obstawionych meczy
+        $expectedResult = new ExpectedResults();
 
+
+//dump($numberofmatch);die;
+        $licznik=1;
+        $entityManager = $this->getDoctrine()->getManager();
        foreach($numberofmatch as $x){
 
-             $query = $repository1->createQueryBuilder('p') //userID
- ->select("p.user_id_id")
- ->andWhere('p.id =: id')//gdzie idtypu=id przegladanego w petli
- ->setParameter('id',$x)
- ->getQuery();
+           $expectedResult = $repository1->find($x['id']);//najważniejsze!!!
+
+          /* $datetype = $repository1->createQueryBuilder('a') // aktualnie to ilosc obstawionych meczy,
+           ->select('a.DateOfType')
+               ->andWhere('a.id = :id')
+               ->setParameter('id',$x['id'] )
+               ->getQuery();
+
+           $datetype=$datetype->execute();//data typu dla danego id
+
+           $datagame=$repository1->createQueryBuilder('b') // aktualnie to ilosc obstawionych meczy,
+->select('b.Game_date_id')
+    ->andWhere('b.id = :id')
+    ->setParameter('id', $x['id'])
+    ->getQuery();
+
+           $datagame=$datagame->execute();
+
+           $stanFlagi= $repository1->createQueryBuilder('c') // flage
+           ->select('c.Flaga')
+               ->andWhere('c.id = :id')
+               ->setParameter('id',$x['id'] )
+               ->getQuery();
+           $stanFlagi=$stanFlagi->execute();
 
 
 
-             /*$query2 = $repository1->createQueryBuilder('a') //game_date_id
-                ->select("a.game_date_id")
-                ->andWhere('a.id =: id')//gdzie idtypu=id przegladanego w petli
-                ->setParameter('id',$x)
-                ->getQuery();
 
-            $query3 = $repository2->createQueryBuilder('a')
-                ->select("a.tournament_id")
-                ->andWhere('a.id =: id')//gdzie idtypu=id przegladanego w petli
-                ->setParameter('id',$query2)
-                ->getQuery();
 
+           foreach ($stanFlagi as $a){
+
+                    $stanFlagi=$a['Flaga'];
+
+           }
+
+
+
+
+//if($datagame>$datetype){ //czy czas gry jest pozniej ustawiony niz data typu
 */
+
+           $datatype=$expectedResult->getDateOfType();
+           $datagame=$expectedResult->getGameDateId();
+           $stanFlagi=$expectedResult->getFlaga();
+
+
+           //$expectedResult->getNameOfMeeting()->getTournament();//id turnieju
+           $waga=$expectedResult->getNameOfMeeting()->getTypeofWeight();//waga meczu
+           $realfirstscore = $expectedResult->getNameOfMeeting()->getFirstTeamScore();//gole 1 zespolu
+           $realsecondscore = $expectedResult->getNameOfMeeting()->getSecondTeamScore();// gole 2 zespolu
+           $expfirstscore = $expectedResult->getFirstTeamScoreExpected();//przewidywane gole 1 zespolu
+           $expsecondscore = $expectedResult->getSecondTeamScoreExpected();
+         //  dump($realfirstscore);die;
+
+          if($datatype<$datagame){ //JEZELI data gry jest pozniejsza niz obstawienia rob punkty
+              if($stanFlagi==false){ //naliczaj punkty jezeli nie byl sprawdzany dane obstawienie
+
+                    if($realfirstscore==$expfirstscore && $realsecondscore==$expsecondscore){ //jezeli idealnie trafił wynik
+
+                        $expectedResult->setPoints(3);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+
+
+
+                    }elseif($realfirstscore>$realsecondscore && $expfirstscore>$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore!=$expsecondscore)
+                            { //uzytkownik trafił wygrana 1 teamu nie trafil w gole
+
+                                    $expectedResult->setPoints(1);
+                                    $expectedResult->setFlaga(true);
+                                $entityManager->persist($expectedResult);
+                                $entityManager->flush();
+
+                            }elseif ($realfirstscore<$realsecondscore && $expfirstscore<$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore!=$expsecondscore){
+                        //uzytkownik trafił wygrana 2 teamu nie trafil w gole
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+
+                    }elseif ($realsecondscore==$realfirstscore && $expsecondscore==$expfirstscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore!=$expsecondscore){
+                        //trafił remis nie trafil ilosci goli
+
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+
+
+                    }elseif ($realsecondscore==$realfirstscore && $expsecondscore==$expfirstscore
+                        && $realfirstscore==$expfirstscore && $realsecondscore!=$expsecondscore){
+                        //trafił remis i trafil gola po jednej stronie +1pkt
+                        $expectedResult->setPoints(2);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+
+                    }elseif ($realsecondscore==$realfirstscore && $expsecondscore==$expfirstscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore==$expsecondscore){
+                        //trafil remis i jednego gola + 1 pkt
+                        $expectedResult->setPoints(2);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+
+                    } elseif($realfirstscore>$realsecondscore && $expfirstscore>$expsecondscore
+                        && $realfirstscore==$expfirstscore && $realsecondscore!=$expsecondscore)
+                    { //uzytkownik trafił wygrana 1 teamu i trafil jednego gola
+
+                        $expectedResult->setPoints(2);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+
+                    }elseif($realfirstscore>$realsecondscore && $expfirstscore>$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore==$expsecondscore)
+                    { //uzytkownik trafił wygrana 1 teamu i trafil gola
+
+                        $expectedResult->setPoints(2);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+
+                    }elseif ($realfirstscore<$realsecondscore && $expfirstscore<$expsecondscore
+                        && $realfirstscore==$expfirstscore && $realsecondscore!=$expsecondscore){
+                        //uzytkownik trafił wygrana 2 teamu i trafil  gola dla  teamu
+                        $expectedResult->setPoints(2);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+
+                    }elseif ($realfirstscore<$realsecondscore && $expfirstscore<$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore==$expsecondscore){
+                        //uzytkownik trafił wygrana 2 teamu i trafil  gola dla  teamu
+                        $expectedResult->setPoints(2);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+
+                    }elseif ($realfirstscore<$realsecondscore && $expfirstscore>$expsecondscore
+                        && $realfirstscore==$expfirstscore && $realsecondscore!=$expsecondscore)
+                    //przegrala 1 druzyna user obstawil inaczej ale trafil gola dla jednego teamu
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    }elseif ($realfirstscore<$realsecondscore && $expfirstscore>$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore==$expsecondscore)
+                        //przegrala 1 druzyna user obstawil inaczej ale trafil gola dla jednego teamu
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    }elseif ($realfirstscore>$realsecondscore && $expfirstscore<$expsecondscore
+                        && $realfirstscore==$expfirstscore && $realsecondscore!=$expsecondscore)
+                        //przegrala 2 druzyna user obstawil inaczej ale trafil gola dla jednego teamu
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    }elseif ($realfirstscore>$realsecondscore && $expfirstscore<$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore==$expsecondscore)
+                        //przegrala 2 druzyna user obstawil inaczej ale trafil gola dla jednego teamu
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    }elseif ($realfirstscore==$realsecondscore && $expfirstscore<$expsecondscore
+                        && $realfirstscore==$expfirstscore && $realsecondscore!=$expsecondscore)
+                        //był remis ale user obstawil inaczej ale trafil gola dla jednego teamu
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    }elseif ($realfirstscore==$realsecondscore && $expfirstscore<$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore==$expsecondscore)
+                        //był remis ale user obstawil inaczej ale trafil gola dla jednego teamu
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    }elseif ($realfirstscore==$realsecondscore && $expfirstscore>$expsecondscore
+                        && $realfirstscore==$expfirstscore && $realsecondscore!=$expsecondscore)
+                        //był remis ale user obstawil inaczej ale trafil gola dla jednego teamu
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    }elseif ($realfirstscore==$realsecondscore && $expfirstscore>$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore==$expsecondscore)
+                        //był remis ale user obstawil inaczej ale trafil gola dla jednego teamu
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    }//byla porazka ale on obstawil remis
+                    elseif ($realfirstscore>$realsecondscore && $expfirstscore==$expsecondscore
+                        && $realfirstscore==$expfirstscore && $realsecondscore!=$expsecondscore)
+                         {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                             $entityManager->persist($expectedResult);
+                             $entityManager->flush();
+                    } elseif ($realfirstscore>$realsecondscore && $expfirstscore==$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore==$expsecondscore)
+                        //była porażka a user obstawil remis
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    } elseif ($realfirstscore<$realsecondscore && $expfirstscore==$expsecondscore
+                        && $realfirstscore!=$expfirstscore && $realsecondscore==$expsecondscore)
+                        {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                            $entityManager->persist($expectedResult);
+                            $entityManager->flush();
+                    }elseif ($realfirstscore<$realsecondscore && $expfirstscore==$expsecondscore
+                        && $realfirstscore==$expfirstscore && $realsecondscore!=$expsecondscore)
+                    {
+                        $expectedResult->setPoints(1);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                    }else{
+
+
+                        $expectedResult->setPoints(0);
+                        $expectedResult->setFlaga(true);
+                        $entityManager->persist($expectedResult);
+                        $entityManager->flush();
+                     
+
+                    }
+
+
+
+
+
+
+
+              }
+
+
+
+
+          }
+
+
+
+
+
+
+
+
+
+
 
 
         }
