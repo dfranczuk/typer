@@ -1,23 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tournament index{% endblock %}
+{% block title %}{{ 'tournament_table.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Tournament index</h1>
+    <h1>{{ 'tournament_table.title' | trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+
+                <th>{{ 'tournament_table.name' | trans }}</th>
+                <th>{{ 'tournament_table.type' | trans }}</th>
+                <th>{{ 'table.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
         {% for tournament in tournaments %}
             <tr>
-                <td>{{ tournament.id }}</td>
+
                 <td>{{ tournament.name }}</td>
+                <td>{{ tournament.TypeOfEvent }}</td>
                 <td>
                     <div class="item-actions">
                         <a href="{{ path('tournament_show', {'id': tournament.id}) }}" class="btn btn-sm btn-default">
@@ -33,12 +35,12 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">{{ 'tournament_table.no_tournament_found' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('tournament_new') }}">Create new</a>
+    <a href="{{ path('tournament_new') }}">{{ 'tournament_table.new' | trans }}</a>
     {% endif %}
 {% endblock %}

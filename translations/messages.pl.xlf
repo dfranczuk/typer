@@ -242,6 +242,10 @@
                 <source>menu.logout</source>
                 <target>Wyloguj się</target>
             </trans-unit>
+            <trans-unit id="table.actions">
+                            <source>table.actions</source>
+                            <target>Akcje</target>
+                        </trans-unit>
 
             <trans-unit id="post.to_publish_a_comment">
                 <source>post.to_publish_a_comment</source>
@@ -315,6 +319,99 @@
                 <source>help.more_information</source>
                 <target><![CDATA[Sprawdź <a href="https://symfony.com/doc">dokumentację Symfony</a>, aby uzyskać więcej informacji.]]></target>
             </trans-unit>
+<trans-unit id="game_table.new">
+           <source>game_table.new</source>
+           <target>Stwórz nowe spotkanie</target>
+</trans-unit>
+
+
+<trans-unit id="game_table.weigh">
+           <source>game_table.weigh</source>
+           <target>Waga</target>
+</trans-unit>
+<trans-unit id="game_table.game_date">
+           <source>game_table.game_date</source>
+           <target>Data spotkania</target>
+</trans-unit>
+<trans-unit id="game_table.title">
+           <source>game_table.title</source>
+           <target>Spotkania</target>
+</trans-unit>
+<trans-unit id="game_table.confrontation">
+           <source>game_table.confrontation</source>
+           <target>Konfrontacja</target>
+</trans-unit>
+<trans-unit id="game_table.score">
+           <source>game_table.score</source>
+           <target>Wynik</target>
+</trans-unit>
+<trans-unit id="game_table.score_blank">
+           <source>game_table.score_blank</source>
+           <target>Brak wyniku</target>
+</trans-unit>
+<trans-unit id="game_table.no_game_found">
+           <source>game_table.no_game_found</source>
+           <target>Brak spodkań</target>
+</trans-unit>
+
+<trans-unit id="tournament_table.name">
+           <source>tournament_table.name</source>
+           <target>Nazwa turnieju</target>
+</trans-unit>
+<trans-unit id="tournament_table.type">
+           <source>tournament_table.type</source>
+           <target>Typ</target>
+</trans-unit>
+<trans-unit id="tournament_table.title">
+           <source>tournament_table.title</source>
+           <target>Turnieje</target>
+</trans-unit>
+
+<trans-unit id="tournament_table.no_tournament_found">
+           <source>tournament_table.no_tournament_found</source>
+           <target>Brak turniejów</target>
+</trans-unit>
+<trans-unit id="tournament_table.new">
+           <source>tournament_table.new</source>
+           <target>Stwórz nowy turniej</target>
+</trans-unit>
+<trans-unit id="team_table.title">
+           <source>team_table.title</source>
+           <target>Drużyny</target>
+</trans-unit>
+
+<trans-unit id="team_table.name">
+           <source>team_table.name</source>
+           <target>Nazwa drużyny</target>
+</trans-unit>
+<trans-unit id="team_table.type">
+           <source>team_table.type</source>
+           <target>Typ drużyny</target>
+</trans-unit>
+<trans-unit id="team_table.no_team_found">
+           <source>team_table.no_team_found</source>
+           <target>Brak drużyn</target>
+</trans-unit>
+<trans-unit id="team_table.new">
+           <source>team_table.new</source>
+           <target>Stwórz nową drużynę</target>
+</trans-unit>
+<trans-unit id="TypeOfEvent_table.title">
+           <source>TypeOfEvent_table.title</source>
+           <target>Typy wydarzenia</target>
+</trans-unit>
+<trans-unit id="TypeOfEvent_table.name">
+           <source>TypeOfEvent_table.name</source>
+           <target>Nazwa typu</target>
+</trans-unit>
+<trans-unit id="type_table.new">
+           <source>type_table.new</source>
+           <target>Stwórz nowy typ</target>
+</trans-unit>
+<trans-unit id="type_table.no_team_found">
+           <source>type_table.no_team_found</source>
+           <target>Brak typów</target>
+</trans-unit>
         </body>
     </file>
 </xliff>

@@ -1,30 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Game index{% endblock %}
+{% block title %}{{ 'game_table.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Game index</h1>
+    <h1>{{ 'game_table.title' | trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Confrontation</th>
-                <th>First_team_score</th>
-                <th>Second_team_score</th>
-                <th>Weight</th>
-                <th>Game date</th>
-                <th>Actions</th>
+                <th>{{ 'game_table.confrontation' | trans }}</th>
+                <th>{{ 'game_table.score' | trans }}</th>
+                <th>{{ 'game_table.weigh' | trans }}</th>
+                <th>{{ 'game_table.game_date' | trans }}</th>
+                <th>{{ 'table.actions' | trans }}</th>
 
             </tr>
         </thead>
         <tbody>
         {% for game in games %}
             <tr>
-                <td>{{ game.id }}</td>
                 <td>{{ game.firstTeam.name }} - {{ game.secondTeam.name }}</td>
-                <td>{{ game.firstTeamScore }}</td>
-                <td>{{ game.secondTeamScore }}</td>
+                <td>
+                    {% if game.firstTeamScore==NULL and game.secondTeamScore==NULL %}
+                    {{ 'game_table.score_blank' | trans }}
+                    {% else %}
+                    {{ game.firstTeamScore }} - {{ game.secondTeamScore }}</td>
+                        {% endif %}
                 <td>{{ game.typeofweight }}</td>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
 
@@ -43,13 +44,13 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">{{ 'game_table.no_game_found' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('game_new') }}">Create new</a>
+    <a href="{{ path('game_new') }}">{{ 'game_table.new' | trans }}</a>
     {% endif %}
 {% endblock %}
