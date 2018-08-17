@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\TypeOfEvent;
 use App\Form\TypeOfEventType;
 use App\Repository\TypeOfEventRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/type/of/event")
+ * @Security("is_granted('ROLE_ADMIN')")
  */
 class TypeOfEventController extends Controller
 {
