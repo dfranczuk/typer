@@ -283,7 +283,7 @@ class ExpectedResultsController extends Controller
                         $expectedResult->setFlaga(true);
                         $entityManager->persist($expectedResult);
                         $entityManager->flush();
-                     
+
 
                     }
 
