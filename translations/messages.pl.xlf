@@ -351,7 +351,7 @@
 </trans-unit>
 <trans-unit id="game_table.no_game_found">
            <source>game_table.no_game_found</source>
-           <target>Brak spodkań</target>
+           <target>Brak spotkań</target>
 </trans-unit>
 
 <trans-unit id="game_table.first_team_score">
