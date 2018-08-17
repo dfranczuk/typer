@@ -87,9 +87,9 @@ class User implements UserInterface
 
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
-     * @Assert\NotBlank(message="Wprowadz swoje zdjecie")
+     *
      * @Assert\File(mimeTypes={"image/jpeg","image/gif","image/png"})
      */
     private $brochure;

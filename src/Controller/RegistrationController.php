@@ -37,26 +37,30 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // $file stores the uploaded PDF file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-            $file = $user->getBrochure();
-
-            $fileName = $this->generateUniqueFileName().'.'.$file->guessExtension();
-
-            // moves the file to the directory where brochures are stored
-            $file->move(
-                $this->getParameter('brochures_directory'),
-                $fileName);
+            if($file = $user->getBrochure()!=NULL) {
 
 
+                // $file stores the uploaded PDF file
+                /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+                $file = $user->getBrochure();
 
+                $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
+
+                // moves the file to the directory where brochures are stored
+                $file->move(
+                    $this->getParameter('brochures_directory'),
+                    $fileName);
+                $user->setBrochure($fileName);
+                $user->setBrochure(
+                    new File($this->getParameter('brochures_directory').'/'.$user->getBrochure())
+                );
+
+            }
             // 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
-            $user->setBrochure($fileName);
-            $user->setBrochure(
-                new File($this->getParameter('brochures_directory').'/'.$user->getBrochure())
-            );
+
+
             // 4) save the User!
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
