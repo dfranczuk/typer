@@ -118,7 +118,7 @@
                             <a class="nav-link" href="{{ path('expected_results_index') }}">{{ 'menu.expected_results' | trans }}</a>
                         </li>
                         {% endif %}
-                        {% if app.user and app.user.role == '["ROLE_ADMIN"]' %}
+                        {% if is_granted('ROLE_ADMIN') %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('type_of_event_index') }}">{{ 'menu.type_of_event' | trans }}</a>
                         </li>
