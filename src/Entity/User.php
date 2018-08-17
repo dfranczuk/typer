@@ -76,9 +76,9 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="json_array")
      */
-    private $roles;
+    private $roles = [];
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ExpectedResults", mappedBy="user_id")
@@ -109,9 +109,7 @@ class User implements UserInterface
 
     public function __construct()
     {
-
         $this->role = '["ROLE_ADMIN"]';
-        $this->roles = array('["ROLE_USER"]');
         $this->expectedResultsID = new ArrayCollection();
     }
 
@@ -175,7 +173,18 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return $this->roles;
+
+        $roles = $this->roles;
+        $role = $this->role;
+        if ( $role =='["ROLE_ADMIN"]'){
+            $roles[] ='ROLE_ADMIN';
+        }
+        if ( $role =='["ROLE_USER"]'){
+            $roles[] ='ROLE_USER';
+        }
+
+        return $roles;
+
     }
 
     public function eraseCredentials()

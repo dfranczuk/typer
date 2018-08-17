@@ -23,11 +23,11 @@
                         <a href="{{ path('tournament_show', {'id': tournament.id}) }}" class="btn btn-sm btn-default">
                             <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
                         </a>
-
+                        {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('tournament_edit', {'id': tournament.id}) }}" class="btn btn-sm btn-primary">
                                 <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
                             </a>
-
+                        {% endif %}
                     </div>
                 </td>
             </tr>
@@ -38,7 +38,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('tournament_new') }}">Create new</a>
-
+    {% endif %}
 {% endblock %}
