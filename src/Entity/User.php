@@ -85,6 +85,28 @@ class User implements UserInterface
      */
     private $expectedResultsID;
 
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Wprowadz swoje zdjecie")
+     * @Assert\File(mimeTypes={"image/jpeg","image/gif","image/png"})
+     */
+    private $brochure;
+
+    public function getBrochure()
+    {
+        return $this->brochure;
+    }
+
+    public function setBrochure($brochure)
+    {
+        $this->brochure = $brochure;
+
+        return $this;
+    }
+
+
     public function __construct()
     {
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a57a2f3ebc1ccca254075a9df77daa35",
+    "content-hash": "80be1787b2225378cb52c9692ee2f377",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -6027,6 +6027,7 @@
         "symfony/expression-language": 10,
         "symfony/form": 10,
         "symfony/framework-bundle": 10,
+        "symfony/intl": 10,
         "symfony/security-bundle": 10,
         "symfony/translation": 10,
         "symfony/twig-bundle": 10,
