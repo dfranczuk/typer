@@ -1,17 +1,67 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ 'game_table.title' | trans }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    <script>
+
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("myTable4");
+            switching = true;
+            dir = "asc";
+            while (switching) {
+
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount ++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+
+    </script>
+{% endblock %}
 {% block body %}
     <h1>{{ 'game_table.title' | trans }}</h1>
 
-    <table class="table">
+    <table class="table" id="myTable4">
         <thead>
             <tr>
-                <th>{{ 'game_table.confrontation' | trans }}</th>
-                <th>{{ 'game_table.score' | trans }}</th>
-                <th>{{ 'game_table.weigh' | trans }}</th>
-                <th>{{ 'game_table.game_date' | trans }}</th>
+                <th onclick="sortTable(0)" style="cursor:pointer">Id</th>
+                <th onclick="sortTable(1)" style="cursor:pointer">{{ 'game_table.confrontation' | trans }}</th>
+                <th onclick="sortTable(2)" style="cursor:pointer">First_team_score</th>
+                <th onclick="sortTable(3)" style="cursor:pointer">Second_team_score</th>
+                <th onclick="sortTable(4)" style="cursor:pointer">{{ 'game_table.weigh' | trans }}</th>
+                <th onclick="sortTable(5)" style="cursor:pointer">{{ 'game_table.game_date' | trans }}</th>
                 <th>{{ 'table.actions' | trans }}</th>
 
             </tr>
@@ -19,13 +69,10 @@
         <tbody>
         {% for game in games %}
             <tr>
+                <td>{{ game.id }}</td>
                 <td>{{ game.firstTeam.name }} - {{ game.secondTeam.name }}</td>
-                <td>
-                    {% if game.firstTeamScore==NULL and game.secondTeamScore==NULL %}
-                    {{ 'game_table.score_blank' | trans }}
-                    {% else %}
-                    {{ game.firstTeamScore }} - {{ game.secondTeamScore }}</td>
-                        {% endif %}
+                <td>{{ game.firstTeamScore }}</td>
+                <td>{{ game.secondTeamScore }}</td>
                 <td>{{ game.typeofweight }}</td>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
 
