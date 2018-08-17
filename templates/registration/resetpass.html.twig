@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset password{% endblock %}
+
+{% block body %}
+    <h1>Reset password</h1>
+
+    {{ include('registration/_form.html.twig', {'button_label': 'Reset password'}) }}
+
+    <a href="/">back to homepage</a>
+
+
+{% endblock %}
