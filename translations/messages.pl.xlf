@@ -351,7 +351,7 @@
 </trans-unit>
 <trans-unit id="game_table.no_game_found">
            <source>game_table.no_game_found</source>
-           <target>Brak spodkań</target>
+           <target>Brak spotkań</target>
 </trans-unit>
 
 <trans-unit id="game_table.first_team_score">
@@ -421,6 +421,14 @@
 <trans-unit id="type_table.no_team_found">
            <source>type_table.no_team_found</source>
            <target>Brak typów</target>
+</trans-unit>
+<trans-unit id="type_weight_table.weight">
+           <source>type_weight_table.weight</source>
+           <target>Wartość wagi</target>
+</trans-unit>
+<trans-unit id="type_weight_table.title">
+           <source>type_weight_table.title</source>
+           <target>Typy wag spotkań</target>
 </trans-unit>
         </body>
     </file>

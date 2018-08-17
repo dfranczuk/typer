@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TypeofWeight index{% endblock %}
+{% block title %}{{ 'type_weight_table.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>TypeofWeight index</h1>
+    <h1>{{ 'type_weight_table.title' | trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Weight</th>
-                <th>actions</th>
+                <th>#</th>
+                <th>{{ 'type_weight_table.weight' | trans }}</th>
+                <th>{{ 'table.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -33,12 +33,12 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">{{ 'type_table.no_team_found' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('typeof_weight_new') }}">Create new</a>
+    <a href="{{ path('typeof_weight_new') }}">{{ 'type_table.new' | trans }}</a>
 
 {% endblock %}
