@@ -354,6 +354,16 @@
            <target>Brak spodkań</target>
 </trans-unit>
 
+<trans-unit id="game_table.first_team_score">
+           <source>game_table.first_team_score</source>
+           <target>Wynik pierwszej druzyny</target>
+</trans-unit>
+<trans-unit id="game_table.second_team_score">
+           <source>game_table.second_team_score</source>
+           <target>Wynik drugiej drużyny</target>
+</trans-unit>
+
+
 <trans-unit id="tournament_table.name">
            <source>tournament_table.name</source>
            <target>Nazwa turnieju</target>
