@@ -1,18 +1,66 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}ExpectedResults index{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("myTable5");
+            switching = true;
+            dir = "asc";
+            while (switching) {
+
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount ++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+
+    </script>
+{% endblock %}
 {% block body %}
     <h1>ExpectedResults index</h1>
 
-    <table class="table">
+    <table class="table" id="myTable5">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Confrontation</th>
-                <th>FirstTeamScoreExpected</th>
-                <th>SecondTeamScoreExpected</th>
-                <th>Points</th>
-                <th>GameDate</th>
+                <th onclick="sortTable(0)" style="cursor:pointer">Id <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(1)" style="cursor:pointer">Confrontation<img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(2)" style="cursor:pointer">FirstTeamScoreExpected<img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(3)" style="cursor:pointer">SecondTeamScoreExpected<img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(4)" style="cursor:pointer">Points<img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(5)" style="cursor:pointer">GameDate<img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
                 <th>Actions</th>
             </tr>
         </thead>
