@@ -32,7 +32,8 @@ class ChangePasswordController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('change_pass', ['id' => $user->getId()]);
+            return $this->redirectToRoute('game_index');
+            //return $this->redirectToRoute('change_pass', ['id' => $user->getId()]);
         }
 
         return $this->render('registration/changepass.html.twig', [
