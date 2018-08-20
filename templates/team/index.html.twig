@@ -15,6 +15,7 @@
                 $("table tr td:nth-last-child(2)").each(
 
                     function(){
+
                         if($(this).html() != a){
                             $(this).parent().hide();
                         }
@@ -75,22 +76,21 @@
     <h1>{{ 'team_table.title' | trans }}</h1>
 <p>
     <select id="rep_check" title="fji">
-        <option disabled selected value> -- select a category -- </option>
-        <option>representation</option>
-        <option>club</option>
+        <option disabled selected value> -- Wybierz kategorię -- </option>
+        <option>reprezentacja</option>
+        <option>klub</option>
+
     </select>
 </p>
     <table class="table" id="myTable">
         <thead>
             <tr>
 
-                <th onclick="sortTable(0)" style="cursor:pointer">Id
+                </th>
+                <th onclick="sortTable(0)"style="cursor:pointer">{{ 'team_table.name' | trans }}
                     <img src="{{ asset('build/images/bg.png') }}" alt="sort">
                 </th>
-                <th onclick="sortTable(1)"style="cursor:pointer">{{ 'team_table.name' | trans }}
-                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
-                </th>
-                <th onclick="sortTable(2)" style="cursor:pointer">{{ 'team_table.type' | trans }}
+                <th onclick="sortTable(1)" style="cursor:pointer">{{ 'team_table.type' | trans }}
                     <img src="{{ asset('build/images/bg.png') }}" alt="sort">
                 </th>
                 <th>{{ 'table.actions' | trans }}</th>
@@ -102,7 +102,7 @@
 
 
             <tr>
-                <td>{{ team.id }}</td>
+
                 <td>{{ team.name }}</td>
                 <td>{{ team.type }}</td>
                 <td>

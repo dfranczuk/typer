@@ -7,7 +7,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Confrontation</th>
                 <th>FirstTeamScoreExpected</th>
                 <th>SecondTeamScoreExpected</th>
@@ -19,7 +18,6 @@
         <tbody>
         {% for expected_result in expected_results %}
             <tr>
-                <td>{{ expected_result.id }}</td>
                 <td>{{ expected_result.NameOfMeeting }}</td>
                 <td>{{ expected_result.FirstTeamScoreExpected }}</td>
                 <td>{{ expected_result.SecondTeamScoreExpected }}</td>
