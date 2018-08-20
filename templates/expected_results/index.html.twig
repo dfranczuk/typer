@@ -67,13 +67,16 @@
         <tbody>
 
         {% for expected_result in expected_results %}
+            {% if(expected_result.getUserId() == app.user ) %}
             <tr>
                 <td>{{ expected_result.id }}</td>
                 <td>{{ expected_result.NameOfMeeting }}</td>
                 <td>{{ expected_result.FirstTeamScoreExpected }}</td>
                 <td>{{ expected_result.SecondTeamScoreExpected }}</td>
-                <td>{{ expected_result.points }}</td>
-                <td>{{ expected_result.GameDateId ? expected_result.GameDateId|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{% if(expected_result.points!=NULL) %}{{ expected_result.points }}{% endif %}
+                    {% if(expected_result.points==NULL) %} Nie znany wynik gry {% endif %}
+                </td>
+                <td>{{ expected_result.GameDateId ? expected_result.GameDateId|date('Y-m-d H-i-s') : '' }}</td>
                 <td>
                     <div class="item-actions">
                         <a href="{{ path('expected_results_show', {'id': expected_result.id}) }}" class="btn btn-sm btn-default">
@@ -85,11 +88,11 @@
                     </div>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
+
+
+            {% endif %}
         {% endfor %}
+
         </tbody>
     </table>
 
