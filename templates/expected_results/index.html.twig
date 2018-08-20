@@ -17,7 +17,9 @@
             </tr>
         </thead>
         <tbody>
+
         {% for expected_result in expected_results %}
+            {% if(expected_result.getUserId() == app.user ) %}
             <tr>
                 <td>{{ expected_result.id }}</td>
                 <td>{{ expected_result.NameOfMeeting }}</td>
@@ -38,11 +40,11 @@
                     </div>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
+
+
+            {% endif %}
         {% endfor %}
+
         </tbody>
     </table>
 
