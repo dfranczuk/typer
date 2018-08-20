@@ -19,10 +19,12 @@ namespace App\Controller;
 class ChangePasswordController extends AbstractController
 {
 
-
+    /**
+     * @author Radoslaw Albiniak    <radoslaw.albiniak@gmail.com>
+     */
 
     /**
-     * @Route("/user/{id}/changepass", name="change_pass", methods="GET|POST")
+     * @Route("/user/{email}/{username}/changepass", name="change_pass", methods="GET|POST")
      */
     public function edit(Request $request, User $user): Response
     {
