@@ -1,9 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'TypeOfEvent_edit.title' | trans }}{% endblock %}
 
+{% block title %}Edit TypeOfEvent{% endblock %}
+{% block javascripts %}
+
+
+    <script>
+
+
+        document.getElementById("btn_save").onclick = function() {myFunction()};
+
+        function myFunction() {
+            document.getElementById("message").innerHTML="Type of event has been updated";
+        }
+
+
+    </script>
+{% endblock %}
 {% block body %}
-    <h1>{{ 'TypeOfEvent_edit.title' | trans }}</h1>
+
+    <h1>Edit TypeOfEvent</h1>
+    <p id="message"></p>
 
     {{ include('type_of_event/_form.html.twig', {'button_label': 'Update'}) }}
 

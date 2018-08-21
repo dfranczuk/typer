@@ -6,7 +6,9 @@ use App\Entity\ExpectedResults;
 use App\Entity\Game;
 use App\Form\ExpectedResults10Type;
 use App\Repository\ExpectedResultsRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,9 +19,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class ExpectedResultsController extends Controller
 {
+
+
+    /**
+     *
+     * Created by PhpStorm.
+     * User: Mateusz Poniatowski <mateusz@live.hk
+     * @param ExpectedResultsRepository $expectedResultsRepository
+     * @return Response
+     */
+
     /**
      * @Route("/", name="expected_results_index", methods="GET")
      */
+
+
     public function index(ExpectedResultsRepository $expectedResultsRepository): Response
     {
 
@@ -28,6 +42,7 @@ class ExpectedResultsController extends Controller
         $repository1=$this->getDoctrine()->getRepository(ExpectedResults::class);
         $repository2=$this->getDoctrine()->getRepository(Game::class);
         $numberofmatch = $repository1->createQueryBuilder('u') // aktualnie to ilosc obstawionych meczy,
+
         ->select('u.id')
             ->getQuery();
         $numberofmatch=$numberofmatch->execute(); //id wszystkich obstawionych meczy
@@ -93,7 +108,7 @@ class ExpectedResultsController extends Controller
            $expsecondscore = $expectedResult->getSecondTeamScoreExpected();
          //  dump($realfirstscore);die;
 
-          if($datatype<$datagame){ //JEZELI data gry jest pozniejsza niz obstawienia rob punkty
+          if($datatype<$datagame && $realfirstscore!=NULL && $realsecondscore!=NULL){ //JEZELI data gry jest pozniejsza niz obstawienia rob punkty
               if($stanFlagi==false){ //naliczaj punkty jezeli nie byl sprawdzany dane obstawienie
 
                     if($realfirstscore==$expfirstscore && $realsecondscore==$expsecondscore){ //jezeli idealnie trafił wynik
@@ -323,6 +338,7 @@ class ExpectedResultsController extends Controller
 
     /**
      * @Route("/new", name="expected_results_new", methods="GET|POST")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request): Response
     {
@@ -388,6 +404,7 @@ class ExpectedResultsController extends Controller
 
     /**
      * @Route("/{id}/edit", name="expected_results_edit", methods="GET|POST")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function edit(Request $request, ExpectedResults $expectedResult): Response
     {
@@ -402,7 +419,7 @@ class ExpectedResultsController extends Controller
             $this->persist($expectedResult);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('expected_results_edit', ['id' => $expectedResult->getId()]);
+            return $this->redirectToRoute('expected_results_index', ['id' => $expectedResult->getId()]);
         }
 
         return $this->render('expected_results/edit.html.twig', [
@@ -413,6 +430,7 @@ class ExpectedResultsController extends Controller
 
     /**
      * @Route("/{id}", name="expected_results_delete", methods="DELETE")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function delete(Request $request, ExpectedResults $expectedResult): Response
     {
@@ -424,5 +442,10 @@ class ExpectedResultsController extends Controller
 
         return $this->redirectToRoute('expected_results_index');
     }
+
+
+
+
+
 
 }

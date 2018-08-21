@@ -17,8 +17,8 @@ class GameType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            /*->add('first_team_score')
-            ->add('second_team_score')*/
+             ->add('first_team_score')
+            ->add('second_team_score')
 
             ->add('TypeofWeight', null,[
                 'label' => 'game_table.weigh',

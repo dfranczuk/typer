@@ -23,9 +23,20 @@ class GameController extends Controller
         return $this->render('game/index.html.twig', ['games' => $gameRepository->findAll()]);
     }
     /**
+     *
+     * Created by PhpStorm.
+     * User: Mateusz Poniatowski <mateusz@live.hk
+     * @param Request $request
+     * @return Response
+     */
+
+
+    /**
      * @Route("/new", name="game_new", methods="GET|POST")
      * @Security("is_granted('ROLE_ADMIN')")
      */
+
+
     public function new(Request $request): Response
     {
         $game = new Game();
@@ -39,15 +50,20 @@ class GameController extends Controller
             }
             if($game->isFlaga()==false){
                 echo '<script language="javascript">';
-                echo 'alert("message successfully sent")';
+                echo 'alert("Wyslano dane")';
                 echo '</script>';
                 //$this->redirectToRoute('game_new');
             }else{
                 $em = $this->getDoctrine()->getManager();
 
+
+                $datagry=$game->getGameDate();
+
+                  $result = $datagry->format('Y-m-d H-i-s');
+
                 $spotkanie1=$game->getFirstTeam();
                 $spotkanie2=$game->getSecondTeam();
-                $spotkanie3=$spotkanie1."-".$spotkanie2;
+                $spotkanie3=$spotkanie1."-".$spotkanie2." data spotkania: ".$result;
                 $game->setMeeting($spotkanie3);
 
                 $em->persist($game);
@@ -67,10 +83,26 @@ class GameController extends Controller
     {
         return $this->render('game/show.html.twig', ['game' => $game]);
     }
+
+
+
+
+    /**
+     *
+     * Created by PhpStorm.
+     * User: Mateusz Poniatowski <mateusz@live.hk
+     * @param Request $request
+     * @param Game $game
+     * @return Response
+     */
+
     /**
      * @Route("/{id}/edit", name="game_edit", methods="GET|POST")
      * @Security("is_granted('ROLE_ADMIN')")
      */
+
+
+
     public function edit(Request $request, Game $game): Response
     {
         $form = $this->createForm(GameType::class, $game);
@@ -79,15 +111,18 @@ class GameController extends Controller
 
             $EntityManager=$this->getDoctrine()->getManager();
 
+            $datagry=$game->getGameDate();
+
+            $result = $datagry->format('Y-m-d H-i-s');
 
             $spotkanie1=$game->getFirstTeam();
             $spotkanie2=$game->getSecondTeam();
-            $spotkanie3=$spotkanie1."-".$spotkanie2;
+            $spotkanie3=$spotkanie1."-".$spotkanie2." data spotkania: ".$result;
             $game->setMeeting($spotkanie3);
             $EntityManager->persist($game);
             $EntityManager->flush();
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('game_edit', ['id' => $game->getId()]);
+            return $this->redirectToRoute('game_index', ['id' => $game->getId()]);
         }
         return $this->render('game/edit.html.twig', [
             'game' => $game,

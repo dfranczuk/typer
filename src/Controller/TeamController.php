@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Team;
 use App\Form\TeamType;
 use App\Repository\TeamRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/team")
+ * @Security("is_granted('ROLE_ADMIN')")
  */
 class TeamController extends Controller
 {
@@ -65,7 +67,7 @@ class TeamController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('team_edit', ['id' => $team->getId()]);
+            return $this->redirectToRoute('team_index', ['id' => $team->getId()]);
         }
 
         return $this->render('team/edit.html.twig', [

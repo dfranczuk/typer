@@ -3,6 +3,7 @@ namespace App\Controller;
 use App\Entity\Tournament;
 use App\Form\Tournament1Type;
 use App\Repository\TournamentRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ class TournamentController extends Controller
 {
     /**
      * @Route("/", name="tournament_index", methods="GET")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(TournamentRepository $tournamentRepository): Response
     {
@@ -21,6 +23,7 @@ class TournamentController extends Controller
     }
     /**
      * @Route("/new", name="tournament_new", methods="GET|POST")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function new(Request $request): Response
     {
@@ -40,6 +43,7 @@ class TournamentController extends Controller
     }
     /**
      * @Route("/{id}", name="tournament_show", methods="GET")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function show(Tournament $tournament): Response
     {
@@ -47,6 +51,7 @@ class TournamentController extends Controller
     }
     /**
      * @Route("/{id}/edit", name="tournament_edit", methods="GET|POST")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Tournament $tournament): Response
     {
@@ -54,7 +59,7 @@ class TournamentController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('tournament_edit', ['id' => $tournament->getId()]);
+            return $this->redirectToRoute('tournament_index', ['id' => $tournament->getId()]);
         }
         return $this->render('tournament/edit.html.twig', [
             'tournament' => $tournament,
@@ -63,6 +68,7 @@ class TournamentController extends Controller
     }
     /**
      * @Route("/{id}", name="tournament_delete", methods="DELETE")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, Tournament $tournament): Response
     {
