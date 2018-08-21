@@ -25,16 +25,6 @@
                 </a>
             </p>
             <p>
-                <a href="{{ path('team_index') }}">
-                    <i class="" aria-hidden="true"></i> {{ 'menu.team' |trans }}
-                </a>
-            </p>
-            <p>
-                <a href="{{ path('tournament_index') }}">
-                    <i class="" aria-hidden="true"></i> {{ 'menu.tournament' | trans }}
-                </a>
-            </p>
-            <p>
                 <a href="{{ path('scoreboard_index') }}">
                     <i class="" aria-hidden="true"></i> {{ 'menu.scoreboard' | trans }}
                 </a>
@@ -48,10 +38,21 @@
             {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
                 <p>
+                    <a href="{{ path('tournament_index') }}">
+                        <i class="" aria-hidden="true"></i> {{ 'menu.tournament' | trans }}
+                    </a>
+                </p>
+                <p>
                     <a href="{{ path('type_of_event_index') }}">
                         <i class="" aria-hidden="true"></i> {{ 'menu.type_of_event' | trans }}
                     </a>
                 </p>
+                <p>
+                    <a href="{{ path('team_index') }}">
+                        <i class="" aria-hidden="true"></i> {{ 'menu.team' |trans }}
+                    </a>
+                </p>
+
                 <p>
                     <a href="{{ path('typeof_weight_index') }}">
                         <i class="" aria-hidden="true"></i> {{ 'menu.typeof_weight' | trans }}

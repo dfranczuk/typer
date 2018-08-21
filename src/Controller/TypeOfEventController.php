@@ -78,7 +78,7 @@ class TypeOfEventController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('type_of_event_edit', ['id' => $typeOfEvent->getId()]);
+            return $this->redirectToRoute('type_of_event_index', ['id' => $typeOfEvent->getId()]);
         }
 
         return $this->render('type_of_event/edit.html.twig', [

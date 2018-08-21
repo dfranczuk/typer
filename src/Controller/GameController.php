@@ -122,7 +122,7 @@ class GameController extends Controller
             $EntityManager->persist($game);
             $EntityManager->flush();
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('game_edit', ['id' => $game->getId()]);
+            return $this->redirectToRoute('game_index', ['id' => $game->getId()]);
         }
         return $this->render('game/edit.html.twig', [
             'game' => $game,

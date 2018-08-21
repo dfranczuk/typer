@@ -1,10 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit TypeOfEvent{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    <script>
+
+
+        document.getElementById("btn_save").onclick = function() {myFunction()};
+
+        function myFunction() {
+            document.getElementById("message").innerHTML="Type of event has been updated";
+        }
+
+
+    </script>
+{% endblock %}
 {% block body %}
     <h1>Edit TypeOfEvent</h1>
-
+    <p id="message"></p>
     {{ include('type_of_event/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('type_of_event_index') }}">back to list</a>

@@ -1,11 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Game{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    <script>
+
+
+        document.getElementById("btn_save").onclick = function() {myFunction()};
+
+        function myFunction() {
+            document.getElementById("message").innerHTML="Game has been updated";
+        }
+
+
+    </script>
+{% endblock %}
 {% block body %}
 
     <h1>Edit Game</h1>
-
+    <p id="message"></p>
     {{ include('game/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('game_index') }}">back to list</a>

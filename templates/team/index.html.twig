@@ -127,6 +127,6 @@
         </tbody>
     </table>
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('team_new') }}">{{ 'team_table.new' | trans }}</a>
+    <a href="{{ path('team_new') }}">{{ 'team_table.new' | trans }}</a>
     {% endif %}
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Scoreboard;
 use App\Form\ScoreboardType;
 use App\Repository\ScoreboardRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,6 +61,7 @@ class ScoreboardController extends Controller
 
     /**
      * @Route("/{id}/edit", name="scoreboard_edit", methods="GET|POST")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Scoreboard $scoreboard): Response
     {
@@ -69,7 +71,7 @@ class ScoreboardController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('scoreboard_edit', ['id' => $scoreboard->getId()]);
+            return $this->redirectToRoute('scoreboard_index', ['id' => $scoreboard->getId()]);
         }
 
         return $this->render('scoreboard/edit.html.twig', [
@@ -80,6 +82,7 @@ class ScoreboardController extends Controller
 
     /**
      * @Route("/{id}", name="scoreboard_delete", methods="DELETE")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, Scoreboard $scoreboard): Response
     {

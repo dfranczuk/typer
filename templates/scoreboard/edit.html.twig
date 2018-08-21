@@ -1,10 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Scoreboard{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    <script>
+
+
+        document.getElementById("btn_save").onclick = function() {myFunction()};
+
+        function myFunction() {
+            document.getElementById("message").innerHTML="Scoreboard has been updated";
+        }
+
+
+    </script>
+{% endblock %}
 {% block body %}
     <h1>Edit Scoreboard</h1>
-
+    <p id="message"></p>
     {{ include('scoreboard/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('scoreboard_index') }}">back to list</a>
