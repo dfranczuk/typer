@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Scoreboard;
 use App\Form\ScoreboardType;
 use App\Repository\ScoreboardRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,6 +61,7 @@ class ScoreboardController extends Controller
 
     /**
      * @Route("/{id}/edit", name="scoreboard_edit", methods="GET|POST")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function edit(Request $request, Scoreboard $scoreboard): Response
     {
@@ -80,6 +82,7 @@ class ScoreboardController extends Controller
 
     /**
      * @Route("/{id}", name="scoreboard_delete", methods="DELETE")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, Scoreboard $scoreboard): Response
     {
