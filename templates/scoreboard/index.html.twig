@@ -56,15 +56,15 @@
     <table class="table" id="myTable3">
         <thead>
             <tr>
-                <th onclick="sortTable(0)" style="cursor:pointer">Id</th>
-                <th onclick="sortTable(1)" style="cursor:pointer">Points</th>
+
+                <th onclick="sortTable(0)" style="cursor:pointer">Points</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for scoreboard in scoreboards %}
             <tr>
-                <td>{{ scoreboard.id }}</td>
+
                 <td>{{ scoreboard.points }}</td>
                 <td>
                     <a href="{{ path('scoreboard_show', {'id': scoreboard.id}) }}">

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{  'team_table.title' | trans}}{% endblock %}
+{% block title %}{{ 'team_table.title' | trans }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
 
@@ -8,23 +8,23 @@
 
 
         $("#rep_check").on("change",
-            function(){
+            function () {
 
                 var a = $(this).find("option:selected").html();
 
                 $("table tr td:nth-last-child(2)").each(
-
-                    function(){
-                        if($(this).html() != a){
+                    function () {
+                        if (a == "wszystkie") {
+                            $(this).parent().show();
+                        }
+                        else if ($(this).html() != a) {
                             $(this).parent().hide();
                         }
-                        else{
+                        else {
                             $(this).parent().show();
                         }
                     });
             });
-
-
 
 
         function sortTable(n) {
@@ -59,7 +59,7 @@
                 if (shouldSwitch) {
                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                     switching = true;
-                    switchcount ++;
+                    switchcount++;
                 } else {
                     if (switchcount == 0 && dir == "asc") {
                         dir = "desc";
@@ -73,28 +73,28 @@
 {% endblock %}
 {% block body %}
     <h1>{{ 'team_table.title' | trans }}</h1>
-<p>
-    <select id="rep_check" title="fji">
-        <option disabled selected value> -- select a category -- </option>
-        <option>representation</option>
-        <option>club</option>
-    </select>
-</p>
+    <p>
+        <select id="rep_check" title="fji">
+            <option disabled selected value> -- Wybierz kategorię --</option>
+            <option>wszystkie</option>
+            <option>reprezentacja</option>
+            <option>klub</option>
+
+        </select>
+    </p>
     <table class="table" id="myTable">
         <thead>
-            <tr>
+        <tr>
 
-                <th onclick="sortTable(0)" style="cursor:pointer">Id
-                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
-                </th>
-                <th onclick="sortTable(1)"style="cursor:pointer">{{ 'team_table.name' | trans }}
-                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
-                </th>
-                <th onclick="sortTable(2)" style="cursor:pointer">{{ 'team_table.type' | trans }}
-                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
-                </th>
-                <th>{{ 'table.actions' | trans }}</th>
-            </tr>
+            </th>
+            <th onclick="sortTable(0)" style="cursor:pointer">{{ 'team_table.name' | trans }}
+                <img src="{{ asset('build/images/bg.png') }}" alt="sort">
+            </th>
+            <th onclick="sortTable(1)" style="cursor:pointer">{{ 'team_table.type' | trans }}
+                <img src="{{ asset('build/images/bg.png') }}" alt="sort">
+            </th>
+            <th>{{ 'table.actions' | trans }}</th>
+        </tr>
         </thead>
         <tbody>
 
@@ -102,20 +102,20 @@
 
 
             <tr>
-                <td>{{ team.id }}</td>
+
                 <td>{{ team.name }}</td>
                 <td>{{ team.type }}</td>
                 <td>
-                <div class="item-actions">
-                    <a href="{{ path('team_show', {'id': team.id}) }}" class="btn btn-sm btn-default">
-                        <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
-                    </a>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('team_edit', {'id': team.id}) }}" class="btn btn-sm btn-primary">
-                            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                    <div class="item-actions">
+                        <a href="{{ path('team_show', {'id': team.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
                         </a>
-                    {% endif %}
-                </div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('team_edit', {'id': team.id}) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
                 </td>
             </tr>
 
@@ -127,6 +127,6 @@
         </tbody>
     </table>
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('team_new') }}">{{ 'team_table.new' | trans }}</a>
+        <a href="{{ path('team_new') }}">{{ 'team_table.new' | trans }}</a>
     {% endif %}
 {% endblock %}
