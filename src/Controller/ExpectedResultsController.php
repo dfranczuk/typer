@@ -6,6 +6,7 @@ use App\Entity\ExpectedResults;
 use App\Entity\Game;
 use App\Form\ExpectedResults10Type;
 use App\Repository\ExpectedResultsRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,6 +29,7 @@ class ExpectedResultsController extends Controller
         $repository1=$this->getDoctrine()->getRepository(ExpectedResults::class);
         $repository2=$this->getDoctrine()->getRepository(Game::class);
         $numberofmatch = $repository1->createQueryBuilder('u') // aktualnie to ilosc obstawionych meczy,
+
         ->select('u.id')
             ->getQuery();
         $numberofmatch=$numberofmatch->execute(); //id wszystkich obstawionych meczy
@@ -323,6 +325,7 @@ class ExpectedResultsController extends Controller
 
     /**
      * @Route("/new", name="expected_results_new", methods="GET|POST")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request): Response
     {
@@ -388,6 +391,7 @@ class ExpectedResultsController extends Controller
 
     /**
      * @Route("/{id}/edit", name="expected_results_edit", methods="GET|POST")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function edit(Request $request, ExpectedResults $expectedResult): Response
     {
@@ -413,6 +417,7 @@ class ExpectedResultsController extends Controller
 
     /**
      * @Route("/{id}", name="expected_results_delete", methods="DELETE")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function delete(Request $request, ExpectedResults $expectedResult): Response
     {
