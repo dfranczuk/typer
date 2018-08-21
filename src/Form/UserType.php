@@ -26,7 +26,7 @@ class UserType extends AbstractType
             ->add('email', EmailType::class)
             ->add('username', TextType::class)
             ->add('brochure', FileType::class,
-                array('label' => 'Zdjecie(jpg,jpeg,png',
+                array('label' => 'Zdjecie(jpg,jpeg,png)',
                     'required' => false))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
