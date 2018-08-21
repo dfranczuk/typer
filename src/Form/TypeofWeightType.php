@@ -9,10 +9,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TypeofWeightType extends AbstractType
 {
+
+/*
+ * @author Jadwiga Kalinowska <7jadzia7@gmail.com>
+ * add label
+ */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Weight')
+            ->add('Weight', null,[
+                'label' => 'type_weight_table.name',
+            ])
         ;
     }
 

@@ -93,12 +93,11 @@
               </header>
           {% endblock %}
 
-          <div class="container body-container" style="width:1300px">
+          <div class="container body-container" style="width:100%">
               <main class="container-fluid" >
               <div class="row">
                   {% block dashboard %}
-
-                  <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar" style="background-color:#000033; border-radius:12px /12px;">
+                  <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar" style="background-color:#CCCCCC; border-radius:12px /12px;">
                       <ul class="nav nav-pills flex-column">
                           <li class="nav-item">
                               <a class="ex1 nav-link " href="{{ path('game_index') }}">{{ 'menu.game' | trans }}</a>
@@ -127,6 +126,9 @@
                           <li class="nav-item">
                               <a class="nav-link ex1" href="{{ path('typeof_weight_index') }}">{{ 'menu.typeof_weight' | trans }}</a>
                           </li>
+                              <li class="nav-item">
+                                  <a class="nav-link ex1" href="{{ path('user_index') }}">{{ 'menu.users' | trans }}</a>
+                              </li>
                           {% endif %}
                       </ul>
                   </nav>

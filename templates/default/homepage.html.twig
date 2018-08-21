@@ -73,7 +73,6 @@
   {% endif %}#}
   {% if app.user %}
       <p >Jesteś zalogowany jako: {{ app.user.username }} </p>
-      <p >Jesteś zalogowany jako: {{ app.user.role }} </p>
       <p>
           <a class="btn btn-primary btn-lg" href="{{ path('security_logout') }}">
               <i class="fa fa-lock" aria-hidden="true"></i> {{ 'menu.logout'|trans }}

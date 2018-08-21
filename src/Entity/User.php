@@ -182,7 +182,10 @@ class User implements UserInterface
         if ( $role =='["ROLE_USER"]'){
             $roles[] ='ROLE_USER';
         }
-
+        //give every users role admin
+//if (!in_array('ROLE_ADMIN', $roles)) {
+//            $roles[] = 'ROLE_ADMIN';
+//        }
         return $roles;
 
     }

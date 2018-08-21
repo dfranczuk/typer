@@ -1,14 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Tournament{% endblock %}
+{% block title %}{{ 'tournament_table.new2' |trans }}{% endblock %}
 
 {% block body %}
 
-    <h1>Create new Tournament</h1>
+    <h1>{{ 'tournament_table.new' | trans }}</h1>
 
     {{ include('tournament/_form.html.twig') }}
 
-    <a href="{{ path('tournament_index') }}">back to list</a>
-
+    <a href="{{ path('tournament_index') }}">{{ 'tournament.back' | trans }}</a>
 
 {% endblock %}

@@ -1,25 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TypeOfEvent{% endblock %}
+{% block title %}{{ 'TypeOfEvent_show.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>TypeOfEvent</h1>
+    <h1>{{ 'TypeOfEvent_show.title' | trans }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ type_of_event.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
+                <th>{{ 'TypeOfEvent_table.name' | trans }}</th>
                 <td>{{ type_of_event.name }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('type_of_event_index') }}">back to list</a>
-    <a href="{{ path('type_of_event_edit', {'id': type_of_event.id}) }}">edit</a>
-    {{ include('type_of_event/_delete_form.html.twig') }}
+    <a href="{{ path('type_of_event_index') }}">{{ 'type.back' | trans }}</a>
+
+    <div class="section">
+        <a href="{{ path('type_of_event_edit', {'id': type_of_event.id}) }}" class="btn btn-success">
+            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+        </a>
+    </div>
+    <br>
+    <div class="section">
+        {{ include('type_of_event/_delete_form.html.twig') }}
+    </div>
 
 {% endblock %}

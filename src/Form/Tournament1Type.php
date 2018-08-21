@@ -9,11 +9,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Tournament1Type extends AbstractType
 {
+/*
+ * @author Jadwiga Kalinowska <7jadzia7@gmail.com>
+ * add label
+ */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('TypeOfEvent')
+            ->add('name', null,[
+                'label' => 'tournament_table.name',
+            ])
+            ->add('TypeOfEvent', null,[
+                'label' => 'tournament_table.type',
+            ])
         ;
     }
 

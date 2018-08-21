@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New TypeOfEvent{% endblock %}
+{% block title %}{{ 'type_table.new2' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new TypeOfEvent</h1>
+    <h1>{{ 'type_table.new' | trans }}</h1>
 
     {{ include('type_of_event/_form.html.twig') }}
 
-    <a href="{{ path('type_of_event_index') }}">back to list</a>
+    <a href="{{ path('type_of_event_index') }}">{{ 'type.back' | trans }}</a>
 {% endblock %}
