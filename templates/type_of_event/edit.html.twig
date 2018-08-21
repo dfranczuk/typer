@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Edit TypeOfEvent{% endblock %}
+{% block title %}{{ 'TypeOfEvent_edit.title' | trans }}{% endblock %}
 {% block javascripts %}
 
 
@@ -19,10 +19,10 @@
 {% endblock %}
 {% block body %}
 
-    <h1>Edit TypeOfEvent</h1>
+    <h1>{{ 'TypeOfEvent_edit.title' | trans }}</h1>
     <p id="message"></p>
 
-    {{ include('type_of_event/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('type_of_event/_form.html.twig', {'button_label':  'update' | trans}) }}
 
     <a href="{{ path('type_of_event_index') }}">{{ 'type.back' | trans }}</a>
 

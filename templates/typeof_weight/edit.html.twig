@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit TypeofWeight{% endblock %}
+{% block title %}{{ 'type_weight_edit.title' | trans }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
 
@@ -12,11 +12,11 @@
     </script>
 {% endblock %}
 {% block body %}
-    <h1>Edit TypeofWeight</h1>
+    <h1>{{ 'type_weight_edit.title' | trans }}</h1>
     <p id="message"></p>
-    {{ include('typeof_weight/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('typeof_weight/_form.html.twig', {'button_label': 'update' | trans}) }}
 
-    <a href="{{ path('typeof_weight_index') }}">back to list</a>
+    <a href="{{ path('typeof_weight_index') }}">{{ 'type_weight_show.back' | trans }}</a>
 
     {{ include('typeof_weight/_delete_form.html.twig') }}
 {% endblock %}

@@ -23,7 +23,7 @@
     <h1>{{ 'tournament_edit.title' | trans }}</h1>
     <p id="message"></p>
 
-    {{ include('tournament/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('tournament/_form.html.twig', {'button_label':  'update' | trans}) }}
 
     <a href="{{ path('tournament_index') }}">{{ 'tournament.back' | trans }}</a>
 
