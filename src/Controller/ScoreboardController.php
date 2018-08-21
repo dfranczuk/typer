@@ -71,7 +71,7 @@ class ScoreboardController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('scoreboard_edit', ['id' => $scoreboard->getId()]);
+            return $this->redirectToRoute('scoreboard_index', ['id' => $scoreboard->getId()]);
         }
 
         return $this->render('scoreboard/edit.html.twig', [

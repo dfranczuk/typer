@@ -1,11 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Team{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    <script>
+
+
+        document.getElementById("btn_save").onclick = function() {myFunction()};
+
+        function myFunction() {
+            document.getElementById("message").innerHTML="Team has been updated";
+        }
+
+
+    </script>
+{% endblock %}
 {% block body %}
 
     <h1>Edit Team</h1>
-
+    <p id="message"></p>
     {{ include('team/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('team_index') }}">back to list</a>

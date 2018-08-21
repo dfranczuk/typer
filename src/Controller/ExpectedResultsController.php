@@ -406,7 +406,7 @@ class ExpectedResultsController extends Controller
             $this->persist($expectedResult);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('expected_results_edit', ['id' => $expectedResult->getId()]);
+            return $this->redirectToRoute('expected_results_index', ['id' => $expectedResult->getId()]);
         }
 
         return $this->render('expected_results/edit.html.twig', [

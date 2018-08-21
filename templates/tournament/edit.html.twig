@@ -1,11 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Tournament{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    <script>
+
+
+        document.getElementById("btn_save").onclick = function() {myFunction()};
+
+        function myFunction() {
+            document.getElementById("message").innerHTML="Tournament has been updated";
+        }
+
+
+    </script>
+{% endblock %}
 {% block body %}
 
     <h1>Edit Tournament</h1>
-
+    <p id="message"></p>
     {{ include('tournament/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('tournament_index') }}">back to list</a>

@@ -67,7 +67,7 @@ class TypeofWeightController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('typeof_weight_edit', ['id' => $typeofWeight->getId()]);
+            return $this->redirectToRoute('typeof_weight_index', ['id' => $typeofWeight->getId()]);
         }
 
         return $this->render('typeof_weight/edit.html.twig', [

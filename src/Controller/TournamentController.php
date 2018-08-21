@@ -59,7 +59,7 @@ class TournamentController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('tournament_edit', ['id' => $tournament->getId()]);
+            return $this->redirectToRoute('tournament_index', ['id' => $tournament->getId()]);
         }
         return $this->render('tournament/edit.html.twig', [
             'tournament' => $tournament,
