@@ -7,6 +7,7 @@ use App\Entity\Game;
 use App\Form\ExpectedResults10Type;
 use App\Repository\ExpectedResultsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,9 +18,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class ExpectedResultsController extends Controller
 {
+
+
+    /**
+     *
+     * Created by PhpStorm.
+     * User: Mateusz Poniatowski <mateusz@live.hk
+     * @param ExpectedResultsRepository $expectedResultsRepository
+     * @return Response
+     */
+
     /**
      * @Route("/", name="expected_results_index", methods="GET")
      */
+
+
     public function index(ExpectedResultsRepository $expectedResultsRepository): Response
     {
 
@@ -424,5 +437,10 @@ class ExpectedResultsController extends Controller
 
         return $this->redirectToRoute('expected_results_index');
     }
+
+
+
+
+
 
 }

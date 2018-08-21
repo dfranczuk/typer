@@ -23,9 +23,20 @@ class GameController extends Controller
         return $this->render('game/index.html.twig', ['games' => $gameRepository->findAll()]);
     }
     /**
+     *
+     * Created by PhpStorm.
+     * User: Mateusz Poniatowski <mateusz@live.hk
+     * @param Request $request
+     * @return Response
+     */
+
+
+    /**
      * @Route("/new", name="game_new", methods="GET|POST")
      * @Security("is_granted('ROLE_ADMIN')")
      */
+
+
     public function new(Request $request): Response
     {
         $game = new Game();
@@ -39,7 +50,7 @@ class GameController extends Controller
             }
             if($game->isFlaga()==false){
                 echo '<script language="javascript">';
-                echo 'alert("message successfully sent")';
+                echo 'alert("Wyslano dane")';
                 echo '</script>';
                 //$this->redirectToRoute('game_new');
             }else{
@@ -72,10 +83,26 @@ class GameController extends Controller
     {
         return $this->render('game/show.html.twig', ['game' => $game]);
     }
+
+
+
+
+    /**
+     *
+     * Created by PhpStorm.
+     * User: Mateusz Poniatowski <mateusz@live.hk
+     * @param Request $request
+     * @param Game $game
+     * @return Response
+     */
+
     /**
      * @Route("/{id}/edit", name="game_edit", methods="GET|POST")
      * @Security("is_granted('ROLE_ADMIN')")
      */
+
+
+
     public function edit(Request $request, Game $game): Response
     {
         $form = $this->createForm(GameType::class, $game);

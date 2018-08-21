@@ -11,10 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
+
+/**
+ * Class TypeOfEventController
+ * @package App\Controller
+ * @author Mateusz Poniatowski <mateusz@live.hk>
+ */
 /**
  * @Route("/type/of/event")
  * @Security("is_granted('ROLE_ADMIN')")
  */
+
+
+
 class TypeOfEventController extends Controller
 {
     /**
