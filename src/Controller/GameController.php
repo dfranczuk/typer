@@ -45,9 +45,14 @@ class GameController extends Controller
             }else{
                 $em = $this->getDoctrine()->getManager();
 
+
+                $datagry=$game->getGameDate();
+
+                  $result = $datagry->format('Y-m-d H-i-s');
+
                 $spotkanie1=$game->getFirstTeam();
                 $spotkanie2=$game->getSecondTeam();
-                $spotkanie3=$spotkanie1."-".$spotkanie2;
+                $spotkanie3=$spotkanie1."-".$spotkanie2." data spotkania: ".$result;
                 $game->setMeeting($spotkanie3);
 
                 $em->persist($game);
@@ -79,10 +84,13 @@ class GameController extends Controller
 
             $EntityManager=$this->getDoctrine()->getManager();
 
+            $datagry=$game->getGameDate();
+
+            $result = $datagry->format('Y-m-d H-i-s');
 
             $spotkanie1=$game->getFirstTeam();
             $spotkanie2=$game->getSecondTeam();
-            $spotkanie3=$spotkanie1."-".$spotkanie2;
+            $spotkanie3=$spotkanie1."-".$spotkanie2." data spotkania: ".$result;
             $game->setMeeting($spotkanie3);
             $EntityManager->persist($game);
             $EntityManager->flush();

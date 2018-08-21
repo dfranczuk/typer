@@ -16,6 +16,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Class ResetPasswordController
+ * @package App\Controller
+ * @author Radoslaw Albiniak <radoslaw.albiniak@gmail.com>
+ */
 class ResetPasswordController extends AbstractController
 {
     /**
@@ -38,7 +43,7 @@ class ResetPasswordController extends AbstractController
 
             $user1=$this->getDoctrine()->getRepository(User::class);
             $numberofusers = $user1->createQueryBuilder('u')
-                ->select('u.username,  u.email, u.id')
+                ->select('u.username,  u.email')
                 ->getQuery();
             $numberofusers = $numberofusers->execute();
 
@@ -48,8 +53,9 @@ class ResetPasswordController extends AbstractController
 
                         if ($zapytanie == $x['email'] && $zapytanie1 == $x['username']) {
 
-                                $id = $x['id'];
-                            return $this->redirectToRoute('change_pass', ['id' => $id]);
+                                $email = $x['email'];
+                                $username = $x['username'];
+                            return $this->redirectToRoute('change_pass', ['email' =>$email, 'username'=>$username]);
                         }
 
             }
