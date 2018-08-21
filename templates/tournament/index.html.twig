@@ -56,13 +56,11 @@
     <table class="table" id="myTable2">
         <thead>
             <tr>
-                <th onclick="sortTable(0)" style="cursor:pointer">Id
+
+                <th onclick="sortTable(0)" style="cursor:pointer">{{ 'tournament_table.name' | trans }}
                     <img src="{{ asset('build/images/bg.png') }}" alt="sort">
                 </th>
-                <th onclick="sortTable(1)" style="cursor:pointer">{{ 'tournament_table.name' | trans }}
-                    <img src="{{ asset('build/images/bg.png') }}" alt="sort">
-                </th>
-                <th onclick="sortTable(2)" style="cursor:pointer">{{ 'tournament_table.type' | trans }}
+                <th onclick="sortTable(1)" style="cursor:pointer">{{ 'tournament_table.type' | trans }}
                     <img src="{{ asset('build/images/bg.png') }}" alt="sort">
                 </th>
                 <th>{{ 'table.actions' | trans }}</th>
@@ -71,7 +69,6 @@
         <tbody>
         {% for tournament in tournaments %}
             <tr>
-                <td>{{ tournament.id }}</td>
                 <td>{{ tournament.name }}</td>
                 <td>{{ tournament.TypeOfEvent }}</td>
                 <td>

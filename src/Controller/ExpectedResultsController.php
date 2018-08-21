@@ -95,7 +95,7 @@ class ExpectedResultsController extends Controller
            $expsecondscore = $expectedResult->getSecondTeamScoreExpected();
          //  dump($realfirstscore);die;
 
-          if($datatype<$datagame){ //JEZELI data gry jest pozniejsza niz obstawienia rob punkty
+          if($datatype<$datagame && $realfirstscore!=NULL && $realsecondscore!=NULL){ //JEZELI data gry jest pozniejsza niz obstawienia rob punkty
               if($stanFlagi==false){ //naliczaj punkty jezeli nie byl sprawdzany dane obstawienie
 
                     if($realfirstscore==$expfirstscore && $realsecondscore==$expsecondscore){ //jezeli idealnie trafił wynik
