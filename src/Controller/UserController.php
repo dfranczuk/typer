@@ -39,8 +39,15 @@ class UserController extends Controller
         return $this->render('user/show.html.twig', ['user' => $user]);
     }
 
+
     /**
      * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
+     */
+    /**
+     * @param Request $request
+     * @param User $user
+     * @return Response
+     * @author Radoslaw Albiniak <radoslaw.albiniak@gmail.com>
      */
     public function edit(Request $request, User $user): Response
     {
@@ -70,11 +77,11 @@ class UserController extends Controller
             }
         }
 
-            return $this->render('user/edit.html.twig', [
-                'user' => $user,
-                'form' => $form->createView(),
-            ]);
-        }
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @Route("/{id}", name="user_delete", methods="DELETE")
