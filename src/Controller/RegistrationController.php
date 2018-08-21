@@ -19,6 +19,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Response;
+
+/**
+ * Class RegistrationController
+ * @package App\Controller
+ * @author Radoslaw Albiniak <radoslaw.albiniak@gmail.com>
+ */
 class RegistrationController extends AbstractController
 {
 
