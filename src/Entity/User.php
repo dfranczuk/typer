@@ -108,11 +108,12 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->role = '["ROLE_ADMIN"]';
+        $this->role = '["ROLE_USER"]';
         $this->expectedResultsID = new ArrayCollection();
     }
 
     // other properties and methods
+
     /**
      * @ORM\Column(type="string", nullable=true)
      */
@@ -121,6 +122,11 @@ class User implements UserInterface
     public function getRole()
     {
         return $this->role;
+    }
+
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 
     public function getEmail()
@@ -142,6 +148,7 @@ class User implements UserInterface
     {
         $this->username = $username;
     }
+
 
     public function getPlainPassword()
     {
@@ -175,11 +182,11 @@ class User implements UserInterface
 
         $roles = $this->roles;
         $role = $this->role;
-        if ( $role =='["ROLE_ADMIN"]'){
-            $roles[] ='ROLE_ADMIN';
+        if ($role == '["ROLE_ADMIN"]') {
+            $roles[] = 'ROLE_ADMIN';
         }
-        if ( $role =='["ROLE_USER"]'){
-            $roles[] ='ROLE_USER';
+        if ($role == '["ROLE_USER"]') {
+            $roles[] = 'ROLE_USER';
         }
         //give every users role admin
 //if (!in_array('ROLE_ADMIN', $roles)) {

@@ -202,6 +202,10 @@
                 <source>menu.homepage</source>
                 <target>Strona główna</target>
             </trans-unit>
+            <trans-unit id="menu.edit">
+                            <source>menu.edit</source>
+                            <target>Edytuj profil</target>
+                        </trans-unit>
             <trans-unit id="menu.admin">
                 <source>menu.admin</source>
                 <target>Panel </target>

@@ -7,10 +7,11 @@
 
     {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('user_index') }}">back to list</a>
+        <a href="{{ path('user_index') }}">back to list</a>
     {% endif %}
     {% if is_granted('ROLE_USER') %}
-        <a href="{{ path('change_pass', {'email': app.user.email, 'username': app.user.username}) }}">Change password</a>
+        <a href="{{ path('change_pass', {'email': app.user.email, 'username': app.user.username, 'password':app.user.password}) }}">Change
+            password</a>
         <a href="{{ path('homepage') }}">back to homepage</a>
     {% endif %}
 

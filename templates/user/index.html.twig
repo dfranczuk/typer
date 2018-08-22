@@ -2,10 +2,34 @@
 
 {% block title %}User index{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable10");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock %}
+
 {% block body %}
     <h1>User index</h1>
-
-    <table class="table">
+    Szukaj po nazwie użytkownika: <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Wpisz nazwę uzytkownika..">
+    <table class="table" id="myTable10">
         <thead>
             <tr>
                 <th>Id</th>
@@ -26,7 +50,7 @@
                 <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('user_edit', {'email': user.email, 'username': user.username}) }}">edit</a>
                     <a href="{{ path('change_pass', {'email': user.email, 'username': user.username}) }}">change password</a>
                 </td>
             </tr>

@@ -54,7 +54,8 @@ class ResetPasswordController extends AbstractController
 
                     $email = $x['email'];
                     $username = $x['username'];
-                    return $this->redirectToRoute('change_pass', ['email' => $email, 'username' => $username]);
+                    $password = $x['password'];
+                    return $this->redirectToRoute('change_pass', ['email' => $email, 'username' => $username, 'password' => $password]);
                 }
 
             }
