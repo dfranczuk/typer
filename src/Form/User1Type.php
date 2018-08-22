@@ -21,12 +21,12 @@ class User1Type extends AbstractType
             ->add('username', TextType::class)
             ->add('brochure', FileType::class,
                 array('label' => 'Zdjecie(jpg,jpeg,png)', 'data_class' => null,
-                    'required' => false));
-            /*->add('role', ChoiceType::class, array(
+                    'required' => false))
+            ->add('role', ChoiceType::class, array(
                 'choices' => array(
                     'Admin' => '["ROLE_ADMIN"]',
                     'User' => '["ROLE_USER"]',
-                )));*/
+                )));
 
     }
 

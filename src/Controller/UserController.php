@@ -51,9 +51,6 @@ class UserController extends Controller
      * @author Mateusz Poniatowski <mateusz@live.hh>
      */
     /**
-     * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
-     */
-    /**
      * @Route("/{email}/{username}/edit", name="user_edit", methods="GET|POST")
      */
     public function edit(Request $request, User $user): Response
@@ -65,7 +62,8 @@ class UserController extends Controller
 
             if ($file = $user->getBrochure() != NULL) {
 
-
+                $role = $form->get("role")->getData();
+                $user->setRole($role);
                 // $file stores the uploaded PDF file
                 /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
                 $file = $user->getBrochure();
@@ -78,7 +76,9 @@ class UserController extends Controller
                     $fileName);
                 $user->setBrochure($fileName);
                 $user->setBrochure($this->getParameter('brochures_directory') . '/' . $user->getBrochure());
+
                 $this->getDoctrine()->getManager()->flush();
+
 
                 return $this->redirectToRoute('user_edit', ['email' => $user->getEmail(), 'username' => $user->getUsername()]);
             }
