@@ -9,8 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-
-
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 class User1Type extends AbstractType
@@ -20,9 +19,14 @@ class User1Type extends AbstractType
         $builder
             ->add('email', EmailType::class)
             ->add('username', TextType::class)
-           ->add('brochure', FileType::class,
-                array('label' => 'Zdjecie(jpg,jpeg,png)','data_class' => null,
+            ->add('brochure', FileType::class,
+                array('label' => 'Zdjecie(jpg,jpeg,png)', 'data_class' => null,
                     'required' => false));
+            /*->add('role', ChoiceType::class, array(
+                'choices' => array(
+                    'Admin' => '["ROLE_ADMIN"]',
+                    'User' => '["ROLE_USER"]',
+                )));*/
 
     }
 

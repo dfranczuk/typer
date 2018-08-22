@@ -14,12 +14,13 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @Route("/user")
- * @Security("is_granted('ROLE_ADMIN')")
+
  */
 class UserController extends Controller
 {
     /**
      * @Route("/", name="user_index", methods="GET")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(): Response
     {
@@ -33,6 +34,7 @@ class UserController extends Controller
 
     /**
      * @Route("/{id}", name="user_show", methods="GET")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function show(User $user): Response
     {
@@ -50,6 +52,9 @@ class UserController extends Controller
      */
     /**
      * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
+     */
+    /**
+     * @Route("/{email}/{username}/edit", name="user_edit", methods="GET|POST")
      */
     public function edit(Request $request, User $user): Response
     {
@@ -75,7 +80,7 @@ class UserController extends Controller
                 $user->setBrochure($this->getParameter('brochures_directory') . '/' . $user->getBrochure());
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
+                return $this->redirectToRoute('user_edit', ['email' => $user->getEmail(), 'username' => $user->getUsername()]);
             }
         }
 
@@ -87,6 +92,7 @@ class UserController extends Controller
 
     /**
      * @Route("/{id}", name="user_delete", methods="DELETE")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, User $user): Response
     {

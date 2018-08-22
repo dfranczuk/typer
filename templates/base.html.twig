@@ -69,6 +69,11 @@
                                 </a>
                             </li>
                             <li>
+                            <a href="{{ path('user_edit', {'email': app.user.email, 'username': app.user.username}) }}">
+                                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'menu.edit'|trans }}
+                            </a>
+                            </li>
+                            <li>
                                 <a href="{{ path('security_logout') }}">
                                     <i class="fa fa-sign-out" aria-hidden="true"></i> {{ 'menu.logout'|trans }}
                                 </a>
