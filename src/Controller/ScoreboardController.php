@@ -24,7 +24,7 @@ class ScoreboardController extends Controller
     {
 
 
-            return $this->render('scoreboard/index.html.twig', ['scoreboards' => $scoreboardRepository->findAll()]);
+        return $this->render('scoreboard/index.html.twig', ['scoreboards' => $scoreboardRepository->findAll()]);
     }
 
 
@@ -86,10 +86,15 @@ class ScoreboardController extends Controller
      */
     public function delete(Request $request, Scoreboard $scoreboard): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$scoreboard->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($scoreboard);
-            $em->flush();
+        if ($this->isCsrfTokenValid('delete' . $scoreboard->getId(), $request->request->get('_token'))) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($scoreboard);
+                $em->flush();
+            } catch (\Doctrine\DBAL\DBALException $e) {
+
+                return $this->render('bundles/TwigBundle/Exception/errorDel.html.twig', array('status_link' => "scoreboard_index"));
+            }
         }
 
         return $this->redirectToRoute('scoreboard_index');

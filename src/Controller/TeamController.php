@@ -81,11 +81,17 @@ class TeamController extends Controller
      */
     public function delete(Request $request, Team $team): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$team->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($team);
-            $em->flush();
+        if ($this->isCsrfTokenValid('delete' . $team->getId(), $request->request->get('_token'))) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($team);
+                $em->flush();
+            } catch (\Doctrine\DBAL\DBALException $e) {
+
+                return $this->render('bundles/TwigBundle/Exception/errorDel.html.twig', array('status_link' => "team_index"));
+            }
         }
+
 
         return $this->redirectToRoute('team_index');
     }

@@ -422,6 +422,20 @@
            <source>type_table.no_team_found</source>
            <target>Brak typów</target>
 </trans-unit>
+
+
+<trans-unit id="error_delete.title">
+           <source>error_delete.title</source>
+           <target>Nie można usunąć</target>
+</trans-unit>
+<trans-unit id="error_delete.paragraph">
+           <source>error_delete.paragraph</source>
+           <target>Być może inna tabela używa tych danych. Usuń te dane z innej tabeli, a następnie spróbuj ponownie.</target>
+</trans-unit>
+  <trans-unit id="error.delete.link">
+                <source>error.delete.link</source>
+                <target><![CDATA[<a href="%url%">powrót do tabeli</a>]]></target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
