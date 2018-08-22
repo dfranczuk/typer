@@ -366,6 +366,22 @@
        <source>button_type_weight.delete</source>
        <target>Usuń typ wagi</target>
  </trans-unit>
+ <trans-unit id="user.delete">
+        <source>user.delete</source>
+        <target>Usuń użytkownika</target>
+  </trans-unit>
+  <trans-unit id="button_user.register">
+          <source>button_user.register</source>
+          <target>Zarejestruj się</target>
+</trans-unit>
+<trans-unit id="button_expected_results.new">
+      <source>button_expected_results.new</source>
+      <target>Dodaj nowy typ</target>
+</trans-unit>
+<trans-unit id="button_expected_results.delete">
+      <source>button_expected_results.delete</source>
+      <target>Usuń typ</target>
+</trans-unit>
  <trans-unit id="update">
         <source>update</source>
         <target>Aktualizuj</target>
@@ -590,6 +606,138 @@
 <trans-unit id="type_weight_edit.title">
         <source>type_weight_edit.title</source>
         <target>Edycja typu wagi</target>
+</trans-unit>
+<trans-unit id="user.email">
+        <source>user.email</source>
+        <target>Email</target>
+</trans-unit>
+<trans-unit id="user.username">
+        <source>user.username</source>
+        <target>Nazwa użytkownika</target>
+</trans-unit>
+<trans-unit id="user.password">
+        <source>user.password</source>
+        <target>Hasło</target>
+</trans-unit>
+<trans-unit id="user.password2">
+        <source>user.password2</source>
+        <target>Powtórz hasło</target>
+</trans-unit>
+<trans-unit id="user.roles">
+        <source>user.roles</source>
+        <target>Rola</target>
+</trans-unit>
+<trans-unit id="user.photo">
+        <source>user.photo</source>
+        <target>Zdjęcie, akceptowane formaty to : jpg, jpeg, png!</target>
+</trans-unit>
+<trans-unit id="user_table.title">
+        <source>user_table.title</source>
+        <target>Użytkownicy</target>
+</trans-unit>
+<trans-unit id="user_table.no_user_found">
+           <source>user_table.no_user_found</source>
+           <target>Brak użytkowników</target>
+</trans-unit>
+<trans-unit id="user_table.new">
+           <source>user_table.new</source>
+           <target>Stwórz nowego użytkownika</target>
+</trans-unit>
+<trans-unit id="user_table.new2">
+           <source>user_table.new2</source>
+           <target>Nowy użytkownik</target>
+</trans-unit>
+<trans-unit id="user.change_password">
+           <source>user.change_password</source>
+           <target>Zmień hasło</target>
+</trans-unit>
+<trans-unit id="user.change_password4">
+           <source>user.change_password4</source>
+           <target>Zmień hasło dla</target>
+</trans-unit>
+<trans-unit id="user_table.back">
+           <source>user_table.back</source>
+           <target>Powrót do listy użytkowników</target>
+</trans-unit>
+<trans-unit id="user_edit.title">
+           <source>user_edit.title</source>
+           <target>Edytuj użytkownika</target>
+</trans-unit>
+<trans-unit id="user_table.save">
+           <source>user_table.save</source>
+           <target>Dodaj użytkownika</target>
+</trans-unit>
+<trans-unit id="user.register">
+           <source>user.register</source>
+           <target>Rejestracja</target>
+</trans-unit>
+<trans-unit id="user_register.sing_up">
+           <source>user_register.sing_up</source>
+           <target>Zapisz się</target>
+</trans-unit>
+<trans-unit id="home.back">
+           <source>home.back</source>
+           <target>Powrót do strony głównej</target>
+</trans-unit>
+<trans-unit id="user.resetpass">
+           <source>user.resetpass</source>
+           <target>Resetuj hasło</target>
+</trans-unit>
+<trans-unit id="expected_results.title">
+           <source>expected_results.title</source>
+           <target>Moje typy</target>
+</trans-unit>
+<trans-unit id="expected_results.blank_score">
+           <source>expected_results.blank_score</source>
+           <target>Nie znany wynik gry</target>
+</trans-unit>
+<trans-unit id="expected_results.FirstTeamScoreExpected">
+           <source>expected_results.FirstTeamScoreExpected</source>
+           <target>Typowany wynik pierwszej drużyny</target>
+</trans-unit>
+<trans-unit id="expected_results.SecondTeamScoreExpected">
+           <source>expected_results.SecondTeamScoreExpected</source>
+           <target>Typowany wynik drugiej drużyny</target>
+</trans-unit>
+<trans-unit id="expected_results.name_of_meeting">
+           <source>expected_results.name_of_meeting</source>
+           <target>Nazwa spotkania</target>
+</trans-unit>
+<trans-unit id="expected_results.points">
+           <source>expected_results.points</source>
+           <target>Punkty</target>
+</trans-unit>
+<trans-unit id="expected_results.data_game">
+           <source>expected_results.data_game</source>
+           <target>Data spotkania</target>
+</trans-unit>
+<trans-unit id="expected_results.new">
+           <source>expected_results.new</source>
+           <target>Stwórz nowe typowanie</target>
+</trans-unit>
+<trans-unit id="expected_results.new2">
+           <source>expected_results.new2</source>
+           <target>Nowe typowanie</target>
+</trans-unit>
+<trans-unit id="expected_results_show.title">
+           <source>expected_results_show.title</source>
+           <target>Typ</target>
+</trans-unit>
+<trans-unit id="expected_results.back">
+           <source>expected_results.back</source>
+           <target>Powrót do moich typów</target>
+</trans-unit>
+<trans-unit id="expected_results.edit">
+           <source>expected_results.edit</source>
+           <target>Edytuj typ</target>
+</trans-unit>
+<trans-unit id="scoreboard.title">
+           <source>scoreboard.title</source>
+           <target>Tablica wyników</target>
+</trans-unit>
+<trans-unit id="scoreboard.no_scoreboard_found">
+           <source>scoreboard.no_scoreboard_found</source>
+           <target>Brak rekorów w tabeli wyników</target>
 </trans-unit>
         </body>
     </file>
