@@ -33,7 +33,7 @@
     <a href="{{ path('user_index') }}">{{ 'user_table.back' | trans }}</a>
 
 
-    <a href="{{ path('user_edit', {'email': user.email, 'username': user.username}}>{{ 'action.edit'|trans }}</a>
+    <a href="{{ path('user_edit', {'email': user.email, 'username': user.username}) }}">{{ 'action.edit'|trans }}</a>
 
 
     <a href="{{ path('change_pass', {'email': user.email, 'username': user.username}) }}">{{ 'user.change_password' | trans }}</a>

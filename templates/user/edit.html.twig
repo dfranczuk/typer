@@ -3,7 +3,7 @@
 {% block title %}{{ 'user_edit.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>{{ 'user_edit.title' | trans }}r</h1>
+    <h1>{{ 'user_edit.title' | trans }}</h1>
 
     {{ include('user/_form.html.twig', {'button_label': 'update' | trans}) }}
     {% if is_granted('ROLE_ADMIN') %}
