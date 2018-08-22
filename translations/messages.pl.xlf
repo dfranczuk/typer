@@ -366,6 +366,10 @@
        <source>button_type_weight.delete</source>
        <target>Usuń typ wagi</target>
  </trans-unit>
+ <trans-unit id="update">
+        <source>update</source>
+        <target>Aktualizuj</target>
+  </trans-unit>
 <trans-unit id="game_table.new">
        <source>game_table.new</source>
        <target>Stwórz nowe spotkanie</target>
@@ -438,6 +442,10 @@
 <trans-unit id="team.back">
            <source>team.back</source>
            <target>Powrót do drużyn</target>
+</trans-unit>
+<trans-unit id="team_edit.titile">
+           <source>team_edit.titile</source>
+           <target>Edycja drużyny</target>
 </trans-unit>
 <trans-unit id="tournament_table.name">
            <source>tournament_table.name</source>

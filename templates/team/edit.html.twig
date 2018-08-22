@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Edit Team{% endblock %}
+{% block title %}{{ 'team_edit.titile' | trans }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
 
@@ -21,10 +21,10 @@
 {% block body %}
 
 
-    <h1>Edit Team</h1>
+    <h1>{{ 'team_edit.titile' | trans }}</h1>
     <p id="message"></p>
 
-    {{ include('team/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('team/_form.html.twig', {'button_label':  'update' | trans}) }}
 
     <a href="{{ path('team_index') }}">{{ 'team.back' | trans }}</a>
 
