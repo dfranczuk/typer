@@ -12,29 +12,31 @@
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>{{ 'user.email' | trans }}</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Username</th>
+                <th>{{ 'user.username' | trans }}</th>
                 <td>{{ user.username }}</td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>{{ 'user.password' | trans }}</th>
                 <td>{{ user.password }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
+                <th>{{ 'user.roles' | trans }}</th>
                 <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a href="{{ path('user_index') }}">{{ 'user_table.back' | trans }}</a>
 
-    <a href="{{ path('user_edit', {'email': user.email, 'username': user.username}) }}">edit</a>
 
-    <a href="{{ path('change_pass', {'email': user.email, 'username': user.username}) }}">change password</a>
+    <a href="{{ path('user_edit', {'email': user.email, 'username': user.username}}>{{ 'action.edit'|trans }}</a>
+
+
+    <a href="{{ path('change_pass', {'email': user.email, 'username': user.username}) }}">{{ 'user.change_password' | trans }}</a>
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

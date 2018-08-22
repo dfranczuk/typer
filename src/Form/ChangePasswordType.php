@@ -18,8 +18,8 @@ class ChangePasswordType extends AbstractType
         $builder
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'user.password'),
+                'second_options' => array('label' => 'user.password2'),
             ));
     }
 

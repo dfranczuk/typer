@@ -41,12 +41,16 @@ class ExpectedResults10Type extends AbstractType
     {
         $builder
             ->add('FirstTeamScoreExpected', NumberType::class, array(
-                'attr' => array('min' => 0, 'max' => 50)
+                'attr' => array('min' => 0, 'max' => 50),
+                'label' => 'expected_results.FirstTeamScoreExpected',
             ))
             ->add('SecondTeamScoreExpected', NumberType::class, array(
-                'attr' => array('min' => 0, 'max' => 50)
+                'attr' => array('min' => 0, 'max' => 50),
+                'label' => 'expected_results.SecondTeamScoreExpected',
             ))
-            ->add('NameOfMeeting')
+            ->add('NameOfMeeting', null,[
+                'label' => 'expected_results.name_of_meeting',
+            ])
         ;
 
 

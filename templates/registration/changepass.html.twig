@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Change password{% endblock %}
+{% block title %}{{ 'user.change_password' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Change password {{ user.username }}</h1>
+    <h1>{{ 'user.change_password4' | trans }} {{ user.username }}</h1>
 
-    {{ include('registration/_form1.html.twig', {'button_label': 'Change password'}) }}
+    {{ include('registration/_form1.html.twig', {'button_label': 'user.change_password' | trans}) }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    <a href="{{ path('user_index') }}">{{ 'user_table.back' | trans }}</a>
 
 
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Scoreboard index{% endblock %}
+{% block title %}{{ 'scoreboard.title' | trans }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
 
@@ -51,14 +51,14 @@
     </script>
 {% endblock %}
 {% block body %}
-    <h1>Scoreboard index</h1>
+    <h1>{{ 'scoreboard.title' | trans }}</h1>
 
     <table class="table" id="myTable3">
         <thead>
             <tr>
 
-                <th onclick="sortTable(0)" style="cursor:pointer">Points</th>
-                <th>actions</th>
+                <th onclick="sortTable(0)" style="cursor:pointer">{{ 'expected_results.points' | trans }}</th>
+                <th>{{ 'table.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -77,7 +77,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">{{ 'scoreboard.no_scoreboard_found' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
