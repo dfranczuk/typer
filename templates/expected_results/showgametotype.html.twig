@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Game{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        (function(){
+
+            var match = document.getElementById("para1").innerHTML;
+            //console.log(match);
+
+           // var name_of_meeting = $("#expected_results10_NameOfMeeting").val();
+
+
+
+            var options = $('#expected_results10_NameOfMeeting').find('option');
+            //$(options[0]).show();
+
+            //console.log($(options[0]));
+            $.each(options, function (key,option) {
+                // console.log($(option).html());
+                if(match  != $(option).html()){
+                    $(option).hide();
+                }else{
+                    $(option).show();
+                }
+            })
+
+
+        })();
+
+    </script>
+{% endblock %}
+{% block body %}
+    <h1>Game</h1>
+
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ game.id }}</td>
+        </tr>
+        <tr>
+            <th>Confrontation</th>
+            <td id="para1">{{ game.meeting }}</td>
+        </tr>
+        <tr>
+            <th>First_team_score</th>
+            <td>{{ game.firstTeamScore }}</td>
+        </tr>
+        <tr>
+            <th>Second_team_score</th>
+            <td>{{ game.secondTeamScore }}</td>
+        </tr>
+        <tr>
+            <th>Game_date</th>
+            <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+    <a href="{{ path('game1_index') }}">back to list</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
+        {{ include('game/_delete_form.html.twig') }}
+    {% endif %}
+
+
+
+
+    {{ include('expected_results/_form.html.twig') }}
+
+
+
+{% endblock %}

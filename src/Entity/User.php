@@ -108,7 +108,7 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->role = '["ROLE_ADMIN"]';
+        $this->role = '["ROLE_USER"]';
         $this->expectedResultsID = new ArrayCollection();
     }
 

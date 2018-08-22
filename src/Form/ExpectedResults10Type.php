@@ -46,7 +46,7 @@ class ExpectedResults10Type extends AbstractType
             ->add('SecondTeamScoreExpected', NumberType::class, array(
                 'attr' => array('min' => 0, 'max' => 50)
             ))
-            ->add('NameOfMeeting')
+            ->add("NameOfMeeting")
         ;
 
 
