@@ -1,6 +1,6 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_row(form.brochure) }}
-<button class="btn">{{ button_label|default('Save') }}</button>
+<button class="btn">{{ button_label|default('button_user.register' | trans) }}</button>
 
 {{ form_end(form) }}

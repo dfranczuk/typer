@@ -1,39 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Game{% endblock %}
+{% block title %}{{ 'game_show.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Game</h1>
+    <h1>{{ 'game_show.title' | trans }}</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ game.id }}</td>
-            </tr>
-            <tr>
-                <th>Confrontation</th>
+                <th>{{ 'game_table.confrontation' | trans }}</th>
                 <td>{{ game.firstTeam }} - {{ game.secondTeam }}</td>
             </tr>
             <tr>
-                <th>First_team_score</th>
-                <td>{{ game.firstTeamScore }}</td>
+                <th>{{ 'game_table.score' | trans }}</th>
+                <td>{{ game.firstTeamScore }} - {{ game.secondTeamScore }}</td>
             </tr>
             <tr>
-                <th>Second_team_score</th>
-                <td>{{ game.secondTeamScore }}</td>
+                <th>{{ 'game_table.weigh' | trans }}</th>
+                <td>{{ game.typeofweight }}</td>
             </tr>
             <tr>
-                <th>Game_date</th>
+                <th>{{ 'game_table.game_date' | trans }}</th>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+
           
 
         </tbody>
     </table>
-    <a href="{{ path('game_index') }}">back to list</a>
+    <a href="{{ path('game_index') }}">{{ 'game.back' | trans }}</a>
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
-    {{ include('game/_delete_form.html.twig') }}
+        <div class="section">
+        <a href="{{ path('game_edit', {id: game.id}) }}" class="btn btn-success">
+            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+        </a>
+    </div>
+        <br>
+        <div class="section">
+            {{ include('game/_delete_form.html.twig') }}
+        </div>
+
     {% endif %}
 {% endblock %}

@@ -20,18 +20,25 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class UserType extends AbstractType
 {
+    /**
+     * @author Jadawiga Kalinowska <7jadzia7@gmail.com> // add label
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
-            ->add('username', TextType::class)
+            ->add('email', EmailType::class ,[
+                'label' => 'user.email',
+            ])
+            ->add('username', TextType::class ,[
+                'label' => 'user.username',
+            ])
             ->add('brochure', FileType::class,
-                array('label' => 'Zdjecie(jpg,jpeg,png',
+                array('label' => 'user.photo',
                     'required' => false))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'user.password'),
+                'second_options' => array('label' => 'user.password2'),
             ));
     }
 

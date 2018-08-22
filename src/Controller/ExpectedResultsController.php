@@ -6,8 +6,10 @@ use App\Entity\ExpectedResults;
 use App\Entity\Game;
 use App\Form\ExpectedResults10Type;
 use App\Repository\ExpectedResultsRepository;
+use App\Repository\GameRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,9 +20,181 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class ExpectedResultsController extends Controller
 {
+
+
+    /**
+     *
+     * Created by PhpStorm.
+     * User: Mateusz Poniatowski <mateusz@live.hk
+     * @param ExpectedResultsRepository $expectedResultsRepository
+     * @return Response
+     */
+
+
+
+
+
+
+    /**
+     * @Route("/gametotype/{id}", name="game1_show",  methods="GET|POST")
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function show1(Game $game,Request $request): Response
+    {
+
+        $repository1=$this->getDoctrine()->getRepository(Game::class);
+        $repository2=$this->getDoctrine()->getRepository(ExpectedResults::class);
+
+
+
+        $expectedResult = new ExpectedResults();
+        $expectedResult1=new Game();
+        $form = $this->createForm(ExpectedResults10Type::class, $expectedResult);
+        $form->handleRequest($request);
+
+
+
+
+
+
+        $numberofmatch1 = $repository1->createQueryBuilder('u') // aktualnie to ilosc obstawionych meczy,
+        ->select('u.id')
+            ->getQuery();
+        $numberofmatch1=$numberofmatch1->execute(); //id wszystkich obstawionych meczy
+
+
+        $title = $request->attributes->get('id');
+        $title=(int)$title;//mam id gry z GAME!!! a chce miec
+//dump($title);die;
+
+        $numberoflastid = $repository1->createQueryBuilder('u') // aktualnie to ilosc obstawionych meczy,
+        ->select('u.id')
+            ->orderBy('u.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery();
+        $numberoflastid=$numberoflastid->execute();
+        $lastIdInGame;
+        foreach ($numberoflastid as $a){
+
+            $lastIdInGame=$a['id'];
+        }
+        $numberofmatch = $repository1->createQueryBuilder('u') // wybor nazwy spotkania
+        ->select('u.meeting')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $title)
+            ->getQuery();
+        $numberofmatch=$numberofmatch->execute(); //mamy nazwe spotkania!)
+
+
+
+$nameofmatch;
+        foreach ($numberofmatch as $a){
+
+            $nameofmatch=$a['meeting'];
+            //dump($nameofmatch);die;//konkretna nazwa spotkania!!! to porównywać z tym co jest w formularzu !!!
+        }
+
+
+
+
+
+
+        $GameInstance = new Game();
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+
+            foreach ($numberofmatch1 as $i){
+
+
+                $expectedResult1 = $repository1->find($i['id']);//najważniejsze!!!
+              //
+                if($i['id']==$title){ // id gry rowne id konkretnej gry
+                    //pobrac ostatnie id z expected i dodac 1
+                    //$expectedResult = $repository1->findById($id);
+
+                //    dump($expectedResult1->getMeeting());die;
+
+                  //  dump($expectedResult->setNameOfMeeting($expectedResult1->getMeeting()));die;
+                   // $expectedResult = $repository2->findById($lastIdInGame);
+
+               //     $expectedResult->setNameOfMeeting($expectedResult1->getMeeting());
+                //    $expectedResult->setGameDateId($expectedResult1->getGameDate());
+                 /*   $numberofmatch = $repository1->createQueryBuilder('u') // wybor nazwy spotkania
+                    ->select('u.meeting')
+                        ->andWhere('u.id = :id')
+                        ->setParameter('id', $i)
+                        ->getQuery();
+                    $numberofmatch=$numberofmatch->execute(); //mamy nazwe spotkania!
+*/
+
+
+                    //    $GameInstance->setMeeting($numberofmatch);
+
+                }
+
+
+            }
+
+
+
+            $meeting=$expectedResult->getNameOfMeeting();
+
+
+
+//$expectedResult->setNameOfMeeting($GameInstance->getMeeting());
+            $expectedResult->setDateOfType(\DateTime::createFromFormat( 'Y-m-d H-i-s' ,date('Y-m-d H-i-s')));
+
+
+            $em = $this->getDoctrine()->getManager();
+
+
+
+
+            $em->persist($expectedResult);
+            $em->flush();
+            $EntityManager=$this->getDoctrine()->getManager();
+
+            /*
+            $expectedResult->getNameOfMeeting()->getTournament();//id turnieju
+            $expectedResult->getDateOfType(); //data typowania
+            $expectedResult->getNameOfMeeting()->getTypeofWeight();//waga meczu
+            $expectedResult->getFlaga();//stan flagi
+            $expectedResult->getNameOfMeeting()->getFirstTeamScore();//gole 1 zespolu
+            $expectedResult->getNameOfMeeting()->getSecondTeamScore();// gole 2 zespolu
+            $expectedResult->getFirstTeamScoreExpected();//przewidywane gole 1 zespolu
+            $expectedResult->getSecondTeamScoreExpected();///przewidywane gole 2 zespolu
+        */
+
+
+            $expectedResult->setUserId($this->getUser());
+            //   dump($expectedResult->getNameOfMeeting()->getGameDate());die;
+//$expectedResult1->setGameDate($expectedResult->getNameOfMeeting()->getGameDate());
+            // dump($expectedResult1->getGameDate());die;
+//$expectedResult->setGameDateId($expectedResult1->getGameDate());
+
+            $EntityManager->persist($expectedResult);
+            $EntityManager->flush();
+            return $this->redirectToRoute('expected_results_index');
+        }
+
+        return $this->render('expected_results/showgametotype.html.twig', ['game' => $game,
+            'expected_result' => $expectedResult,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+
+
+
     /**
      * @Route("/", name="expected_results_index", methods="GET")
      */
+
+
     public function index(ExpectedResultsRepository $expectedResultsRepository): Response
     {
 
@@ -339,6 +513,21 @@ class ExpectedResultsController extends Controller
         ]);
     }
 
+
+
+    /**
+     * @Route("/gametotype", name="game1_index", methods="GET")
+     *
+     */
+    public function index1(GameRepository $gameRepository): Response
+    {
+        return $this->render('expected_results/gamestotype.html.twig', ['games' => $gameRepository->findAll()]);
+    }
+
+
+
+
+
     /**
      * @Route("/{id}", name="expected_results_show", methods="GET")
      */
@@ -363,7 +552,7 @@ class ExpectedResultsController extends Controller
             $expectedResult->setDateOfType(\DateTime::createFromFormat('Y-m-d H-i-s', date('Y-m-d H-i-s')));
             $this->getDoctrine()->getManager();
 
-            $this->persist($expectedResult);
+           // $this->persist($expectedResult);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('expected_results_index', ['id' => $expectedResult->getId()]);
@@ -394,5 +583,10 @@ class ExpectedResultsController extends Controller
 
         return $this->redirectToRoute('expected_results_index');
     }
+
+
+
+
+
 
 }

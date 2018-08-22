@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ExpectedResults{% endblock %}
+{% block title %}{{ 'expected_results.new2' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new ExpectedResults</h1>
+    <h1>{{ 'expected_results.new' | trans }}</h1>
 
     {{ include('expected_results/_form.html.twig') }}
 
-    <a href="{{ path('expected_results_index') }}">back to list</a>
+    <a href="{{ path('expected_results_index') }}">{{ 'expected_results.back' | trans }}</a>
 {% endblock %}
+
+

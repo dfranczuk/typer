@@ -1,25 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Team{% endblock %}
-{% block javascripts %}
-    {{ parent() }}
+{% block title %}{{ 'team_table.new2' | trans }}{% endblock %}
 
-    <script >
-        $( document ).ready(function() {
-
-
-        });
-    </script>
-{% endblock %}
 
 {% block body %}
 
 
-    <h1>Create new Team</h1>
+    <h1>{{ 'team_table.new' | trans }}</h1>
 
     {{ include('team/_form.html.twig') }}
 
-    <a href="{{ path('team_index') }}">back to list</a>
+    <a href="{{ path('team_index') }}">{{ 'team.back' | trans }}</a>
 
 
 {% endblock %}

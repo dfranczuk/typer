@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ExpectedResults{% endblock %}
+{% block title %}{{ 'expected_results_show.title' | trans }}{% endblock %}
 
 {% block body %}
     {% if app.user %}
-        <h1>ExpectedResults</h1>
+        <h1>{{ 'expected_results_show.title' | trans }}</h1>
 
         <table class="table">
             <tbody>
@@ -13,27 +13,27 @@
                 <td>{{ expected_result.id }}</td>
             </tr>
             <tr>
-                <th>Confrontation</th>
+                <th> {{ 'game_table.confrontation' | trans }}</th>
                 <td>{{ expected_result.NameOfMeeting }}</td>
             </tr>
             <tr>
-                <th>FirstTeamScoreExpected</th>
+                <th>{{ 'expected_results.FirstTeamScoreExpected' | trans }}</th>
                 <td>{{ expected_result.FirstTeamScoreExpected }}</td>
             </tr>
             <tr>
-                <th>SecondTeamScoreExpected</th>
+                <th>{{ 'expected_results.SecondTeamScoreExpected' | trans }}</th>
                 <td>{{ expected_result.SecondTeamScoreExpected }}</td>
             </tr>
             <tr>
-                <th>Game_date</th>
+                <th>{{ 'expected_results.data_game' | trans }}</th>
                 <td>{{ expected_result.GameDateId ? expected_result.GameDateId|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             </tbody>
         </table>
 
-        <a href="{{ path('expected_results_index') }}">back to list</a>
+        <a href="{{ path('expected_results_index') }}">{{ 'expected_results.back' | trans }}</a>
         {% if is_granted('ROLE_USER') %}
-            <a href="{{ path('expected_results_edit', {'id': expected_result.id}) }}">edit</a>
+            <a href="{{ path('expected_results_edit', {'id': expected_result.id}) }}">{{ 'action.edit'|trans }}</a>
 
             {{ include('expected_results/_delete_form.html.twig') }}
         {% endif %}

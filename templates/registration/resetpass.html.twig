@@ -1,13 +1,14 @@
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset password{% endblock %}
+{% block title %}{{ 'user.resetpass' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Reset password</h1>
+    <h1>{{ 'user.resetpass' | trans }}</h1>
 
     {{ include('registration/_form1.html.twig', {'button_label': 'Reset password'}) }}
 
-    <a href="/">back to homepage</a>
+    <a href="/">{{ 'home.back' | trans }}</a>
 
 
 {% endblock %}

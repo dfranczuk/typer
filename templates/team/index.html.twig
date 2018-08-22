@@ -26,7 +26,6 @@
                     });
             });
 
-
         function sortTable(n) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
             table = document.getElementById("myTable");
@@ -85,7 +84,6 @@
     <table class="table" id="myTable">
         <thead>
         <tr>
-
             </th>
             <th onclick="sortTable(0)" style="cursor:pointer">{{ 'team_table.name' | trans }}
                 <img src="{{ asset('build/images/bg.png') }}" alt="sort">
@@ -104,7 +102,15 @@
             <tr>
 
                 <td>{{ team.name }}</td>
-                <td>{{ team.type }}</td>
+                <td>
+                    {% if  team.type  == 'representation' %}
+                        {{ 'team_table.representation' | trans}}
+                    {% elseif  team.type  == 'club' %}
+                        {{ 'team_table.club' | trans }}
+                    {% else %}
+                        {{ 'team_table.notype' | trans }}
+                    {% endif %}
+                </td>
                 <td>
                     <div class="item-actions">
                         <a href="{{ path('team_show', {'id': team.id}) }}" class="btn btn-sm btn-default">

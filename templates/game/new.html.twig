@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Game{% endblock %}
+{% block title %}{{ 'game_new.title' | trans }}{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -41,11 +41,11 @@
 
 {% block body %}
 
-    <h1>Create new Game</h1>
+    <h1>{{ 'game_table.new' | trans }}</h1>
 
     {{ include('game/_form.html.twig') }}
 
-    <a href="{{ path('game_index') }}">back to list</a>
+    <a href="{{ path('game_index') }}">{{ 'game.back' | trans }}</a>
 
 
 

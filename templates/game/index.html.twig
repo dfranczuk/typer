@@ -6,6 +6,39 @@
 
     <script>
 
+
+
+
+
+        $("#game_check").on("change",
+            function () {
+
+                var a = $(this).find("option:selected").html();
+
+
+
+                $("table tr td:first-child").each(
+                    function () {
+
+                        console.log("to jest z selectora: ");
+                        console.log(a);
+                        console.log("to jest z bazy: ");
+console.log($(this).html());
+                        if (a == "wszystkie") {
+                            $(this).parent().show();
+                        }
+                        else if ($(this).html() != a) {
+
+                            $(this).parent().hide();
+                        }
+                        else {
+                            $(this).parent().show();
+                        }
+                    });
+            });
+
+
+
         function sortTable(n) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
             table = document.getElementById("myTable4");
@@ -53,10 +86,21 @@
 {% block body %}
     <h1>{{ 'game_table.title' | trans }}</h1>
 
+    <p>
+        <select id="game_check" title="abc">
+
+            <option disabled selected value> -- Wybierz turniej --</option>
+            {% for game in games %}
+                <option> {{ game.tournament }}</option>
+            {% endfor %}
+            <option>wszystkie</option>
+        </select>
+    </p>
+
     <table class="table" id="myTable4">
         <thead>
             <tr>
-
+                <th> Turniej</th>
                 <th onclick="sortTable(0)" style="cursor:pointer">{{ 'game_table.confrontation' | trans }}
                     <img src="{{ asset('build/images/bg.png') }}" alt="sort">
                 </th>
@@ -75,6 +119,7 @@
         <tbody>
         {% for game in games %}
             <tr>
+                <td> {{ game.tournament }}</td>
                 <td>{{ game.firstTeam.name }} - {{ game.secondTeam.name }}</td>
 
                 <td>{{ game.firstTeamScore }}</td>

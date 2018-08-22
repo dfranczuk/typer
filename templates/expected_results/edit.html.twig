@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit ExpectedResults{% endblock %}
+{% block title %}{{ 'expected_results.edit' | trans }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
 
@@ -17,11 +17,11 @@
     </script>
 {% endblock %}
 {% block body %}
-    <h1>Edit ExpectedResults</h1>
+    <h1>{{ 'expected_results.edit' | trans }}</h1>
     <p id="message"></p>
-    {{ include('expected_results/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('expected_results/_form.html.twig', {'button_label': 'update' | trans}) }}
 
-    <a href="{{ path('expected_results_index') }}">back to list</a>
+    <a href="{{ path('expected_results_index') }}">{{ 'expected_results.back' | trans }}</a>
 
     {{ include('expected_results/_delete_form.html.twig') }}
 {% endblock %}

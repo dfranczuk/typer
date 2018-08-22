@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Registration{% endblock %}
+{% block title %}{{ 'user.register' | trans }}{% endblock %}
 
 
 {% block body %}
 
 
-    <h1>Sign up!</h1>
+    <h1>{{ 'user_register.sing_up' | trans }}</h1>
 
     {{ include('registration/_form.html.twig') }}
 
-    <a href="/">back to homepage</a>
+    <a href="/">{{ 'home.back' | trans }}</a>
 
 
 {% endblock %}

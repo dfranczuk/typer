@@ -110,16 +110,15 @@ class ExpectedResults
         return $this;
     }
 
-    public function getNameOfMeeting(): ?Game
+    public function getNameOfMeeting()
     {
         return $this->NameOfMeeting;
     }
 
-    public function setNameOfMeeting(?Game $NameOfMeeting): self
+    public function setNameOfMeeting($NameOfMeeting)
     {
         $this->NameOfMeeting = $NameOfMeeting;
 
-        return $this;
     }
 
 

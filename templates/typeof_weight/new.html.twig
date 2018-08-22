@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New TypeofWeight{% endblock %}
+{% block title %}{{ 'type_weight_table.new' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Create new TypeofWeight</h1>
+    <h1>{{ 'type_weight_table.new2' | trans }}</h1>
 
     {{ include('typeof_weight/_form.html.twig') }}
 
-    <a href="{{ path('typeof_weight_index') }}">back to list</a>
+    <a href="{{ path('typeof_weight_index') }}">{{ 'type_weight_show.back' | trans }}</a>
 {% endblock %}

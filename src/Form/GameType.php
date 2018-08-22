@@ -15,13 +15,13 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-$listener = function (FormEvent $event) {
-
-};
 
 class GameType extends AbstractType
 {
 
+    /**
+     * @author Jadawiga Kalinowska <7jadzia7@gmail.com> // add label
+     */
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -29,13 +29,19 @@ class GameType extends AbstractType
         $builder
             ->add('first_team_score')
             ->add('second_team_score')
-            ->add('TypeofWeight')
             ->add('game_date', DateTimeType::class, [
-                'date_widget' => 'single_text'
+                'date_widget' => 'single_text',
+                'label' => 'game_table.game_date',
             ])
-            ->add('tournament')
-            ->add('first_team')
-            ->add('second_team');
+            ->add('tournament', null,[
+                'label' => 'game_table.weigh',
+            ])
+            ->add('first_team', null,[
+                'label' => 'tournament_table.tournament',
+            ])
+            ->add('second_team', null,[
+                'label' => 'game_table.second_team',
+            ]);
 
     }
 
