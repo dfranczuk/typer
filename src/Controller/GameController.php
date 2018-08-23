@@ -134,6 +134,18 @@ class GameController extends Controller
         ]);
     }
 
+
+
+    /**
+     *
+     * Created by PhpStorm.
+     * User: Ania Biała <anna.biala94@wp.pl>
+     * Date: 2018-08-22
+     * Time: 15:02
+     * @param Request $request
+     * @param Game $game
+     * @return Response
+     */
     /**
      * @Route("/{id}", name="game_delete", methods="DELETE")
      * @Security("is_granted('ROLE_ADMIN')")
@@ -147,10 +159,10 @@ class GameController extends Controller
                 $em->flush();
             } catch (\Doctrine\DBAL\DBALException $e) {
 
-                return $this->render('bundles/TwigBundle/Exception/errorDel.html.twig', array('status_link' => "game_index"));
+                return $this->render('bundles/TwigBundle/Exception/errorDel.html.twig', array('status_link' => "game1_index"));
             }
         }
-        return $this->redirectToRoute('game_index');
+        return $this->redirectToRoute('game1_index');
     }
 
 

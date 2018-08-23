@@ -108,7 +108,7 @@
         </tbody>
         </table>
         {% if is_granted('ROLE_USER') %}
-            <a href="{{ path('expected_results_new') }}">{{ 'expected_results.new' | trans}}</a>
+            <a href="{{ path('game1_index') }}">{{ 'expected_results.new' | trans}}</a>
         {% endif %}
     {% endif %}
 {% endblock %}
