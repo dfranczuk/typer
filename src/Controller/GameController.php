@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 use App\Entity\Game;
+use App\Form\AddScoreType;
 use App\Form\GameType;
 use App\Repository\GameRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -141,5 +142,34 @@ class GameController extends Controller
             $em->flush();
         }
         return $this->redirectToRoute('game_index');
+    }
+
+    /**
+     * @author Jadawiga Kalinowska <7jadzia7@gmail.com>
+     */
+    /**
+     * @Route("/{id}/add", name="game_add_score", methods="GET|POST")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function addScore(Request $request, Game $game)
+    {
+        $valFlag = $game->getFlag();
+        if ($valFlag !== 1) {
+            $form = $this->createForm(AddScoreType::class, $game);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $game->setFlag(1);
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('game_index', ['id' => $game->getId()]);
+            }
+
+            return $this->render('game/addScore.html.twig', [
+                'game' => $game,
+                'form' => $form->createView(),
+            ]);
+        }
+        else
+            return $this->render('game/errorScore.html.twig');
     }
 }

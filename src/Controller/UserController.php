@@ -40,14 +40,16 @@ class UserController extends Controller
     }
 
 
-    /**
-     * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
-     */
+
     /**
      * @param Request $request
      * @param User $user
      * @return Response
      * @author Radoslaw Albiniak <radoslaw.albiniak@gmail.com>
+     */
+
+    /**
+     * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
      */
     public function edit(Request $request, User $user): Response
     {

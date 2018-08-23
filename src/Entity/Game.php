@@ -4,6 +4,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GameRepository")
  */
@@ -31,10 +32,22 @@ class Game
     private $second_team;
     /**
      * @ORM\Column(type="integer",nullable=true)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 50,
+     *      minMessage = "score.too_small",
+     *      maxMessage = "score.too_big"
+     * )
      */
     private $first_team_score;
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 50,
+     *      minMessage = "score.too_small",
+     *      maxMessage = "score.too_big"
+     * )
      */
     private $second_team_score;
 
@@ -85,6 +98,16 @@ class Game
 
 
     public $flaga=true;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $flag;
 
 
 
@@ -212,6 +235,30 @@ class Game
     public function getExpectedResults(): ?ExpectedResults
     {
         return $this->expectedResults;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getFlag(): ?int
+    {
+        return $this->flag;
+    }
+
+    public function setFlag(?int $flag): self
+    {
+        $this->flag = $flag;
+
+        return $this;
     }
 
 }
