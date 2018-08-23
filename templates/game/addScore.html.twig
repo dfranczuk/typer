@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'game_add.title' | trans }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $('#add_score_status').on('change', function() {
+            //  alert( this.value ); // or $(this).val()
+            if(this.value == "executed") {
+                $('#add_score_first_team_score').show();
+                $('#add_score_second_team_score').show();
+                $('label[for="add_score_first_team_score"]').show();
+                $('label[for="add_score_second_team_score"]').show();
+            } else {
+                $('#add_score_first_team_score').hide();
+                $('#add_score_second_team_score').hide();
+                $('label[for="add_score_first_team_score"]').hide();
+                $('label[for="add_score_second_team_score"]').hide();
+            }
+        });
+    </script>
+{% endblock %}
+{% block body %}
+    <h1 id="haa">{{ 'game_add.title' | trans }}</h1>
+    <p id="message"></p>
+    {{ include('game/_form.html.twig', {'button_label':  'game_add.add' | trans}) }}
+    <a href="{{ path('game_index') }}">{{ 'game.back' | trans }}</a>
+    <br>
+    <a href="{{ path('game_edit', {id: game.id}) }}" class="btn btn-success">
+        <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+    </a>
+    {{ include('game/_delete_form.html.twig') }}
+{% endblock %}

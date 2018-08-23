@@ -462,6 +462,50 @@
            <source>game.back</source>
            <target>Powrót do spotkań</target>
 </trans-unit>
+<trans-unit id="game_add.title">
+           <source>game_add.title</source>
+           <target>Wynik spotkania</target>
+</trans-unit>
+<trans-unit id="game_add.add">
+           <source>game_add.add</source>
+           <target>Dodaj wynik spotkania</target>
+</trans-unit>
+<trans-unit id="game_add.addMessage">
+           <source>game_add.addMessage</source>
+           <target>Wynik został dodany</target>
+</trans-unit>
+<trans-unit id="game.status">
+           <source>game.status</source>
+           <target>Status</target>
+</trans-unit>
+<trans-unit id="game_status.not_executed">
+           <source>game_status.not_executed</source>
+           <target>Nie przeprowadzony</target>
+</trans-unit>
+<trans-unit id="game_status.executed">
+           <source>game_status.executed</source>
+           <target>Przeprowadzony</target>
+</trans-unit>
+<trans-unit id="game_status.annulled">
+           <source>game_status.annulled</source>
+           <target>Anulowany</target>
+</trans-unit>
+<trans-unit id="add_game.score">
+           <source>add_game.score</source>
+           <target>Dodaj wynik i status</target>
+</trans-unit>
+<trans-unit id="errorAddScore.title">
+           <source>errorAddScore.title</source>
+           <target>Błąd zapisu wyniku</target>
+</trans-unit>
+<trans-unit id="game.score.is">
+           <source>game.score.is</source>
+           <target>Wynik i status zostały ustalone.</target>
+</trans-unit>
+<trans-unit id="errorAddScore.p">
+           <source>errorAddScore.p</source>
+           <target>Nie można zmienić wyniku meczu!</target>
+</trans-unit>
 <trans-unit id="team.back">
            <source>team.back</source>
            <target>Powrót do drużyn</target>

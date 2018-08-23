@@ -53,19 +53,22 @@ class UserController extends Controller
     /**
      * @Route("/{email}/{username}/edit", name="user_edit", methods="GET|POST")
      */
+
+    /**
+     * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
+     */
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(User1Type::class, $user);
+        $form = $this->createForm(User1Type::class, $user, ['role' => $this->getUser()->getRoles()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($file = $user->getBrochure() != NULL) {
+             if ($file = $user->getBrochure() != NULL) {
 
-                $role = $form->get("role")->getData();
-                $user->setRole($role);
-                // $file stores the uploaded PDF file
-                /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+
+                 // $file stores the uploaded PDF file
+                 /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
                 $file = $user->getBrochure();
 
                 $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
@@ -77,11 +80,12 @@ class UserController extends Controller
                 $user->setBrochure($fileName);
                 $user->setBrochure($this->getParameter('brochures_directory') . '/' . $user->getBrochure());
 
+        }
                 $this->getDoctrine()->getManager()->flush();
 
 
                 return $this->redirectToRoute('user_edit', ['email' => $user->getEmail(), 'username' => $user->getUsername()]);
-            }
+
         }
 
         return $this->render('user/edit.html.twig', [

@@ -30,6 +30,15 @@
                 <source>comment.is_spam</source>
                 <target>Twój komentarz został uznany za spam.</target>
             </trans-unit>
+             <trans-unit id="score.too_big">
+                            <source>score.too_big</source>
+                            <target>Twój wynik jest za duży (maksimum: {{ limit }} ).</target>
+              </trans-unit>
+              <trans-unit id="score.too_small">
+                        <source>score.too_small</source>
+                        <target>Twój wynik jest za mały (minimum: {{ limit }} ).</target>
+              </trans-unit>
+
         </body>
     </file>
 </xliff>

@@ -113,6 +113,8 @@ console.log($(this).html());
                     <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
                 <th onclick="sortTable(4)" style="cursor:pointer">{{ 'game_table.game_date' | trans }}
                     <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(5)" style="cursor:pointer">Stastus
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
                 <th>{{ 'table.actions' | trans }}</th>
 
             </tr>
@@ -128,7 +130,15 @@ console.log($(this).html());
 
                 <td>{{ game.typeofweight }}</td>
                 <td>{{ game.gameDate ? game.gameDate|date('Y-m-d H:i:s') : '' }}</td>
-
+                <td>
+                    {% if (game.status == 'executed') %}
+                        {{ 'game_status.executed' | trans }}
+                    {% elseif (game.status == 'annulled') %}
+                        {{ 'game_status.annulled' | trans }}
+                    {% elseif (game.status == 'not executed') %}
+                        {{ 'game_status.not_executed' | trans }}
+                    {% endif %}
+                </td>
                 <td>
                     <div class="item-actions">
                         <a href="{{ path('game_show', {id: game.id}) }}" class="btn btn-sm btn-default">
@@ -138,6 +148,13 @@ console.log($(this).html());
                         <a href="{{ path('game_edit', {id: game.id}) }}" class="btn btn-sm btn-primary">
                             <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
                         </a>
+                            {% if game.flag == 1 %}
+                                <p style="font-size: small">{{ 'game.score.is' | trans }} </p>
+                                {% else %}
+                            <a href="{{ path('game_add_score', {id: game.id}) }}" class="btn btn-sm btn-warning">
+                                <i class="fa fa-asterisk" aria-hidden="true"></i> {{ 'add_game.score' | trans}}
+                            </a>
+                        {% endif %}
                         {% endif %}
                     </div>
                 </td>

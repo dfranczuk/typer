@@ -83,7 +83,7 @@
                 <td>{{ expected_result.SecondTeamScoreExpected }}</td>
                 <td>{% if(expected_result.points!=NULL) %}{{ expected_result.points }}{% endif %}
                     {% if(expected_result.points==NULL) %}
-                    {{ 'expected_results.blank_score' | trans }}
+                        <p>  {{ 'expected_results.blank_score' | trans }} </p>
                     {% endif %}
                 </td>
 
