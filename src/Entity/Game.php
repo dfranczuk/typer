@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -52,6 +53,22 @@ class Game
     private $second_team_score;
 
     /**
+     * @return ArrayCollection
+     */
+    public function getGames(): ArrayCollection
+    {
+        return $this->games;
+    }
+
+    /**
+     * @param ArrayCollection $games
+     */
+    public function setGames(ArrayCollection $games): void
+    {
+        $this->games = $games;
+    }
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $game_date;
@@ -71,6 +88,7 @@ class Game
     {
         $this->games = new ArrayCollection();
     }
+
     /**
      * @return mixed
      */
@@ -78,6 +96,7 @@ class Game
     {
         return $this->TypeofWeight;
     }
+
     /**
      * @param mixed $TypeofWeight
      */
@@ -93,11 +112,7 @@ class Game
     private $meeting;
 
 
-
-
-
-
-    public $flaga=true;
+    public $flaga = true;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -110,13 +125,11 @@ class Game
     private $flag;
 
 
-
-
-
     public function getId()
     {
         return $this->id;
     }
+
     /**
      * @return bool
      */
@@ -124,6 +137,7 @@ class Game
     {
         return $this->flaga;
     }
+
     /**
      * @param bool $flaga
      */
@@ -131,6 +145,7 @@ class Game
     {
         $this->flaga = $flaga;
     }
+
     /**
      * @return mixed
      */
@@ -138,63 +153,72 @@ class Game
     {
         return $this->first_team;
     }
+
     public function setFirstTeam(Team $first_team): self
     {
         $this->first_team = $first_team;
         return $this;
     }
+
     public function getSecondTeam()
     {
         return $this->second_team;
     }
+
     public function setSecondTeam(Team $second_team): self
     {
-        if($this->getFirstTeam()!=$second_team){
-            $flaga=true;
-        }else{
-            $flaga=false;
+        if ($this->getFirstTeam() != $second_team) {
+            $flaga = true;
+        } else {
+            $flaga = false;
         }
         $this->second_team = $second_team;
         return $this;
     }
+
     public function getFirstTeamScore(): ?int
     {
         return $this->first_team_score;
     }
+
     public function setFirstTeamScore(int $first_team_score): self
     {
         $this->first_team_score = $first_team_score;
         return $this;
     }
+
     public function getSecondTeamScore(): ?int
     {
         return $this->second_team_score;
     }
+
     public function setSecondTeamScore(int $second_team_score): self
     {
         $this->second_team_score = $second_team_score;
         return $this;
     }
+
     public function getGameDate(): ?\DateTimeInterface
     {
         return $this->game_date;
     }
+
     public function setGameDate(\DateTimeInterface $game_date): self
     {
         $this->game_date = $game_date;
         return $this;
     }
+
     public function getTournament(): ?Tournament
     {
         return $this->tournament;
     }
+
     public function setTournament(?Tournament $tournament): self
     {
         $this->tournament = $tournament;
         return $this;
     }
-
-
 
 
     public function getMeeting()
@@ -211,11 +235,10 @@ class Game
 
     public function __toString()
     {
-        if(is_null($this->meeting)) {
+        if (is_null($this->meeting)) {
             return 'NULL';
         }
         return $this->meeting;
-
 
 
     }

@@ -14,12 +14,13 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @Route("/user")
- * @Security("is_granted('ROLE_ADMIN')")
+
  */
 class UserController extends Controller
 {
     /**
      * @Route("/", name="user_index", methods="GET")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function index(): Response
     {
@@ -33,6 +34,7 @@ class UserController extends Controller
 
     /**
      * @Route("/{id}", name="user_show", methods="GET")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function show(User $user): Response
     {
@@ -46,6 +48,10 @@ class UserController extends Controller
      * @param User $user
      * @return Response
      * @author Radoslaw Albiniak <radoslaw.albiniak@gmail.com>
+     * @author Mateusz Poniatowski <mateusz@live.hh>
+     */
+    /**
+     * @Route("/{email}/{username}/edit", name="user_edit", methods="GET|POST")
      */
 
     /**
@@ -53,16 +59,16 @@ class UserController extends Controller
      */
     public function edit(Request $request, User $user): Response
     {
-        $form = $this->createForm(User1Type::class, $user);
+        $form = $this->createForm(User1Type::class, $user, ['role' => $this->getUser()->getRoles()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            if ($file = $user->getBrochure() != NULL) {
+             if ($file = $user->getBrochure() != NULL) {
 
 
-                // $file stores the uploaded PDF file
-                /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+                 // $file stores the uploaded PDF file
+                 /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
                 $file = $user->getBrochure();
 
                 $fileName = $this->generateUniqueFileName() . '.' . $file->guessExtension();
@@ -73,10 +79,13 @@ class UserController extends Controller
                     $fileName);
                 $user->setBrochure($fileName);
                 $user->setBrochure($this->getParameter('brochures_directory') . '/' . $user->getBrochure());
+
+        }
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
-            }
+
+                return $this->redirectToRoute('user_edit', ['email' => $user->getEmail(), 'username' => $user->getUsername()]);
+
         }
 
         return $this->render('user/edit.html.twig', [
@@ -87,6 +96,7 @@ class UserController extends Controller
 
     /**
      * @Route("/{id}", name="user_delete", methods="DELETE")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, User $user): Response
     {

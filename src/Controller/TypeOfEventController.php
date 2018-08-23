@@ -93,9 +93,14 @@ class TypeOfEventController extends Controller
     public function delete(Request $request, TypeOfEvent $typeOfEvent): Response
     {
         if ($this->isCsrfTokenValid('delete'.$typeOfEvent->getId(), $request->request->get('_token'))) {
+            try{
             $em = $this->getDoctrine()->getManager();
             $em->remove($typeOfEvent);
             $em->flush();
+            }catch (\Doctrine\DBAL\DBALException $e){
+
+                return $this->render('bundles/TwigBundle/Exception/errorDel.html.twig',array('status_link'=>"type_of_event_index"));
+            }
         }
 
         return $this->redirectToRoute('type_of_event_index');

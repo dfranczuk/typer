@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TypeOfEvent{% endblock %}
+
+{% block body %}
+    <h1>Edit TypeOfEvent</h1>
+
+    {{ include('type_of_event/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('type_of_event_index') }}">back to list</a>
+
+    {{ include('type_of_event/_delete_form.html.twig') }}
+{% endblock %}

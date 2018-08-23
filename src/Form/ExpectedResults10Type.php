@@ -48,15 +48,11 @@ class ExpectedResults10Type extends AbstractType
                 'attr' => array('min' => 0, 'max' => 50),
                 'label' => 'expected_results.SecondTeamScoreExpected',
             ))
+
             ->add('NameOfMeeting', null,[
                 'label' => 'expected_results.name_of_meeting',
-            ])
-        ;
-
-
-
+            ]);
     }
-
 
 
 
