@@ -52,11 +52,9 @@ class ScoreboardController extends Controller
             ->select('m.id as muid', 'm.username as muname')
             ->getQuery();
         $username = $username->execute();
-        
-      //  dump($userpoints);die;
-       // dump($username);die;
 
-
+        //  dump($userpoints);die;
+        // dump($username);die;
 
 
         foreach ($userpoints as $key) {
@@ -66,13 +64,12 @@ class ScoreboardController extends Controller
             $scoreboard = new Scoreboard();
             $scoreboard->setUsrid($userid);
             $scoreboard->setPoints($points);
-            foreach ($username as $key2)
-            {
+            foreach ($username as $key2) {
                 $usermuid = $key2['muid'];
                 $usermuname = $key2['muname'];
-                if($userid==$usermuid){
-                   // dump("test");
-                    $scoreboard->setUserName( $usermuname);
+                if ($userid == $usermuid) {
+                    // dump("test");
+                    $scoreboard->setUserName($usermuname);
                 }
 
             }
@@ -86,8 +83,6 @@ class ScoreboardController extends Controller
 
         return $this->render('scoreboard/index.html.twig', ['scoreboards' => $scoreboardRepository->findAll()]);
     }
-
-
 
 
     /**

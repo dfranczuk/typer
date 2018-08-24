@@ -74,7 +74,6 @@
         {% for expected_result in expected_results %}
             {% if(expected_result.getUserId() == app.user ) %}
             <tr>
-                <td>{{ expected_result.id }}</td>
                 <td>{{ expected_result.NameOfMeeting }}</td>
                 <td>{{ expected_result.FirstTeamScoreExpected }}</td>
                 <td>{{ expected_result.SecondTeamScoreExpected }}</td>
