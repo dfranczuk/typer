@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Form;
-
 use App\Entity\Game;
 use App\Entity\Tournament;
 use App\Entity\ExpectedResults;
@@ -14,19 +12,14 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
 /**
  * Class ExpectedResults10Type
  * @package App\Form
  * @author Mateusz Poniatowski <mateusz@live.hk>
  */
-
 class ExpectedResults10Type extends AbstractType
 {
-
-
     private $em;
-
     /**
      * @param EntityManagerInterface $em
      */
@@ -34,9 +27,6 @@ class ExpectedResults10Type extends AbstractType
     {
         $this->em = $em;
     }
-
-
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -48,14 +38,11 @@ class ExpectedResults10Type extends AbstractType
                 'attr' => array('min' => 0, 'max' => 50),
                 'label' => 'expected_results.SecondTeamScoreExpected',
             ))
-
             ->add('NameOfMeeting', null,[
                 'label' => 'expected_results.name_of_meeting',
-            ]);
+            ])
+        ;
     }
-
-
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

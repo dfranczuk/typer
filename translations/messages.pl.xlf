@@ -59,7 +59,10 @@
                 <source>title.comment_error</source>
                 <target>Podczas publikacji Twojego komentarza wystąpił błąd</target>
             </trans-unit>
-
+ <trans-unit id="action.show1">
+                <source>action.show1</source>
+                <target>Typuj</target>
+            </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
                 <target>Pokaż</target>

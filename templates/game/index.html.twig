@@ -91,6 +91,7 @@ console.log($(this).html());
 
             <option disabled selected value> -- Wybierz turniej --</option>
             {% for game in games %}
+
                 <option> {{ game.tournament }}</option>
             {% endfor %}
             <option>wszystkie</option>

@@ -5,7 +5,7 @@
     {{ parent() }}
 
     <script>
-
+//@author Mateusz Poniatowski <mateusz@live.hk>
 
 
 
@@ -20,10 +20,15 @@
                 $("table tr td:first-child").each(
                     function () {
 
-                        console.log("to jest z selectora: ");
+
+
+                    /*    console.log("to jest z selectora: ");
                         console.log(a);
                         console.log("to jest z bazy: ");
                         console.log($(this).html());
+*/
+
+
                         if (a == "wszystkie") {
                             $(this).parent().show();
                         }
@@ -81,21 +86,102 @@
             }
         }
 
+
+        (function(){
+
+
+
+
+            var optionVal = new Array();
+            var withoutRep1 = new Array();
+
+            var j=0;
+            var i=0;
+            var x = document.getElementById("game_check").length;
+
+            const tab = [];
+
+            var options = $('#game_check').find('option');
+            //$(options[0]).show();
+
+            //console.log($(options[0]));
+
+
+
+
+
+
+
+        //    var unique = optionVal.filter( onlyUnique ); // returns ['a', 1, 2, '1']
+
+            var x = document.getElementById("game_check");
+            var c = document.createElement("option");
+
+
+
+
+
+            $.each(options, function (key,option) {
+                // console.log($(option).html());
+
+                optionVal.push($(option).html());
+
+
+            })
+
+
+          //  const uniqueCars = Array.from(new Set(optionVal));
+
+
+
+
+            var selectobject=document.getElementById("game_check");
+            for ( i=0; i<selectobject.length; i++){
+
+                selectobject.remove(i);
+            }
+
+
+/*
+            for(i=0;i<uniqueCars.length;i++){
+
+
+                option = document.createElement( 'option' );
+                option.value =i;
+                    option.text = uniqueCars[i];
+                selectobject.add( option );
+
+
+            }
+*/
+  //
+
+
+
+
+
+
+
+
+
+        })();
+
     </script>
 {% endblock %}
 {% block body %}
     <h1>{{ 'game_table.title' | trans }}</h1>
-
+    {{ 'now'|date('d - m -Y') }}
     <p>
         <select id="game_check" title="abc">
 
 
 
             <option disabled selected value> -- Wybierz turniej --</option>
+            <option>wszystkie</option>
             {% for game in games %}
                 <option> {{ game.tournament }}</option>
             {% endfor %}
-            <option>wszystkie</option>
+
         </select>
     </p>
 
@@ -120,6 +206,8 @@
         </thead>
         <tbody>
         {% for game in games %}
+            {% if game.gameDate|date('Y-m-d H-i-s') > 'now'|date('Y-m-d H-i-s') %}
+
             <tr>
                 <td> {{ game.tournament }}</td>
                 <td>{{ game.firstTeam.name }} - {{ game.secondTeam.name }}</td>
@@ -133,13 +221,13 @@
                 <td>
                     <div class="item-actions">
                         <a href="{{ path('game1_show', {id: game.id}) }}" class="btn btn-sm btn-default">
-                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show1'|trans }}
                         </a>
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('game_edit', {id: game.id}) }}" class="btn btn-sm btn-primary">
                                 <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
                             </a>
-                        {% endif %}
+                        {% endif %}{% endif %}
                     </div>
                 </td>
             </tr>
