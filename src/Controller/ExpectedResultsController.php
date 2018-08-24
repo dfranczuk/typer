@@ -583,10 +583,4 @@ $nameofmatch;
 
         return $this->redirectToRoute('expected_results_index');
     }
-
-
-
-
-
-
 }

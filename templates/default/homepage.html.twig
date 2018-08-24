@@ -18,12 +18,19 @@
     <div class="col-sm-6">
         <div class="jumbotron">
         <h3>{{ 'title.homepage_text'|trans|raw }}</h3>
-
-            <p>
-                <a href="{{ path('game_index') }}">
-                    <i class="" aria-hidden="true"></i> {{ 'menu.game' | trans }}
-                </a>
-            </p>
+            {% if is_granted('ROLE_ADMIN') %}
+                <p>
+                    <a href="{{ path('game_index') }}">
+                        <i class="" aria-hidden="true"></i> {{ 'menu.game' | trans }}
+                    </a>
+                </p>
+            {% else %}
+                <p>
+                    <a href="{{ path('game1_index') }}">
+                        <i class="" aria-hidden="true"></i> {{ 'menu.game' | trans }}
+                    </a>
+                </p>
+            {% endif %}
             <p>
                 <a href="{{ path('scoreboard_index') }}">
                     <i class="" aria-hidden="true"></i> {{ 'menu.scoreboard' | trans }}
