@@ -54,9 +54,6 @@ class UserController extends Controller
      * @Route("/{email}/{username}/edit", name="user_edit", methods="GET|POST")
      */
 
-    /**
-     * @Route("/{id}/edit", name="user_edit", methods="GET|POST")
-     */
     public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(User1Type::class, $user, ['role' => $this->getUser()->getRoles()]);
