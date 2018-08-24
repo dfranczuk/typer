@@ -95,7 +95,7 @@ class Scoreboard
         return $this->points;
     }
 
-    public function setPoints(int $points): self
+    public function setPoints(?int $points): self
     {
         $this->points = $points;
 

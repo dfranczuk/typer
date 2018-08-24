@@ -58,7 +58,6 @@
         <tr>
             <th>Miejsce</th>
             <th>Użytkownik</th>
-            <th>Turniej</th>
             <th onclick="sortTable(0)" style="cursor:pointer">{{ 'expected_results.points' | trans }}</th>
             <th>{{ 'table.actions' | trans }}</th>
         </tr>
@@ -68,15 +67,13 @@
             <tr>
                 <td>{{ scoreboard.id }}</td>
                 <td>{{ scoreboard.UserName }}</td>
-                <td>{{ scoreboard.tournament }}</td>
+
                 <td>{{ scoreboard.points }}</td>
                 <td>
                     <a href="{{ path('scoreboard_show', {'id': scoreboard.id}) }}">
                         {{ 'action.show' | trans }}
                     </a>
-                    <a href="{{ path('scoreboard_edit', {'id': scoreboard.id}) }}">
-                        {{ 'action.edit' | trans }}
-                    </a>
+
                 </td>
             </tr>
         {% else %}
