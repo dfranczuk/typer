@@ -8,8 +8,8 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Użytkownik</th>
-                <td>{{ scoreboard.UserName }}</td>
+                <th>Id</th>
+                <td>{{ scoreboard.id }}</td>
             </tr>
             <tr>
                 <th>Points</th>
@@ -20,4 +20,7 @@
 
     <a href="{{ path('scoreboard_index') }}">back to list</a>
 
+    <a href="{{ path('scoreboard_edit', {'id': scoreboard.id}) }}">edit</a>
+
+    {{ include('scoreboard/_delete_form.html.twig') }}
 {% endblock %}
