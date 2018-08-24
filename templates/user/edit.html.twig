@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}{{ 'user_edit.title' | trans }}{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+    <h1>{{ 'user_edit.title' | trans }}</h1>
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('user/_form.html.twig', {'button_label': 'update' | trans}) }}
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('user_index') }}">{{ 'menu.users' | trans }}</a>
+    {% endif %}
+    {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('change_pass', {'email': app.user.email, 'username': app.user.username}) }}">{{ 'user.change_password' | trans }}</a>
+        <a href="{{ path('homepage') }}">{{ 'user_table.back' | trans }}</a>
 
-    <a href="{{ path('user_index') }}">back to list</a>
+    {% endif %}
 
     {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

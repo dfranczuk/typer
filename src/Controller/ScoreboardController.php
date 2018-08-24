@@ -56,26 +56,8 @@ class ScoreboardController extends Controller
       //  dump($userpoints);die;
        // dump($username);die;
 
-    //-------------------------------------------------
-
-        $query = $this->createQueryBuilder('c')
-            ->select('(c.name) as utourname')
-            ->innerJoin('Scoreboard::class', 'co', 'WITH', 'co.id = c.id')
-            ->innerJoin('Tournament::class', 'ct', 'WITH', 'ct.id = c.id')
-            ->orderBy('c.createdAt', 'DESC')
-            ->where('co.group = :group OR ct.group = :group')
-            ->setParameter('group', $group)
-            ->setMaxResults(20);
 
 
-
-
-
-
-
-
-
-   //----------------------------------------------------------
 
         foreach ($userpoints as $key) {
 
@@ -106,16 +88,7 @@ class ScoreboardController extends Controller
     }
 
 
-    /*
-        public function calculatePoints(?int $totalPoints) {
 
-
-            $totalPoints = $totalPoints + $user_id->getPoint();
-            $this->totalpoints = $totalPoints;
-
-            return $this;
-        }
-    */
 
     /**
      * @Route("/new", name="scoreboard_new", methods="GET|POST")
@@ -160,7 +133,7 @@ class ScoreboardController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('scoreboard_edit', ['id' => $scoreboard->getId()]);
+            return $this->redirectToRoute('scoreboard_index', ['id' => $scoreboard->getId()]);
         }
 
         return $this->render('scoreboard/edit.html.twig', [
@@ -176,9 +149,20 @@ class ScoreboardController extends Controller
     public function delete(Request $request, Scoreboard $scoreboard): Response
     {
         if ($this->isCsrfTokenValid('delete' . $scoreboard->getId(), $request->request->get('_token'))) {
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($scoreboard);
             $em->flush();
+
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($scoreboard);
+                $em->flush();
+            } catch (\Doctrine\DBAL\DBALException $e) {
+
+                return $this->render('bundles/TwigBundle/Exception/errorDel.html.twig', array('status_link' => "scoreboard_index"));
+            }
+
         }
 
         return $this->redirectToRoute('scoreboard_index');

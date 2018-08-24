@@ -1,14 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Team{% endblock %}
 
+{% block title %}{{ 'team_edit.titile' | trans }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+
+    <script>
+
+
+        document.getElementById("btn_save").onclick = function() {myFunction()};
+
+        function myFunction() {
+            document.getElementById("message").innerHTML="Team has been updated";
+        }
+
+
+    </script>
+{% endblock %}
 {% block body %}
 
-    <h1>Edit Team</h1>
 
-    {{ include('team/_form.html.twig', {'button_label': 'Update'}) }}
+    <h1>{{ 'team_edit.titile' | trans }}</h1>
+    <p id="message"></p>
 
-    <a href="{{ path('team_index') }}">back to list</a>
+    {{ include('team/_form.html.twig', {'button_label':  'update' | trans}) }}
+
+    <a href="{{ path('team_index') }}">{{ 'team.back' | trans }}</a>
 
     {{ include('team/_delete_form.html.twig') }}
 {% endblock %}

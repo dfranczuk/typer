@@ -1,20 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}{{ 'user_table.title' | trans }}{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable10");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
 
-    <table class="table">
+    <h1>{{ 'user_table.title' | trans }}</h1>
+    Szukaj po nazwie użytkownika: <input type="text" id="myInput" onkeyup="myFunction()"
+                                         placeholder="Wpisz nazwę uzytkownika..">
+
+    <table class="table" id="myTable10">
+
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Username</th>
-                <th>Password</th>
-                <th>Roles</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>{{ 'user.email' | trans }}</th>
+            <th>{{ 'user.username' | trans }}</th>
+            <th>{{ 'user.password' | trans }}</th>
+            <th>{{ 'user.roles' | trans }}</th>
+            <th>{{ 'table.actions' | trans }}</th>
+        </tr>
         </thead>
         <tbody>
         {% for user in users %}
@@ -25,18 +54,21 @@
                 <td>{{ user.password }}</td>
                 <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
                 <td>
-                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-                    <a href="{{ path('change_pass', {'email': user.email, 'username': user.username}) }}">change password</a>
+
+                    <a href="{{ path('user_show', {'id': user.id}) }}">{{ 'action.show'|trans }}</a>
+                    <a href="{{ path('user_edit', {'email': user.email, 'username': user.username}) }}">{{ 'action.edit'|trans }}</a>
+                    <a href="{{ path('change_pass', {'email': user.email, 'username': user.username}) }}">
+                        {{ 'user.change_password' | trans }}</a>
+
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">{{ 'user_table.no_user_found' | trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('user_registration') }}">Create new</a>
+    <a href="{{ path('user_registration') }}">{{ 'user_table.new' | trans }}</a>
 {% endblock %}

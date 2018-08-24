@@ -67,7 +67,7 @@ class TypeofWeightController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('typeof_weight_edit', ['id' => $typeofWeight->getId()]);
+            return $this->redirectToRoute('typeof_weight_index', ['id' => $typeofWeight->getId()]);
         }
 
         return $this->render('typeof_weight/edit.html.twig', [
@@ -81,10 +81,15 @@ class TypeofWeightController extends Controller
      */
     public function delete(Request $request, TypeofWeight $typeofWeight): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$typeofWeight->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($typeofWeight);
-            $em->flush();
+        if ($this->isCsrfTokenValid('delete' . $typeofWeight->getId(), $request->request->get('_token'))) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($typeofWeight);
+                $em->flush();
+            } catch (\Doctrine\DBAL\DBALException $e) {
+
+                return $this->render('bundles/TwigBundle/Exception/errorDel.html.twig', array('status_link' => "typeof_weight_index"));
+            }
         }
 
         return $this->redirectToRoute('typeof_weight_index');

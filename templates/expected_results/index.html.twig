@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ExpectedResults index{% endblock %}
+{% block title %}{{ 'expected_results.title' | trans }}{% endblock %}
 {% block javascripts %}
     {{ parent() }}
     <script>
@@ -44,45 +44,60 @@
 {% endblock %}
 {% block body %}
     {% if app.user %}
-        <h1>ExpectedResults index</h1>
+
+    <h1>{{ 'expected_results.title' | trans }}</h1>
+
 
         <table class="table" id="myTable5">
             <thead>
             <tr>
-                <th onclick="sortTable(0)" style="cursor:pointer">Id <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
-                <th onclick="sortTable(1)" style="cursor:pointer">Confrontation<img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
-                <th onclick="sortTable(2)" style="cursor:pointer">FirstTeamScoreExpected<img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
-                <th onclick="sortTable(3)" style="cursor:pointer">SecondTeamScoreExpected<img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
-                <th onclick="sortTable(4)" style="cursor:pointer">Points<img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
-                <th>Actions</th>
+
+                <th onclick="sortTable(1)" style="cursor:pointer">
+                    {{ 'game_table.confrontation' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(2)" style="cursor:pointer">
+                    {{ 'expected_results.FirstTeamScoreExpected' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(3)" style="cursor:pointer">
+                    {{ 'expected_results.SecondTeamScoreExpected' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th onclick="sortTable(4)" style="cursor:pointer">
+                    {{ 'expected_results.points' | trans }}
+                    <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+                <th>{{ 'table.actions' | trans }}</th>
+
             </tr>
             </thead>
             <tbody>
 
-            {% for expected_result in expected_results %}
-                {% if(expected_result.getUserId() == app.user ) %}
-                    <tr>
-                        <td>{{ expected_result.id }}</td>
-                        <td>{{ expected_result.NameOfMeeting }}</td>
-                        <td>{{ expected_result.FirstTeamScoreExpected }}</td>
-                        <td>{{ expected_result.SecondTeamScoreExpected }}</td>
-                        <td>{% if(expected_result.points!=NULL) %}{{ expected_result.points }}{% endif %}
-                            {% if(expected_result.points==NULL) %} Nie znany wynik gry {% endif %}
-                        </td>
-                        <td>
-                            <div class="item-actions">
-                                <a href="{{ path('expected_results_show', {'id': expected_result.id}) }}" class="btn btn-sm btn-default">
-                                    <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
-                                </a>
-                                {% if is_granted('ROLE_USER') %}
-                                    <a href="{{ path('expected_results_edit', {'id': expected_result.id}) }}"
-                                       class="btn btn-sm btn-primary">
-                                        <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
-                                    </a>
-                                {% endif %}
-                            </div>
-                        </td>
-                    </tr>
+
+        {% for expected_result in expected_results %}
+            {% if(expected_result.getUserId() == app.user ) %}
+            <tr>
+                <td>{{ expected_result.id }}</td>
+                <td>{{ expected_result.NameOfMeeting }}</td>
+                <td>{{ expected_result.FirstTeamScoreExpected }}</td>
+                <td>{{ expected_result.SecondTeamScoreExpected }}</td>
+                <td>{% if(expected_result.points!=NULL) %}{{ expected_result.points }}{% endif %}
+                    {% if(expected_result.points==NULL) %}
+                        <p>  {{ 'expected_results.blank_score' | trans }} </p>
+                    {% endif %}
+                </td>
+
+                <td>
+                    <div class="item-actions">
+                        <a href="{{ path('expected_results_show', {'id': expected_result.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                        </a>
+                        {% if is_granted('ROLE_USER') %}
+                        <a href="{{ path('expected_results_edit', {'id': expected_result.id}) }}"
+                           class="btn btn-sm btn-primary">
+                            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                        </a>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
 
 
                 {% endif %}
@@ -90,7 +105,7 @@
             </tbody>
         </table>
         {% if is_granted('ROLE_USER') %}
-            <a href="{{ path('expected_results_new') }}">Create new</a>
+            <a href="{{ path('game1_index') }}">{{ 'expected_results.new' | trans}}</a>
         {% endif %}
     {% endif %}
 {% endblock %}

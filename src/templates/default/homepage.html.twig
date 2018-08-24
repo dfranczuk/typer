@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'homepage' %}
+
+{#
+    the homepage is a special page which displays neither a header nor a footer.
+    this is done with the 'trick' of defining empty Twig blocks without any content
+#}
+{% block header %}{% endblock %}
+{% block dashboard %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block body %}
+    <div class="page-header">
+        <h1>{{ 'title.homepage'|trans|raw }}</h1>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="jumbotron">
+        <h3>{{ 'title.homepage_text'|trans|raw }}</h3>
+
+            <p>
+                <a href="{{ path('game_index') }}">
+                    <i class="" aria-hidden="true"></i> {{ 'menu.game' | trans }}
+                </a>
+            </p>
+            <p>
+                <a href="{{ path('team_index') }}">
+                    <i class="" aria-hidden="true"></i> {{ 'menu.team' |trans }}
+                </a>
+            </p>
+            <p>
+                <a href="{{ path('tournament_index') }}">
+                    <i class="" aria-hidden="true"></i> {{ 'menu.tournament' | trans }}
+                </a>
+            </p>
+            <p>
+                <a href="{{ path('scoreboard_index') }}">
+                    <i class="" aria-hidden="true"></i> {{ 'menu.scoreboard' | trans }}
+                </a>
+            </p>
+            {% if app.user %}
+            <p>
+                <a href="{{ path('expected_results_index') }}">
+                    <i class="" aria-hidden="true"></i> {{ 'menu.expected_results' | trans }}
+                </a>
+            </p>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <p>
+                    <a href="{{ path('type_of_event_index') }}">
+                        <i class="" aria-hidden="true"></i> {{ 'menu.type_of_event' | trans }}
+                    </a>
+                </p>
+                <p>
+                    <a href="{{ path('typeof_weight_index') }}">
+                        <i class="" aria-hidden="true"></i> {{ 'menu.typeof_weight' | trans }}
+                    </a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col-sm-6">
+            <div class="jumbotron">
+{#  {% if is_granted('ROLE_ADMIN') %}
+  <p>
+      <a class="btn btn-primary btn-lg" href="{{ path('admin_index') }}">
+          <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.browse_admin'|trans }}
+      </a>
+  </p>
+  {% endif %}#}
+  {% if app.user %}
+      <p >Jesteś zalogowany jako: {{ app.user.username }} </p>
+      <p >Jesteś zalogowany jako: {{ app.user.role }} </p>
+      <p>
+          <a class="btn btn-primary btn-lg" href="{{ path('security_logout') }}">
+              <i class="fa fa-lock" aria-hidden="true"></i> {{ 'menu.logout'|trans }}
+          </a>
+      </p>
+
+  {% elseif not app.user %}
+  <p>
+      <a class="btn btn-primary btn-lg" href="{{ path('security_login') }}">
+          <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.sign_in'|trans }}
+      </a>
+  </p>
+  <p>
+      <a class="btn btn-primary btn-lg" href="{{ path('user_registration') }}">
+          <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.create_an_account'|trans }}
+      </a>
+  </p>
+  {% endif %}
+</div>
+</div>
+</div>
+
+{% endblock %}

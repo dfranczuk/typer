@@ -11,10 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
+
+/**
+ * Class TypeOfEventController
+ * @package App\Controller
+ * @author Mateusz Poniatowski <mateusz@live.hk>
+ */
 /**
  * @Route("/type/of/event")
  * @Security("is_granted('ROLE_ADMIN')")
  */
+
+
+
 class TypeOfEventController extends Controller
 {
     /**
@@ -67,7 +78,7 @@ class TypeOfEventController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('type_of_event_edit', ['id' => $typeOfEvent->getId()]);
+            return $this->redirectToRoute('type_of_event_index', ['id' => $typeOfEvent->getId()]);
         }
 
         return $this->render('type_of_event/edit.html.twig', [
@@ -82,9 +93,14 @@ class TypeOfEventController extends Controller
     public function delete(Request $request, TypeOfEvent $typeOfEvent): Response
     {
         if ($this->isCsrfTokenValid('delete'.$typeOfEvent->getId(), $request->request->get('_token'))) {
+            try{
             $em = $this->getDoctrine()->getManager();
             $em->remove($typeOfEvent);
             $em->flush();
+            }catch (\Doctrine\DBAL\DBALException $e){
+
+                return $this->render('bundles/TwigBundle/Exception/errorDel.html.twig',array('status_link'=>"type_of_event_index"));
+            }
         }
 
         return $this->redirectToRoute('type_of_event_index');

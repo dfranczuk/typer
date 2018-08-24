@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Controller;
+
 use App\Entity\Tournament;
 use App\Form\Tournament1Type;
 use App\Repository\TournamentRepository;
@@ -8,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 /**
  * @Route("/tournament")
  */
@@ -21,6 +24,7 @@ class TournamentController extends Controller
     {
         return $this->render('tournament/index.html.twig', ['tournaments' => $tournamentRepository->findAll()]);
     }
+
     /**
      * @Route("/new", name="tournament_new", methods="GET|POST")
      * @Security("is_granted('ROLE_ADMIN')")
@@ -41,6 +45,7 @@ class TournamentController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("/{id}", name="tournament_show", methods="GET")
      * @Security("is_granted('ROLE_ADMIN')")
@@ -49,6 +54,7 @@ class TournamentController extends Controller
     {
         return $this->render('tournament/show.html.twig', ['tournament' => $tournament]);
     }
+
     /**
      * @Route("/{id}/edit", name="tournament_edit", methods="GET|POST")
      * @Security("is_granted('ROLE_ADMIN')")
@@ -59,23 +65,29 @@ class TournamentController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('tournament_edit', ['id' => $tournament->getId()]);
+            return $this->redirectToRoute('tournament_index', ['id' => $tournament->getId()]);
         }
         return $this->render('tournament/edit.html.twig', [
             'tournament' => $tournament,
             'form' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("/{id}", name="tournament_delete", methods="DELETE")
      * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, Tournament $tournament): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$tournament->getId(), $request->request->get('_token'))) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($tournament);
-            $em->flush();
+        if ($this->isCsrfTokenValid('delete' . $tournament->getId(), $request->request->get('_token'))) {
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($tournament);
+                $em->flush();
+            } catch (\Doctrine\DBAL\DBALException $e) {
+
+                return $this->render('bundles/TwigBundle/Exception/errorDel.html.twig', array('status_link' => "tournament_index"));
+            }
         }
         return $this->redirectToRoute('tournament_index');
     }

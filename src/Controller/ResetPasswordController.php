@@ -34,29 +34,28 @@ class ResetPasswordController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $zapytanie=$form->get("field_email")->getData();
+            $zapytanie = $form->get("field_email")->getData();
 
 
-            $zapytanie1=$form->get("field_username")->getData();
-          /*  $zapytanie1arr=["username" => $zapytanie1, "email" => $zapytanie];
-*/
+            $zapytanie1 = $form->get("field_username")->getData();
+            /*  $zapytanie1arr=["username" => $zapytanie1, "email" => $zapytanie];
+  */
 
-            $user1=$this->getDoctrine()->getRepository(User::class);
+            $user1 = $this->getDoctrine()->getRepository(User::class);
             $numberofusers = $user1->createQueryBuilder('u')
                 ->select('u.username,  u.email')
                 ->getQuery();
             $numberofusers = $numberofusers->execute();
 
 
-            foreach ($numberofusers as $x)
-            {
+            foreach ($numberofusers as $x) {
 
-                        if ($zapytanie == $x['email'] && $zapytanie1 == $x['username']) {
+                if ($zapytanie == $x['email'] && $zapytanie1 == $x['username']) {
 
-                                $email = $x['email'];
-                                $username = $x['username'];
-                            return $this->redirectToRoute('change_pass', ['email' =>$email, 'username'=>$username]);
-                        }
+                    $email = $x['email'];
+                    $username = $x['username'];
+                    return $this->redirectToRoute('change_pass', ['email' => $email, 'username' => $username]);
+                }
 
             }
 

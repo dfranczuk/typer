@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'team_table.title' | trans }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+
+        $("#rep_check").on("change",
+            function () {
+
+                var a = $(this).find("option:selected").html();
+
+                $("table tr td:nth-last-child(2)").each(
+                    function () {
+                        if (a == "wszystkie") {
+                            $(this).parent().show();
+                        }
+                        else if ($(this).html() != a) {
+                            $(this).parent().hide();
+                        }
+                        else {
+                            $(this).parent().show();
+                        }
+                    });
+            });
+
+
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("myTable");
+            switching = true;
+            dir = "asc";
+            while (switching) {
+
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+
+    </script>
+{% endblock %}
+{% block body %}
+    <h1>{{ 'team_table.title' | trans }}</h1>
+    <p>
+        <select id="rep_check" title="fji">
+            <option disabled selected value> -- Wybierz kategorię --</option>
+            <option>wszystkie</option>
+            <option>reprezentacja</option>
+            <option>klub</option>
+
+        </select>
+    </p>
+    <table class="table" id="myTable">
+        <thead>
+        <tr>
+
+            </th>
+            <th onclick="sortTable(0)" style="cursor:pointer">{{ 'team_table.name' | trans }}
+                <img src="{{ asset('build/images/bg.png') }}" alt="sort">
+            </th>
+            <th onclick="sortTable(1)" style="cursor:pointer">{{ 'team_table.type' | trans }}
+                <img src="{{ asset('build/images/bg.png') }}" alt="sort">
+            </th>
+            <th>{{ 'table.actions' | trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for team in teams %}
+
+
+            <tr>
+
+                <td>{{ team.name }}</td>
+                <td>{{ team.type }}</td>
+                <td>
+                    <div class="item-actions">
+                        <a href="{{ path('team_show', {'id': team.id}) }}" class="btn btn-sm btn-default">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                        </a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('team_edit', {'id': team.id}) }}" class="btn btn-sm btn-primary">
+                                <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                            </a>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+
+        {% else %}
+            <tr>
+                <td colspan="3">{{ 'team_table.no_team_found' | trans }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('team_new') }}">{{ 'team_table.new' | trans }}</a>
+    {% endif %}
+{% endblock %}

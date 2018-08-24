@@ -23,8 +23,8 @@ class ExpectedResults
      * @Assert\Range(
      *      min = 0,
      *      max = 50,
-     *      minMessage = "The number must be greater than or equal to {{ limit }}",
-     *      maxMessage = "The number must be less than  {{ limit }}"
+     *      minMessage = "score.too_small",
+     *      maxMessage = "score.too_big"
      * )
      */
     private $FirstTeamScoreExpected;
@@ -34,8 +34,8 @@ class ExpectedResults
      *  @Assert\Range(
      *      min = 0,
      *      max = 50,
-     *      minMessage = "The number must be greater than or equal to {{ limit }}",
-     *      maxMessage = "The number must be less than  {{ limit }}"
+     *      minMessage = "score.too_small",
+     *      maxMessage = "score.too_big"
      * )
      */
     private $SecondTeamScoreExpected;
@@ -110,16 +110,15 @@ class ExpectedResults
         return $this;
     }
 
-    public function getNameOfMeeting(): ?Game
+    public function getNameOfMeeting()
     {
         return $this->NameOfMeeting;
     }
 
-    public function setNameOfMeeting(?Game $NameOfMeeting): self
+    public function setNameOfMeeting($NameOfMeeting)
     {
         $this->NameOfMeeting = $NameOfMeeting;
 
-        return $this;
     }
 
 

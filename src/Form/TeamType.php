@@ -11,19 +11,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TeamType extends AbstractType
 {
+    /**
+     * @author Jadawiga Kalinowska <7jadzia7@gmail.com> // add label
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('name', null,[
+                'label' => 'team_table.name',
+            ])
             ->add('type', ChoiceType::class, array(
                 'choices' => array(
-                    'reprezentacja' => 'reprezentacja',
-                    'klub' => 'klub',
 
-                )))
-
-
-        ;
+                    'team_table.representation'  => 'representation' ,
+                    'team_table.club' =>  'club' ,
+                ),
+                'label' => 'team_table.type',
+                ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -1,13 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit ExpectedResults{% endblock %}
+{% block title %}{{ 'expected_results.edit' | trans }}{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
 
+    <script>
+
+
+        document.getElementById("btn_save").onclick = function() {myFunction()};
+
+        function myFunction() {
+            document.getElementById("message").innerHTML="Expected result has been updated";
+        }
+
+
+    </script>
+{% endblock %}
 {% block body %}
-    <h1>Edit ExpectedResults</h1>
+    <h1>{{ 'expected_results.edit' | trans }}</h1>
+    <p id="message"></p>
+    {{ include('expected_results/_form.html.twig', {'button_label': 'update' | trans}) }}
 
-    {{ include('expected_results/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('expected_results_index') }}">back to list</a>
+    <a href="{{ path('expected_results_index') }}">{{ 'expected_results.back' | trans }}</a>
 
     {{ include('expected_results/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,0 +1,21 @@
+{# author:Anna Biała <anna.biala94@wp.pl> #}
+{% extends 'base.html.twig' %}
+
+{% block body_id 'error' %}
+
+{% block main %}
+    <h1>{{ 'error_delete.title' | trans }}</h1>
+    <p>
+        {{ 'error_delete.paragraph' | trans }}
+    </p>
+    <p>
+        {{ 'error.delete.link'|trans({ '%url%': path(status_link) })|raw }}
+
+    </p>
+{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}
+
+    {{ show_source_code(_self) }}
+{% endblock %}

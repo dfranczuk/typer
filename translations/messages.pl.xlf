@@ -59,7 +59,10 @@
                 <source>title.comment_error</source>
                 <target>Podczas publikacji Twojego komentarza wystąpił błąd</target>
             </trans-unit>
-
+ <trans-unit id="action.show1">
+                <source>action.show1</source>
+                <target>Typuj</target>
+            </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
                 <target>Pokaż</target>
@@ -202,6 +205,10 @@
                 <source>menu.homepage</source>
                 <target>Strona główna</target>
             </trans-unit>
+            <trans-unit id="menu.edit">
+                            <source>menu.edit</source>
+                            <target>Edytuj profil</target>
+                        </trans-unit>
             <trans-unit id="menu.admin">
                 <source>menu.admin</source>
                 <target>Panel </target>
@@ -237,6 +244,11 @@
                 <source>menu.typeof_weight</source>
                 <target>Typ wagi spotkania</target>
             </trans-unit>
+
+    <trans-unit id="menu.users">
+                    <source>menu.users</source>
+                    <target>Użytkownicy</target>
+                </trans-unit>
 
             <trans-unit id="menu.logout">
                 <source>menu.logout</source>
@@ -319,9 +331,71 @@
                 <source>help.more_information</source>
                 <target><![CDATA[Sprawdź <a href="https://symfony.com/doc">dokumentację Symfony</a>, aby uzyskać więcej informacji.]]></target>
             </trans-unit>
+
+<trans-unit id="button_game.new">
+    <source>button_game.new</source>
+    <target>Dodaj nowe spotkanie</target>
+</trans-unit>
+<trans-unit id="button_game.delete">
+     <source>button_game.delete</source>
+     <target>Usuń spotkanie</target>
+</trans-unit>
+<trans-unit id="button_team.new">
+      <source>button_team.new</source>
+      <target>Dodaj nowy zespół</target>
+</trans-unit>
+<trans-unit id="button_team.delete">
+       <source>button_team.delete</source>
+       <target>Usuń zespół</target>
+ </trans-unit>
+<trans-unit id="button_tournament.new">
+      <source>button_tournament.new</source>
+      <target>Dodaj nowy turniej</target>
+</trans-unit>
+<trans-unit id="button_tournament.delete">
+       <source>button_tournament.delete</source>
+       <target>Usuń turniej</target>
+ </trans-unit>
+<trans-unit id="button_type_event.new">
+      <source>button_type_event.new</source>
+      <target>Dodaj nowy typ wydarzenia</target>
+</trans-unit>
+<trans-unit id="button_type_event.delete">
+       <source>button_type_event.delete</source>
+       <target>Usuń typ wydarzenia</target>
+ </trans-unit>
+
+<trans-unit id="button_type_weight.new">
+      <source>button_type_weight.new</source>
+      <target>Dodaj nowy typ wagi</target>
+</trans-unit>
+<trans-unit id="button_type_weight.delete">
+       <source>button_type_weight.delete</source>
+       <target>Usuń typ wagi</target>
+ </trans-unit>
+ <trans-unit id="user.delete">
+        <source>user.delete</source>
+        <target>Usuń użytkownika</target>
+  </trans-unit>
+  <trans-unit id="button_user.register">
+          <source>button_user.register</source>
+          <target>Zarejestruj się</target>
+</trans-unit>
+<trans-unit id="button_expected_results.new">
+      <source>button_expected_results.new</source>
+      <target>Dodaj nowy typ</target>
+</trans-unit>
+<trans-unit id="button_expected_results.delete">
+      <source>button_expected_results.delete</source>
+      <target>Usuń typ</target>
+</trans-unit>
+ <trans-unit id="update">
+        <source>update</source>
+        <target>Aktualizuj</target>
+  </trans-unit>
 <trans-unit id="game_table.new">
-           <source>game_table.new</source>
-           <target>Stwórz nowe spotkanie</target>
+       <source>game_table.new</source>
+       <target>Stwórz nowe spotkanie</target>
 </trans-unit>
 
 
@@ -340,6 +414,14 @@
 <trans-unit id="game_table.confrontation">
            <source>game_table.confrontation</source>
            <target>Konfrontacja</target>
+</trans-unit>
+<trans-unit id="game_table.first_team">
+            <source>game_table.first_team</source>
+           <target>Pierwszy zespół</target>
+</trans-unit>
+<trans-unit id="game_table.second_team">
+           <source>game_table.second_team</source>
+           <target>Drugi zespół</target>
 </trans-unit>
 <trans-unit id="game_table.score">
            <source>game_table.score</source>
@@ -363,20 +445,95 @@
            <target>Wynik drugiej drużyny</target>
 </trans-unit>
 
+<trans-unit id="game_edit.title">
+           <source>game_edit.title</source>
+           <target>Edycja spotkania</target>
+</trans-unit>
+<trans-unit id="game_new.title">
+          <source>game_new.title</source>
+          <target>Nowe spotkanie</target>
+</trans-unit>
+<trans-unit id="game_show.title">
+          <source>game_show.title</source>
+          <target>Spotkanie</target>
+</trans-unit>
 
+<trans-unit id="game.back">
+           <source>game.back</source>
+           <target>Powrót do spotkań</target>
+</trans-unit>
+<trans-unit id="game_add.title">
+           <source>game_add.title</source>
+           <target>Wynik spotkania</target>
+</trans-unit>
+<trans-unit id="game_add.add">
+           <source>game_add.add</source>
+           <target>Dodaj wynik spotkania</target>
+</trans-unit>
+<trans-unit id="game_add.addMessage">
+           <source>game_add.addMessage</source>
+           <target>Wynik został dodany</target>
+</trans-unit>
+<trans-unit id="game.status">
+           <source>game.status</source>
+           <target>Status</target>
+</trans-unit>
+<trans-unit id="game_status.not_executed">
+           <source>game_status.not_executed</source>
+           <target>Nie przeprowadzony</target>
+</trans-unit>
+<trans-unit id="game_status.executed">
+           <source>game_status.executed</source>
+           <target>Przeprowadzony</target>
+</trans-unit>
+<trans-unit id="game_status.annulled">
+           <source>game_status.annulled</source>
+           <target>Anulowany</target>
+</trans-unit>
+<trans-unit id="add_game.score">
+           <source>add_game.score</source>
+           <target>Dodaj wynik i status</target>
+</trans-unit>
+<trans-unit id="errorAddScore.title">
+           <source>errorAddScore.title</source>
+           <target>Błąd zapisu wyniku</target>
+</trans-unit>
+<trans-unit id="game.score.is">
+           <source>game.score.is</source>
+           <target>Wynik i status zostały ustalone.</target>
+</trans-unit>
+<trans-unit id="errorAddScore.p">
+           <source>errorAddScore.p</source>
+           <target>Nie można zmienić wyniku meczu!</target>
+</trans-unit>
+<trans-unit id="team.back">
+           <source>team.back</source>
+           <target>Powrót do drużyn</target>
+</trans-unit>
+<trans-unit id="team_edit.titile">
+           <source>team_edit.titile</source>
+           <target>Edycja drużyny</target>
+</trans-unit>
 <trans-unit id="tournament_table.name">
            <source>tournament_table.name</source>
            <target>Nazwa turnieju</target>
 </trans-unit>
 <trans-unit id="tournament_table.type">
            <source>tournament_table.type</source>
-           <target>Typ</target>
+           <target>Typ tunieju</target>
 </trans-unit>
 <trans-unit id="tournament_table.title">
            <source>tournament_table.title</source>
            <target>Turnieje</target>
 </trans-unit>
-
+<trans-unit id="tournament_show.title">
+           <source>tournament_show.title</source>
+           <target>Turniej</target>
+</trans-unit>
+<trans-unit id="tournament_edit.title">
+           <source>tournament_edit.title</source>
+           <target>Edycja turnieju</target>
+</trans-unit>
 <trans-unit id="tournament_table.no_tournament_found">
            <source>tournament_table.no_tournament_found</source>
            <target>Brak turniejów</target>
@@ -385,11 +542,26 @@
            <source>tournament_table.new</source>
            <target>Stwórz nowy turniej</target>
 </trans-unit>
+<trans-unit id="tournament_table.new2">
+           <source>tournament_table.new2</source>
+           <target>Nowy turniej</target>
+</trans-unit>
+<trans-unit id="tournament.back">
+           <source>tournament.back</source>
+           <target>Powrót do turniejów</target>
+</trans-unit>
+<trans-unit id="tournament_table.tournament">
+           <source>tournament_table.tournament</source>
+           <target>Turniej</target>
+</trans-unit>
 <trans-unit id="team_table.title">
            <source>team_table.title</source>
            <target>Drużyny</target>
 </trans-unit>
-
+<trans-unit id="team_show.title">
+           <source>team_show.title</source>
+           <target>Drużyna</target>
+</trans-unit>
 <trans-unit id="team_table.name">
            <source>team_table.name</source>
            <target>Nazwa drużyny</target>
@@ -397,6 +569,18 @@
 <trans-unit id="team_table.type">
            <source>team_table.type</source>
            <target>Typ drużyny</target>
+</trans-unit>
+<trans-unit id="team_table.representation">
+           <source>team_table.representation</source>
+           <target>Reprezentacja</target>
+</trans-unit>
+<trans-unit id="team_table.club">
+           <source>team_table.club</source>
+           <target>Klub</target>
+</trans-unit>
+<trans-unit id="team_table.notype">
+           <source>team_table.notype</source>
+           <target>Brak typu drużyny</target>
 </trans-unit>
 <trans-unit id="team_table.no_team_found">
            <source>team_table.no_team_found</source>
@@ -406,9 +590,21 @@
            <source>team_table.new</source>
            <target>Stwórz nową drużynę</target>
 </trans-unit>
+<trans-unit id="team_table.new2">
+           <source>team_table.new2</source>
+           <target>Nowa drużyna</target>
+</trans-unit>
 <trans-unit id="TypeOfEvent_table.title">
-           <source>TypeOfEvent_table.title</source>
-           <target>Typy wydarzenia</target>
+       <source>TypeOfEvent_table.title</source>
+       <target>Typy wydarzeń</target>
+</trans-unit>
+<trans-unit id="TypeOfEvent_show.title">
+        <source>TypeOfEvent_show.title</source>
+        <target>Typ wydarzenia</target>
+</trans-unit>
+<trans-unit id="TypeOfEvent_edit.title">
+        <source>TypeOfEvent_edit.title</source>
+        <target>Edycja typu wydarzenia</target>
 </trans-unit>
 <trans-unit id="TypeOfEvent_table.name">
            <source>TypeOfEvent_table.name</source>
@@ -416,11 +612,197 @@
 </trans-unit>
 <trans-unit id="type_table.new">
            <source>type_table.new</source>
-           <target>Stwórz nowy typ</target>
+           <target>Stwórz nowy typ wydarzenia</target>
+</trans-unit>
+<trans-unit id="type_table.new2">
+           <source>type_table.new2</source>
+           <target>Nowy typ wydarzenia</target>
+</trans-unit>
+<trans-unit id="type.back">
+           <source>type.back</source>
+           <target>Powrót do typów turniejów</target>
 </trans-unit>
 <trans-unit id="type_table.no_team_found">
            <source>type_table.no_team_found</source>
            <target>Brak typów</target>
+</trans-unit>
+
+<trans-unit id="error_delete.title">
+           <source>error_delete.title</source>
+           <target>Nie można usunąć</target>
+</trans-unit>
+<trans-unit id="error_delete.paragraph">
+           <source>error_delete.paragraph</source>
+           <target>Być może inna tabela używa tych danych. Usuń te dane z innej tabeli, a następnie spróbuj ponownie.</target>
+</trans-unit>
+  <trans-unit id="error.delete.link">
+                <source>error.delete.link</source>
+                <target><![CDATA[<a href="%url%">powrót do tabeli</a>]]></target>
+            </trans-unit>
+
+<trans-unit id="type_weight_table.weight">
+           <source>type_weight_table.weight</source>
+           <target>Wartość wagi</target>
+</trans-unit>
+<trans-unit id="type_weight_table.title">
+           <source>type_weight_table.title</source>
+           <target>Typy wag spotkań</target>
+</trans-unit>
+<trans-unit id="type_weight_table.name">
+           <source>type_weight_table.name</source>
+           <target>Nazwa wagi</target>
+</trans-unit>
+<trans-unit id="type_weight_table.new">
+           <source>type_weight_table.new</source>
+           <target>Stwórz nowy typ wagi</target>
+</trans-unit>
+<trans-unit id="type_weight_table.new2">
+           <source>type_weight_table.new2</source>
+           <target>Nowy typ wagi</target>
+</trans-unit>
+<trans-unit id="type_weight_show.title">
+           <source>type_weight_show.title</source>
+           <target>Typ wagi</target>
+</trans-unit>
+<trans-unit id="type_weight_show.back">
+           <source>type_weight_show.back</source>
+           <target>Powrót do typów wag</target>
+</trans-unit>
+<trans-unit id="type_weight_edit.title">
+        <source>type_weight_edit.title</source>
+        <target>Edycja typu wagi</target>
+</trans-unit>
+<trans-unit id="user.email">
+        <source>user.email</source>
+        <target>Email</target>
+</trans-unit>
+<trans-unit id="user.username">
+        <source>user.username</source>
+        <target>Nazwa użytkownika</target>
+</trans-unit>
+<trans-unit id="user.password">
+        <source>user.password</source>
+        <target>Hasło</target>
+</trans-unit>
+<trans-unit id="user.password2">
+        <source>user.password2</source>
+        <target>Powtórz hasło</target>
+</trans-unit>
+<trans-unit id="user.roles">
+        <source>user.roles</source>
+        <target>Rola</target>
+</trans-unit>
+<trans-unit id="user.photo">
+        <source>user.photo</source>
+        <target>Zdjęcie, akceptowane formaty to : jpg, jpeg, png!</target>
+</trans-unit>
+<trans-unit id="user_table.title">
+        <source>user_table.title</source>
+        <target>Użytkownicy</target>
+</trans-unit>
+<trans-unit id="user_table.no_user_found">
+           <source>user_table.no_user_found</source>
+           <target>Brak użytkowników</target>
+</trans-unit>
+<trans-unit id="user_table.new">
+           <source>user_table.new</source>
+           <target>Stwórz nowego użytkownika</target>
+</trans-unit>
+<trans-unit id="user_table.new2">
+           <source>user_table.new2</source>
+           <target>Nowy użytkownik</target>
+</trans-unit>
+<trans-unit id="user.change_password">
+           <source>user.change_password</source>
+           <target>Zmień hasło</target>
+</trans-unit>
+<trans-unit id="user.change_password4">
+           <source>user.change_password4</source>
+           <target>Zmień hasło dla</target>
+</trans-unit>
+<trans-unit id="user_table.back">
+           <source>user_table.back</source>
+           <target>Powrót do listy użytkowników</target>
+</trans-unit>
+<trans-unit id="user_edit.title">
+           <source>user_edit.title</source>
+           <target>Edytuj użytkownika</target>
+</trans-unit>
+<trans-unit id="user_table.save">
+           <source>user_table.save</source>
+           <target>Dodaj użytkownika</target>
+</trans-unit>
+<trans-unit id="user.register">
+           <source>user.register</source>
+           <target>Rejestracja</target>
+</trans-unit>
+<trans-unit id="user_register.sing_up">
+           <source>user_register.sing_up</source>
+           <target>Zapisz się</target>
+</trans-unit>
+<trans-unit id="home.back">
+           <source>home.back</source>
+           <target>Powrót do strony głównej</target>
+</trans-unit>
+<trans-unit id="user.resetpass">
+           <source>user.resetpass</source>
+           <target>Resetuj hasło</target>
+</trans-unit>
+<trans-unit id="expected_results.title">
+           <source>expected_results.title</source>
+           <target>Moje typy</target>
+</trans-unit>
+<trans-unit id="expected_results.blank_score">
+           <source>expected_results.blank_score</source>
+           <target>Nie znany wynik gry</target>
+</trans-unit>
+<trans-unit id="expected_results.FirstTeamScoreExpected">
+           <source>expected_results.FirstTeamScoreExpected</source>
+           <target>Typowany wynik pierwszej drużyny</target>
+</trans-unit>
+<trans-unit id="expected_results.SecondTeamScoreExpected">
+           <source>expected_results.SecondTeamScoreExpected</source>
+           <target>Typowany wynik drugiej drużyny</target>
+</trans-unit>
+<trans-unit id="expected_results.name_of_meeting">
+           <source>expected_results.name_of_meeting</source>
+           <target>Nazwa spotkania</target>
+</trans-unit>
+<trans-unit id="expected_results.points">
+           <source>expected_results.points</source>
+           <target>Punkty</target>
+</trans-unit>
+<trans-unit id="expected_results.data_game">
+           <source>expected_results.data_game</source>
+           <target>Data spotkania</target>
+</trans-unit>
+<trans-unit id="expected_results.new">
+           <source>expected_results.new</source>
+           <target>Stwórz nowe typowanie</target>
+</trans-unit>
+<trans-unit id="expected_results.new2">
+           <source>expected_results.new2</source>
+           <target>Nowe typowanie</target>
+</trans-unit>
+<trans-unit id="expected_results_show.title">
+           <source>expected_results_show.title</source>
+           <target>Typ</target>
+</trans-unit>
+<trans-unit id="expected_results.back">
+           <source>expected_results.back</source>
+           <target>Powrót do moich typów</target>
+</trans-unit>
+<trans-unit id="expected_results.edit">
+           <source>expected_results.edit</source>
+           <target>Edytuj typ</target>
+</trans-unit>
+<trans-unit id="scoreboard.title">
+           <source>scoreboard.title</source>
+           <target>Tablica wyników</target>
+</trans-unit>
+<trans-unit id="scoreboard.no_scoreboard_found">
+           <source>scoreboard.no_scoreboard_found</source>
+           <target>Brak rekorów w tabeli wyników</target>
 </trans-unit>
         </body>
     </file>
