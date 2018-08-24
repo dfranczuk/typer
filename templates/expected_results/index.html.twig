@@ -103,6 +103,43 @@
             {% endfor %}
             </tbody>
         </table>
+
+        <hr>
+        <h1>Typy innych użytkowników za przeprowadzone mecze</h1>
+        <table class="table" >
+            <thead>
+            <tr>
+                <th>{{ 'user.username' | trans }}</th>
+                <th>{{ 'expected_results.data_game' | trans }}</th>
+                <th>{{ 'game_table.confrontation' | trans }}</th>
+                <th>{{ 'expected_results.FirstTeamScoreExpected' | trans }}</th>
+                <th>{{ 'expected_results.SecondTeamScoreExpected' | trans }}</th>
+                <th>{{ 'expected_results.points' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for expected_result in expected_results %}
+               {% if (expected_result.getNameOfMeeting().getGameDate()) |date('Y-m-d H:i:s') < 'now'|date('Y-m-d H-i-s') %}
+                {% if(expected_result.getUserId() != app.user ) %}
+                    <tr>
+                        <td>{{ (expected_result.getUserId().getUsername() ) }}</td>
+                        <td>{{ (expected_result.getNameOfMeeting().getGameDate()) ? (expected_result.getNameOfMeeting().getGameDate()) |date('Y-m-d H:i:s') : '' }}
+                        <td>{{ expected_result.NameOfMeeting }}</td>
+                        <td>{{ expected_result.FirstTeamScoreExpected }}</td>
+                        <td>{{ expected_result.SecondTeamScoreExpected }}</td>
+                        <td>{% if(expected_result.points!=NULL) %}{{ expected_result.points }}{% endif %}
+                            {% if(expected_result.points==NULL) %}
+                                <p>  {{ 'expected_results.blank_score' | trans }} </p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+               {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+
         {% if is_granted('ROLE_USER') %}
             <a href="{{ path('game1_index') }}">{{ 'expected_results.new' | trans}}</a>
         {% endif %}

@@ -67,11 +67,13 @@
             <tr>
                 <td>{{ scoreboard.id }}</td>
                 <td>{{ scoreboard.UserName }}</td>
+
                 <td>{{ scoreboard.points }}</td>
                 <td>
                     <a href="{{ path('scoreboard_show', {'id': scoreboard.id}) }}">
                         {{ 'action.show' | trans }}
                     </a>
+
                 </td>
             </tr>
         {% else %}

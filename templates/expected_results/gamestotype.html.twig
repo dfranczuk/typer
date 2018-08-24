@@ -200,8 +200,9 @@
                 <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
             <th onclick="sortTable(4)" style="cursor:pointer">{{ 'game_table.game_date' | trans }}
                 <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+            {% if app.user %}
             <th>{{ 'table.actions' | trans }}</th>
-
+            {% endif %}
         </tr>
         </thead>
         <tbody>
@@ -220,9 +221,11 @@
 
                 <td>
                     <div class="item-actions">
+                {% if is_granted('ROLE_USER') %}
                         <a href="{{ path('game1_show', {id: game.id}) }}" class="btn btn-sm btn-default">
                             <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show1'|trans }}
                         </a>
+                    {% endif %}
                         {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('game_edit', {id: game.id}) }}" class="btn btn-sm btn-primary">
                                 <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
