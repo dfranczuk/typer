@@ -4,24 +4,18 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-
         function sortTable(n) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
             table = document.getElementById("myTable5");
             switching = true;
             dir = "asc";
             while (switching) {
-
                 switching = false;
                 rows = table.rows;
-
                 for (i = 1; i < (rows.length - 1); i++) {
-
                     shouldSwitch = false;
-
                     x = rows[i].getElementsByTagName("TD")[n];
                     y = rows[i + 1].getElementsByTagName("TD")[n];
-
                     if (dir == "asc") {
                         if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                             shouldSwitch = true;
@@ -46,17 +40,18 @@
                 }
             }
         }
-
     </script>
 {% endblock %}
 {% block body %}
     {% if app.user %}
+
     <h1>{{ 'expected_results.title' | trans }}</h1>
 
-    <table class="table" id="myTable5">
-        <thead>
+
+        <table class="table" id="myTable5">
+            <thead>
             <tr>
-                <th onclick="sortTable(0)" style="cursor:pointer">Id <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
+
                 <th onclick="sortTable(1)" style="cursor:pointer">
                     {{ 'game_table.confrontation' | trans }}
                     <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
@@ -70,9 +65,11 @@
                     {{ 'expected_results.points' | trans }}
                     <img src="{{ asset('build/images/bg.png') }}" alt="sort"></th>
                 <th>{{ 'table.actions' | trans }}</th>
+
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
+
 
         {% for expected_result in expected_results %}
             {% if(expected_result.getUserId() == app.user ) %}
@@ -102,9 +99,10 @@
                 </td>
             </tr>
 
-            {% endif %}
-        {% endfor %}
-        </tbody>
+
+                {% endif %}
+            {% endfor %}
+            </tbody>
         </table>
 
         <hr>

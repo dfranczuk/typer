@@ -22,7 +22,7 @@ class Scoreboard
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
@@ -30,12 +30,12 @@ class Scoreboard
      * @var Tournament
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Tournament")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $tournament;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $points;
 
@@ -43,6 +43,16 @@ class Scoreboard
      * @ORM\OneToMany(targetEntity="App\Entity\ExpectedResults", mappedBy="ScoreboardID")
      */
     private $ExpectedResultsID;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $UserName;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $usrid;
 
 
 
@@ -130,6 +140,29 @@ class Scoreboard
         return $this;
     }
 
+    public function getUserName(): ?string
+    {
+        return $this->UserName;
+    }
+
+    public function setUserName(?string $UserName): self
+    {
+        $this->UserName = $UserName;
+
+        return $this;
+    }
+
+    public function getUsrid(): ?int
+    {
+        return $this->usrid;
+    }
+
+    public function setUsrid(?int $usrid): self
+    {
+        $this->usrid = $usrid;
+
+        return $this;
+    }
 
 
 }
