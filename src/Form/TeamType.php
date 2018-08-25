@@ -23,8 +23,8 @@ class TeamType extends AbstractType
             ->add('type', ChoiceType::class, array(
                 'choices' => array(
 
-                    'team_table.representation'  => 'representation' ,
-                    'team_table.club' =>  'club' ,
+                    'reprezentacja'  => 'reprezentacja' ,
+                    'klub' =>  'klub' ,
                 ),
                 'label' => 'team_table.type',
                 ));
